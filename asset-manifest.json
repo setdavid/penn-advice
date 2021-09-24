@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/penn-advice/static/css/main.a617e044.chunk.css",
+    "main.js": "/penn-advice/static/js/main.876bcfb6.chunk.js",
+    "main.js.map": "/penn-advice/static/js/main.876bcfb6.chunk.js.map",
+    "runtime-main.js": "/penn-advice/static/js/runtime-main.bf1a1390.js",
+    "runtime-main.js.map": "/penn-advice/static/js/runtime-main.bf1a1390.js.map",
+    "static/js/2.60d476d3.chunk.js": "/penn-advice/static/js/2.60d476d3.chunk.js",
+    "static/js/2.60d476d3.chunk.js.map": "/penn-advice/static/js/2.60d476d3.chunk.js.map",
+    "static/js/3.a74be5e0.chunk.js": "/penn-advice/static/js/3.a74be5e0.chunk.js",
+    "static/js/3.a74be5e0.chunk.js.map": "/penn-advice/static/js/3.a74be5e0.chunk.js.map",
+    "index.html": "/penn-advice/index.html",
+    "static/css/main.a617e044.chunk.css.map": "/penn-advice/static/css/main.a617e044.chunk.css.map",
+    "static/js/2.60d476d3.chunk.js.LICENSE.txt": "/penn-advice/static/js/2.60d476d3.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/penn-advice/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bf1a1390.js",
+    "static/js/2.60d476d3.chunk.js",
+    "static/css/main.a617e044.chunk.css",
+    "static/js/main.876bcfb6.chunk.js"
+  ]
+}
