@@ -1,22 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import "./css/base-styles.css";
+import "./css/bootstrap-grid.min.css";
+
+import TitleBar from "./Components/TitleBar";
+import MainContent from "./Components/MainContent";
+import NavBar from "./Components/NavBar";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Hello Bitches. This is Spark Grey
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <TitleBar />
+        <MainContent />
+        <NavBar />
       </header>
     </div>
   );

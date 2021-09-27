@@ -1,0 +1,108 @@
+/********** Defaults **********/
+
+/* * {
+    border: 1px solid red;
+} */
+
+:root {
+    --theme-color-1: #004785;
+    --theme-color-2: #057D82;
+    --theme-color-3: #073763;
+    --theme-color-4: #073763;
+    --theme-color-5: #073763;
+    --off-white: #f5f5f5;
+    --text-color: #444444;
+}
+
+html {
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: left;
+    color: var(--text-color);
+    position: relative;
+    scroll-behavior: auto;
+    /* scroll-behavior: smooth; */
+}
+
+body {
+    position: relative;
+    left: 0px;
+    margin-top: 0;
+    overflow-x: hidden;
+    transition-property: left;
+    transition-duration: 0.5s;
+}
+
+a {
+    cursor: pointer;
+    color: inherit;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+}
+
+a:hover {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+h1, .h1 {
+    font-size: 2.5rem;
+}
+
+h2, .h2 {
+    font-size: 2rem;
+}
+
+h3, .h3 {
+    font-size: 1.75rem;
+}
+
+h4, .h4 {
+    font-size: 1.5rem;
+}
+
+h5, .h5 {
+    font-size: 1.25rem;
+}
+
+h6, .h6 {
+    font-size: 1rem;
+}
+
+p, .p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+
+
+
+/********** Media Queries **********/
+
+/********** Extra Large devices only **********/
+
+@media (min-width: 1200px) {}
+
+/********** Large devices only **********/
+
+@media (min-width: 992px) and (max-width: 1199px) {}
+
+/********** Medium devices only **********/
+
+@media (min-width: 768px) and (max-width: 991px) {}
+
+/********** Small devices only **********/
+
+@media (min-width: 576px) and (max-width: 767px) {}
+
+/********** Extra Small devices only **********/
+
+@media (max-width: 575px) {}
