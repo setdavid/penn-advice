@@ -1,9 +1,8 @@
 import { combineReducers, createStore } from "redux";
-// import navsliderReducer from "./ducks/navslider";
+import modeReducer from "./ducks/mode";
 
 const reducer = combineReducers({
-    // navslider: navsliderReducer,
-    
+    mode: modeReducer
 });
 
 const store = createStore(reducer);

@@ -10,7 +10,7 @@ function NavBar() {
     }
 
     return (
-        <div id="nav-bar" style={navbarCSS}>
+        <div id="nav-bar" className="container-fluid d-block d-lg-none" style={navbarCSS}>
             NavBar
         </div>
     );
