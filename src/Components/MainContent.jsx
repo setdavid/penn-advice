@@ -1,5 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Desktop from "./Desktop";
+import Mobile from "./Mobile";
 import { NAV_BAR_HEIGHT } from "./NavBar";
 import { TITLE_BAR_HEIGHT } from "./TitleBar";
 
@@ -14,7 +16,7 @@ function MainContent() {
 
   return (
     <div id="main-content" style={mainContentCSS}>
-      MainContent
+      {modeIsMobile ? <Mobile /> : <Desktop />}
     </div>
   );
 }
