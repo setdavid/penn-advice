@@ -11,7 +11,7 @@ export let initializeEventListeners = () => {
             store.dispatch(setDesktop());
         }
 
-        console.log(windowWidth)
-        console.log(store.getState().mode.modeIsMobile);
+        // console.log(windowWidth)
+        // console.log(store.getState().mode.modeIsMobile);
     });
 }

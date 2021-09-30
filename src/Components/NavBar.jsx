@@ -3,7 +3,6 @@ import React from "react";
 export let NAV_BAR_HEIGHT = 80;
 
 function NavBar() {
-
     let navbarCSS = {
         height: `${NAV_BAR_HEIGHT}px`, 
         backgroundColor: "red"
