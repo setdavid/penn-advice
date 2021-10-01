@@ -4,10 +4,10 @@ import "./css/bootstrap-grid.min.css";
 import TitleBar from "./Components/TitleBar";
 import MainContent from "./Components/MainContent";
 import NavBar from "./Components/NavBar";
-import { initializeEventListeners } from "./js/utils";
+import { initialize } from "./js/utils";
 
 function App() {
-  initializeEventListeners();
+  initialize();
 
   return (
     <div className="App">
