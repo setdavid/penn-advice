@@ -15,8 +15,12 @@ function MainContent() {
   }
 
   return (
-    <div id="main-content" style={mainContentCSS}>
-      {modeIsMobile ? <Mobile /> : <Desktop />}
+    <div id="main-content" className="container-fluid" style={mainContentCSS}>
+      <div className="row full-height">
+        <div className="col-12 full-height">
+          {modeIsMobile ? <Mobile /> : <Desktop />}
+        </div>
+      </div>
     </div>
   );
 }
