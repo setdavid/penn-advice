@@ -80,6 +80,7 @@ function SwipeCard(props) {
     }
 
     const handleTouchMove = (e) => {
+        e.preventDefault();
         if (dragging) {
             let clientX = e.touches[0].clientX;
             let clientY = e.touches[0].clientY;

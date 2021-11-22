@@ -90,6 +90,7 @@ p, .p {
 .swipe-card {
     transition-property: left, top;
     transition-duration: 1ms;
+    touch-action: none;
 }
 
 
