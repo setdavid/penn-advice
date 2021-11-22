@@ -87,7 +87,10 @@ p, .p {
     min-height: 100%;
 }
 
-.sam{}
+.swipe-card {
+    transition-property: left, top;
+    transition-duration: 1ms;
+}
 
 
 /********** Media Queries **********/
