@@ -1,39 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 function SwipeCard(props) {
-    let { boundPos } = props
+    let { boundPos } = props;
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [prevCenter, setPrevCenter] = useState({ x: 0, y: 0 });
     const [dragging, setDragging] = useState(false);
+    const [returnPos, setReturnPos] = useState({ x: 0, y: 0 });
+    const [isInitial, setIsInitial] = useState(true);
 
     let swipeCardCSS = {
         backgroundColor: "purple",
         width: "50vh",
         height: "75vh",
         position: "absolute",
-        left: `${position.x - boundPos.x}px`,
-        top: `${position.y - boundPos.y}px`
+        left: `${isInitial ? "auto" : position.x - boundPos.x + "px"}`,
+        top: `${isInitial ? "auto" : position.y - boundPos.y + "px"}`
     }
 
-    // const handlePan = (e) => {
-    //     let newPosition = {
-    //         x: position.x + (e.center.x - prevCenter.x),
-    //         y: position.y + (e.center.y - prevCenter.y), 
-    //     }
-
-    //     let center = {
-    //         x: e.center.x,
-    //         y: e.center.y
-    //     }
-
-    //     console.log("position: " + newPosition.x);
-    //     console.log("center: " + e.center.x);
-    //     console.log("prevCetner: " + prevCenter.x);
-
-
-    //     setPosition(newPosition);
-    //     setPrevCenter(center);
-    // }
+    let swipeCardRef = useRef();
+    useEffect(() => {
+        let returnPosition = swipeCardRef.current.getBoundingClientRect();
+        setReturnPos(returnPosition);
+        setPosition(returnPosition);
+        setIsInitial(false);
+    }, [isInitial]);
 
     const handleMouseDown = (e) => {
         let center = {
@@ -46,6 +36,7 @@ function SwipeCard(props) {
     }
 
     const handleEndDrag = (e) => {
+        setPosition(returnPos);
         setDragging(false);
     }
 
@@ -100,8 +91,15 @@ function SwipeCard(props) {
         }
     }
 
+    // Need to work on resizing
+    // window.addEventListener("resize", () => {
+    //     if (!isInitial) {
+    //         setIsInitial(true);
+    //     }
+    // });
+
     return (
-        <div className="swipe-card" style={swipeCardCSS}
+        <div ref={swipeCardRef} className={`swipe-card ${!dragging ? "swipe-card-return" : ""}`} style={swipeCardCSS}
             onMouseDown={handleMouseDown}
             onMouseUp={handleEndDrag}
             onMouseOut={handleEndDrag}

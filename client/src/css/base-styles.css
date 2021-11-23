@@ -91,6 +91,12 @@ p, .p {
     transition-property: left, top;
     transition-duration: 1ms;
     touch-action: none;
+    left: auto;
+    top: auto;
+}
+
+.swipe-card-return {
+    transition-duration: 0.5s !important;
 }
 
 
