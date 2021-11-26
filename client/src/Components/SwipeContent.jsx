@@ -7,7 +7,8 @@ function SwipeContent() {
     let [position, setPosition] = useState({ x: 0, y: 0 });
 
     let swipeContentCSS = {
-        backgroundColor: "white"
+        backgroundColor: "white",
+        overflow: "hidden"
     }
 
     let timer = useRef(0);

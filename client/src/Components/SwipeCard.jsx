@@ -124,7 +124,7 @@ function SwipeCard(props) {
     }
 
     return (
-        <div ref={swipeCardRef} className={`swipe-card ${!dragging ? "swipe-card-return" : ""}`} style={swipeCardCSS}
+        <div ref={swipeCardRef} className={`no-select swipe-card ${!dragging ? "swipe-card-return" : ""}`} style={swipeCardCSS}
             onMouseDown={handleMouseDown}
             onMouseUp={handleEndDrag}
             onMouseOut={handleEndDrag}
