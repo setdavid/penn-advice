@@ -132,7 +132,7 @@ function SwipeCard(props) {
             onTouchStart={handleTouchStart}
             onTouchEnd={handleEndDrag}
             onTouchMove={handleTouchMove}>
-            <div>Tap Me</div>
+            SOME SAMPLE TEXT
         </div>
     );
 }
