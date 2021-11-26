@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 function SwipeCard(props) {
+    let exist = useRef(true);
     let { boundPos } = props;
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [prevCenter, setPrevCenter] = useState({ x: 0, y: 0 });
@@ -17,18 +18,45 @@ function SwipeCard(props) {
         top: `${isInitial ? "auto" : position.y - boundPos.y + "px"}`
     }
 
-    let swipeCardRef = useRef();
+    let timer = useRef(0);
+    let debounce = (callback) => {
+        clearTimeout(timer.current);
+        timer.current = setTimeout(callback, 50, exist);
+    }
+
+    let useDebounce = () => {
+        debounce((exist) => {
+            if (exist.current) {
+                setIsInitial(true);
+            }
+        });
+    }
+
     useEffect(() => {
+        window.addEventListener("resize", useDebounce);
+
+        return () => {
+            window.removeEventListener("resize", useDebounce);
+            exist.current = false;
+        }
+    }, []);
+
+    let swipeCardRef = useRef();
+    const updateReturnPos = () => {
         let returnPosition = swipeCardRef.current.getBoundingClientRect();
         setReturnPos(returnPosition);
         setPosition(returnPosition);
-        setIsInitial(false);
-    }, [isInitial]);
+    }
 
     const handleMouseDown = (e) => {
         let center = {
             x: e.clientX,
             y: e.clientY
+        }
+
+        if (isInitial) {
+            updateReturnPos();
+            setIsInitial(false);
         }
 
         setDragging(true);
@@ -66,12 +94,16 @@ function SwipeCard(props) {
             y: e.touches[0].clientY
         }
 
+        if (isInitial) {
+            updateReturnPos();
+            setIsInitial(false);
+        }
+
         setDragging(true);
         setPrevCenter(center);
     }
 
     const handleTouchMove = (e) => {
-        e.preventDefault();
         if (dragging) {
             let clientX = e.touches[0].clientX;
             let clientY = e.touches[0].clientY;
@@ -90,13 +122,6 @@ function SwipeCard(props) {
             setPrevCenter(center);
         }
     }
-
-    // Need to work on resizing
-    // window.addEventListener("resize", () => {
-    //     if (!isInitial) {
-    //         setIsInitial(true);
-    //     }
-    // });
 
     return (
         <div ref={swipeCardRef} className={`swipe-card ${!dragging ? "swipe-card-return" : ""}`} style={swipeCardCSS}

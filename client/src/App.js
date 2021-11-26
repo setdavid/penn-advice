@@ -7,8 +7,6 @@ import NavBar from "./Components/NavBar";
 import { initialize } from "./js/utils";
 
 function App() {
-  initialize();
-
   return (
     <div className="App">
       <header className="App-header">
