@@ -4,10 +4,15 @@ function SwipeCard(props) {
     let exist = useRef(true);
     let { boundPos } = props;
     const [position, setPosition] = useState({ x: 0, y: 0 });
-    const [prevCenter, setPrevCenter] = useState({ x: 0, y: 0 });
+    const [prevCenter, setPrevCenter] = useState({ x: 0, y: 0, timeStamp: 0 });
     const [dragging, setDragging] = useState(false);
     const [returnPos, setReturnPos] = useState({ x: 0, y: 0 });
+    const [latestVel, setLatestVel] = useState(0);
+    const [swipeAngle, setSwipeAngle] = useState({ theta: 0, direction: 1 });
     const [isInitial, setIsInitial] = useState(true);
+
+    const VELOCITY_THRESHOLD = 3;
+    const SWIPE_ANGLE_MAX = Math.PI / 4;
 
     let swipeCardCSS = {
         backgroundColor: "purple",
@@ -51,7 +56,8 @@ function SwipeCard(props) {
     const handleMouseDown = (e) => {
         let center = {
             x: e.clientX,
-            y: e.clientY
+            y: e.clientY,
+            timeStamp: e.timeStamp
         }
 
         if (isInitial) {
@@ -63,26 +69,26 @@ function SwipeCard(props) {
         setPrevCenter(center);
     }
 
-    const handleEndDrag = (e) => {
-        setPosition(returnPos);
-        setDragging(false);
-    }
-
     const handleMouseMove = (e) => {
         if (dragging) {
             let clientX = e.clientX;
             let clientY = e.clientY;
 
+            let dx = clientX - prevCenter.x;
+            let dy = clientY - prevCenter.y;
+
             let newPosition = {
-                x: position.x + (clientX - prevCenter.x),
-                y: position.y + (clientY - prevCenter.y)
+                x: position.x + dx,
+                y: position.y + dy
             }
 
             let center = {
                 x: clientX,
-                y: clientY
+                y: clientY,
+                timeStamp: e.timeStamp
             }
 
+            velGen(dx, dy, e.timeStamp - prevCenter.timeStamp);
             setPosition(newPosition);
             setPrevCenter(center);
         }
@@ -91,7 +97,8 @@ function SwipeCard(props) {
     const handleTouchStart = (e) => {
         let center = {
             x: e.touches[0].clientX,
-            y: e.touches[0].clientY
+            y: e.touches[0].clientY,
+            timeStamp: e.timeStamp
         }
 
         if (isInitial) {
@@ -108,19 +115,47 @@ function SwipeCard(props) {
             let clientX = e.touches[0].clientX;
             let clientY = e.touches[0].clientY;
 
+            let dx = clientX - prevCenter.x;
+            let dy = clientY - prevCenter.y;
+
             let newPosition = {
-                x: position.x + (clientX - prevCenter.x),
-                y: position.y + (clientY - prevCenter.y)
+                x: position.x + dx,
+                y: position.y + dy
             }
 
             let center = {
                 x: clientX,
-                y: clientY
+                y: clientY,
+                timeStamp: e.timeStamp
             }
 
+            velGen(dx, dy, e.timeStamp - prevCenter.timeStamp);
             setPosition(newPosition);
             setPrevCenter(center);
         }
+    }
+
+    const handleEndDrag = (e) => {
+        if (latestVel > VELOCITY_THRESHOLD && Math.abs(swipeAngle.theta) < SWIPE_ANGLE_MAX) {
+            console.log(swipeAngle.direction);
+        }
+
+        setPosition(returnPos);
+        setDragging(false);
+    }
+
+    const velGen = (dx, dy, dt) => {
+        let v = (Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2))) / dt;
+        let theta = Math.atan(dy / dx);
+        let direction = 1;
+
+        if (dx < 0) {
+            direction = -1;
+        }
+
+        setSwipeAngle({ theta, direction });
+        setLatestVel(v);
+        return v;
     }
 
     return (
