@@ -106,11 +106,12 @@ p,
 }
 
 .swipe-card {
-    transition-property: left, top;
+    transition-property: left, top, opacity;
     transition-duration: 1ms;
     touch-action: none;
     left: auto;
     top: auto;
+    opacity: 1;
     color: white;
 }
 

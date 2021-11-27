@@ -43,6 +43,7 @@ function SwipeCard(props) {
         return () => {
             window.removeEventListener("resize", useDebounce);
             exist.current = false;
+            console.log("cleanup");
         }
     }, []);
 
@@ -137,10 +138,20 @@ function SwipeCard(props) {
 
     const handleEndDrag = (e) => {
         if (latestVel > VELOCITY_THRESHOLD && Math.abs(swipeAngle.theta) < SWIPE_ANGLE_MAX) {
-            console.log(swipeAngle.direction);
+            let factor = 1000;
+            let ratio = Math.tan(swipeAngle.theta);
+            let sign = swipeAngle.direction;
+
+            let swipedAway = {
+                x: sign * factor + position.x,
+                y: sign * factor * ratio + position.y
+            };
+
+            setPosition(swipedAway);
+        } else {
+            setPosition(returnPos);
         }
 
-        setPosition(returnPos);
         setDragging(false);
     }
 
