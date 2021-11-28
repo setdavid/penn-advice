@@ -19,7 +19,7 @@ function SwipeCard(props) {
 
     const VELOCITY_THRESHOLD = 2;
     const SWIPE_ANGLE_MAX = 3 * Math.PI / 8;
-    const TIME_BETWEEN_SWIPES = 250;
+    const TIME_BETWEEN_SWIPES = 500;
 
     let swipeCardCSS = {
         // width: "50vh",
@@ -28,7 +28,8 @@ function SwipeCard(props) {
         // height: `${modeIsMobile ? "70vh" : "75vh"}`,
         left: `${isInitial ? "auto" : position.x - boundPos.x + "px"}`,
         top: `${isInitial ? "auto" : position.y - boundPos.y + "px"}`,
-        opacity: `${swiped ? 0 : 1}`
+        opacity: `${swiped ? 0 : 1}`,
+        transitionDuration: `${swiped ? TIME_BETWEEN_SWIPES + "ms" : ""}`
     }
 
     let timer = useRef(0);
@@ -148,7 +149,7 @@ function SwipeCard(props) {
         setDragging(false);
 
         if (latestVel > VELOCITY_THRESHOLD && Math.abs(swipeAngle.theta) < SWIPE_ANGLE_MAX) {
-            let factor = 1000;
+            let factor = window.innerWidth / 5;
             let ratio = Math.tan(swipeAngle.theta);
             let sign = swipeAngle.direction;
 
@@ -157,8 +158,8 @@ function SwipeCard(props) {
                 y: sign * factor * ratio + position.y
             };
 
-            setPosition(swipedAway);
             setSwiped(true);
+            setPosition(swipedAway);
             setTimeout(() => {
                 dispatch(noSwipeCard());
             }, TIME_BETWEEN_SWIPES);
@@ -185,7 +186,7 @@ function SwipeCard(props) {
         <React.Fragment>
             {immobile ? <div ref={swipeCardRef} className={"no-select swipe-card swipe-card-return"} style={swipeCardCSS}>
                 SOME SAMPLE TEXT immobile {text}
-            </div> : <div ref={swipeCardRef} className={`no-select swipe-card ${!dragging ? "swipe-card-return" : ""}`} style={swipeCardCSS}
+            </div> : <div ref={swipeCardRef} className={`no-select swipe-card ${!dragging && !swiped ? "swipe-card-return" : ""}`} style={swipeCardCSS}
                 onMouseDown={handleMouseDown}
                 onMouseUp={handleEndDrag}
                 onMouseOut={handleEndDrag}

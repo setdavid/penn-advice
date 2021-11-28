@@ -108,6 +108,7 @@ p,
 .swipe-card {
     transition-property: left, top, opacity;
     transition-duration: 1ms;
+    transition-timing-function: ease-in-out;
     touch-action: none;
     background-color: darkgrey;
     position: absolute;
