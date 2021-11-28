@@ -109,10 +109,20 @@ p,
     transition-property: left, top, opacity;
     transition-duration: 1ms;
     touch-action: none;
+    background-color: darkgrey;
+    position: absolute;
     left: auto;
     top: auto;
+    width: 50vh;
+    height: 75vh;
     opacity: 1;
     color: white;
+    border-radius: 1.5rem;
+    border: black solid 2px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .swipe-card-return {
@@ -141,12 +151,27 @@ p,
 
 /********** Medium devices only **********/
 
-@media (min-width: 768px) and (max-width: 991px) {}
+@media (min-width: 768px) and (max-width: 991px) {
+    .swipe-card {
+        width: 50vh;
+        height: 70vh;
+    }
+}
 
 /********** Small devices only **********/
 
-@media (min-width: 576px) and (max-width: 767px) {}
+@media (min-width: 576px) and (max-width: 767px) {
+    .swipe-card {
+        width: 50vh;
+        height: 70vh;
+    }
+}
 
 /********** Extra Small devices only **********/
 
-@media (max-width: 575px) {}
+@media (max-width: 575px) {
+    .swipe-card {
+        width: 85vw;
+        height: 70vh;
+    }
+}

@@ -1,8 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { noSwipeCard } from "../redux/ducks/swipe";
 
 function SwipeCard(props) {
+    let { text, immobile, boundPos } = props;
+
     let exist = useRef(true);
-    let { boundPos } = props;
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [prevCenter, setPrevCenter] = useState({ x: 0, y: 0, timeStamp: 0 });
     const [dragging, setDragging] = useState(false);
@@ -10,17 +13,22 @@ function SwipeCard(props) {
     const [latestVel, setLatestVel] = useState(0);
     const [swipeAngle, setSwipeAngle] = useState({ theta: 0, direction: 1 });
     const [isInitial, setIsInitial] = useState(true);
+    const [swiped, setSwiped] = useState(false);
 
-    const VELOCITY_THRESHOLD = 3;
-    const SWIPE_ANGLE_MAX = Math.PI / 4;
+    let dispatch = useDispatch();
+
+    const VELOCITY_THRESHOLD = 4;
+    const SWIPE_ANGLE_MAX = 3 * Math.PI / 8;
+    const TIME_BETWEEN_SWIPES = 250;
 
     let swipeCardCSS = {
-        backgroundColor: "purple",
-        width: "50vh",
-        height: "75vh",
-        position: "absolute",
+        // width: "50vh",
+        // height: "75vh",
+        // width: `${modeIsMobile ? "80vw" : "50vh"}`,
+        // height: `${modeIsMobile ? "70vh" : "75vh"}`,
         left: `${isInitial ? "auto" : position.x - boundPos.x + "px"}`,
-        top: `${isInitial ? "auto" : position.y - boundPos.y + "px"}`
+        top: `${isInitial ? "auto" : position.y - boundPos.y + "px"}`,
+        opacity: `${swiped ? 0 : 1}`
     }
 
     let timer = useRef(0);
@@ -43,7 +51,7 @@ function SwipeCard(props) {
         return () => {
             window.removeEventListener("resize", useDebounce);
             exist.current = false;
-            console.log("cleanup");
+            console.log("cleanup: " + text);
         }
     }, []);
 
@@ -137,6 +145,8 @@ function SwipeCard(props) {
     }
 
     const handleEndDrag = (e) => {
+        setDragging(false);
+
         if (latestVel > VELOCITY_THRESHOLD && Math.abs(swipeAngle.theta) < SWIPE_ANGLE_MAX) {
             let factor = 1000;
             let ratio = Math.tan(swipeAngle.theta);
@@ -148,11 +158,13 @@ function SwipeCard(props) {
             };
 
             setPosition(swipedAway);
+            setSwiped(true);
+            setTimeout(() => {
+                dispatch(noSwipeCard());
+            }, TIME_BETWEEN_SWIPES);
         } else {
             setPosition(returnPos);
         }
-
-        setDragging(false);
     }
 
     const velGen = (dx, dy, dt) => {
@@ -170,16 +182,20 @@ function SwipeCard(props) {
     }
 
     return (
-        <div ref={swipeCardRef} className={`no-select swipe-card ${!dragging ? "swipe-card-return" : ""}`} style={swipeCardCSS}
-            onMouseDown={handleMouseDown}
-            onMouseUp={handleEndDrag}
-            onMouseOut={handleEndDrag}
-            onMouseMove={handleMouseMove}
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleEndDrag}
-            onTouchMove={handleTouchMove}>
-            SOME SAMPLE TEXT
-        </div>
+        <React.Fragment>
+            {immobile ? <div ref={swipeCardRef} className={"no-select swipe-card swipe-card-return"} style={swipeCardCSS}>
+                SOME SAMPLE TEXT immobile {text}
+            </div> : <div ref={swipeCardRef} className={`no-select swipe-card ${!dragging ? "swipe-card-return" : ""}`} style={swipeCardCSS}
+                onMouseDown={handleMouseDown}
+                onMouseUp={handleEndDrag}
+                onMouseOut={handleEndDrag}
+                onMouseMove={handleMouseMove}
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleEndDrag}
+                onTouchMove={handleTouchMove}>
+                SOME SAMPLE TEXT {text}
+            </div>}
+        </React.Fragment>
     );
 }
 
