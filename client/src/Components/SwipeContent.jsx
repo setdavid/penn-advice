@@ -37,26 +37,41 @@ function SwipeContent() {
         }
     }, []);
 
-    let [count, setCount] = useState(0);
+    let [index, setIndex] = useState(0);
     let hasSwipeCard = useSelector(state => state.swipe.hasSwipeCard);
     let dispatch = useDispatch();
 
     useEffect(() => {
         if (!hasSwipeCard) {
-            setCount(count + 1);
+            setIndex(index + 1);
             console.log("new");
             dispatch(newSwipeCard());
         }
     }, [hasSwipeCard]);
 
-    const testArr = [{ text: "hello 1" }, { text: "hello 2" }, { text: "hello 3" }, { text: "hello 4" }];
+    const testArr = [{ text: "hello 1 testArr" }, { text: "hello 2 testArr" }, { text: "hello 3 testArr" }, { text: "hello 4 testArr" }];
+
+    let currObj = testArr[index];
+    let nextObj = testArr[index + 1];
+
+    const emptyObj = {
+        text: "No new content"
+    };
+    
+    if (currObj === undefined) {
+        currObj = emptyObj;
+    }
+
+    if (nextObj === undefined) {
+        nextObj = emptyObj;
+    }
 
     return (
         <div ref={swipeContentRef} id="swipe-content" className="full-height container-fluid" style={swipeContentCSS}>
             <div className="row full-height">
                 <div className="col-12 full-height d-flex justify-content-center align-items-center">
-                    <SwipeCard immobile={true} boundPos={position} text={count + 1} />
-                    {hasSwipeCard ? <SwipeCard immobile={false} boundPos={position} text={count} /> : ""}
+                    <SwipeCard immobile={true} boundPos={position} text={nextObj.text} />
+                    {hasSwipeCard ? <SwipeCard immobile={false} boundPos={position} text={currObj.text} /> : ""}
                 </div>
             </div>
         </div>
