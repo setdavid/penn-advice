@@ -105,6 +105,12 @@ p,
     min-height: 100%;
 }
 
+#title-bar {
+    position: relative;
+    box-shadow: 0px 1px 5px rgb(39, 39, 39);
+    z-index: 1000;
+}
+
 .swipe-card {
     transition-property: left, top, opacity;
     transition-duration: 1ms;

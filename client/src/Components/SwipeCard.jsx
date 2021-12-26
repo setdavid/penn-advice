@@ -185,7 +185,7 @@ function SwipeCard(props) {
     return (
         <React.Fragment>
             {immobile ? <div ref={swipeCardRef} className={"no-select swipe-card swipe-card-return"} style={swipeCardCSS}>
-                SOME SAMPLE TEXT {text} immobile
+                {text} (immobile)
             </div> : <div ref={swipeCardRef} className={`no-select swipe-card ${!dragging && !swiped ? "swipe-card-return" : ""}`} style={swipeCardCSS}
                 onMouseDown={handleMouseDown}
                 onMouseUp={handleEndDrag}
@@ -194,7 +194,7 @@ function SwipeCard(props) {
                 onTouchStart={handleTouchStart}
                 onTouchEnd={handleEndDrag}
                 onTouchMove={handleTouchMove}>
-                SOME SAMPLE TEXT {text}
+                {text}
             </div>}
         </React.Fragment>
     );

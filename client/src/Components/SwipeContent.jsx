@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { newSwipeCard } from "../redux/ducks/swipe";
+import { newPercentRight, newSwipeCard } from "../redux/ducks/swipe";
 import SwipeCard from "./SwipeCard";
 
 function SwipeContent() {
@@ -46,16 +46,18 @@ function SwipeContent() {
             setIndex(index + 1);
             console.log("new");
             dispatch(newSwipeCard());
+            dispatch(newPercentRight(currObj.percentRight));
         }
     }, [hasSwipeCard]);
 
-    const testArr = [{ text: "hello 1 testArr" }, { text: "hello 2 testArr" }, { text: "hello 3 testArr" }, { text: "hello 4 testArr" }];
+    const testArr = [{ text: "hello 1 testArr", percentRight: 0.25 }, { text: "hello 2 testArr", percentRight: 0.5 }, { text: "hello 3 testArr", percentRight: 0.75 }, { text: "hello 4 testArr", percentRight: 1 }];
 
     let currObj = testArr[index];
     let nextObj = testArr[index + 1];
 
     const emptyObj = {
-        text: "No new content"
+        text: "NO NEW CONTENT",
+        percentRight: Math.random()
     };
     
     if (currObj === undefined) {
