@@ -111,6 +111,12 @@ p,
     z-index: 1000;
 }
 
+.percent-bar {
+    transition-property: width min-width;
+    transition-duration: 1s;
+    z-index: 1000;
+}
+
 .swipe-card {
     transition-property: left, top, opacity;
     transition-duration: 1ms;
