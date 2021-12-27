@@ -76,107 +76,117 @@ function SwipeCard(props) {
     }
 
     const handleMouseDown = (e) => {
-        let center = {
-            x: e.clientX,
-            y: e.clientY,
-            timeStamp: e.timeStamp
-        }
-
-        if (isInitial) {
-            updateReturnPos();
-            setIsInitial(false);
-        }
-
-        setDragging(true);
-        setPrevCenter(center);
-    }
-
-    const handleMouseMove = (e) => {
-        if (dragging) {
-            let clientX = e.clientX;
-            let clientY = e.clientY;
-
-            let dx = clientX - prevCenter.x;
-            let dy = clientY - prevCenter.y;
-
-            let newPosition = {
-                x: position.x + dx,
-                y: position.y + dy
-            }
-
+        if (!swiped) {
             let center = {
-                x: clientX,
-                y: clientY,
+                x: e.clientX,
+                y: e.clientY,
                 timeStamp: e.timeStamp
             }
 
-            velGen(dx, dy, e.timeStamp - prevCenter.timeStamp);
-            setPosition(newPosition);
+            if (isInitial) {
+                updateReturnPos();
+                setIsInitial(false);
+            }
+
+            setDragging(true);
             setPrevCenter(center);
+        }
+    }
+
+    const handleMouseMove = (e) => {
+        if (!swiped) {
+            if (dragging) {
+                let clientX = e.clientX;
+                let clientY = e.clientY;
+
+                let dx = clientX - prevCenter.x;
+                let dy = clientY - prevCenter.y;
+
+                let newPosition = {
+                    x: position.x + dx,
+                    y: position.y + dy
+                }
+
+                let center = {
+                    x: clientX,
+                    y: clientY,
+                    timeStamp: e.timeStamp
+                }
+
+                velGen(dx, dy, e.timeStamp - prevCenter.timeStamp);
+                setPosition(newPosition);
+                setPrevCenter(center);
+            }
         }
     }
 
     const handleTouchStart = (e) => {
-        let center = {
-            x: e.touches[0].clientX,
-            y: e.touches[0].clientY,
-            timeStamp: e.timeStamp
-        }
-
-        if (isInitial) {
-            updateReturnPos();
-            setIsInitial(false);
-        }
-
-        setDragging(true);
-        setPrevCenter(center);
-    }
-
-    const handleTouchMove = (e) => {
-        if (dragging) {
-            let clientX = e.touches[0].clientX;
-            let clientY = e.touches[0].clientY;
-
-            let dx = clientX - prevCenter.x;
-            let dy = clientY - prevCenter.y;
-
-            let newPosition = {
-                x: position.x + dx,
-                y: position.y + dy
-            }
-
+        if (!swiped) {
             let center = {
-                x: clientX,
-                y: clientY,
+                x: e.touches[0].clientX,
+                y: e.touches[0].clientY,
                 timeStamp: e.timeStamp
             }
 
-            velGen(dx, dy, e.timeStamp - prevCenter.timeStamp);
-            setPosition(newPosition);
+            if (isInitial) {
+                updateReturnPos();
+                setIsInitial(false);
+            }
+
+            setDragging(true);
             setPrevCenter(center);
         }
     }
 
+    const handleTouchMove = (e) => {
+        if (!swiped) {
+            if (dragging) {
+                let clientX = e.touches[0].clientX;
+                let clientY = e.touches[0].clientY;
+
+                let dx = clientX - prevCenter.x;
+                let dy = clientY - prevCenter.y;
+
+                let newPosition = {
+                    x: position.x + dx,
+                    y: position.y + dy
+                }
+
+                let center = {
+                    x: clientX,
+                    y: clientY,
+                    timeStamp: e.timeStamp
+                }
+
+                velGen(dx, dy, e.timeStamp - prevCenter.timeStamp);
+                setPosition(newPosition);
+                setPrevCenter(center);
+            }
+        }
+    }
+
     const handleEndDrag = (e) => {
-        setDragging(false);
+        if (!swiped) {
+            setDragging(false);
 
-        if (latestVel > VELOCITY_THRESHOLD && Math.abs(swipeAngle.theta) < SWIPE_ANGLE_MAX) {
-            let factor = window.innerWidth / 5;
-            let ratio = Math.tan(swipeAngle.theta);
-            let sign = swipeAngle.direction;
+            if (latestVel > VELOCITY_THRESHOLD && Math.abs(swipeAngle.theta) < SWIPE_ANGLE_MAX) {
+                let factor = window.innerWidth / 5;
+                let ratio = Math.tan(swipeAngle.theta);
+                let sign = swipeAngle.direction;
 
-            let swipedAway = {
-                x: sign * factor + position.x,
-                y: sign * factor * ratio + position.y
-            };
+                let swipedAway = {
+                    x: sign * factor + position.x,
+                    y: sign * factor * ratio + position.y
+                };
 
-            setSwiped(true);
-            setPosition(swipedAway);
-            setTimeout(() => {
-                dispatch(noSwipeCard());
-            }, TIME_BETWEEN_SWIPES);
-        } else {
-            setPosition(returnPos);
+                setSwiped(true);
+                setPosition(swipedAway);
+                setTimeout(() => {
+                    dispatch(noSwipeCard());
+                }, TIME_BETWEEN_SWIPES);
+            } else {
+                setPosition(returnPos);
+            }
         }
     }
 
