@@ -120,9 +120,9 @@ p,
 .swipe-card {
     transition-property: left, top, opacity;
     transition-duration: 1ms;
-    transition-timing-function: ease-in-out;
+    transition-timing-function: ease-out;
     touch-action: none;
-    background-color: darkgrey;
+    /* background-color: #A9A9A9; */
     position: absolute;
     left: auto;
     top: auto;
@@ -160,36 +160,16 @@ p,
 
 /********** Large devices only **********/
 
-@media (min-width: 992px) and (max-width: 1199px) {
-    /* .swipe-card {
-        width: 50vh;
-        height: 70vh;
-    } */
-}
+@media (min-width: 992px) and (max-width: 1199px) {}
 
 /********** Medium devices only **********/
 
-@media (min-width: 768px) and (max-width: 991px) {
-    /* .swipe-card {
-        width: 50vh;
-        height: 70vh;
-    } */
-}
+@media (min-width: 768px) and (max-width: 991px) {}
 
 /********** Small devices only **********/
 
-@media (min-width: 576px) and (max-width: 767px) {
-    /* .swipe-card {
-        width: 50vh;
-        height: 70vh;
-    } */
-}
+@media (min-width: 576px) and (max-width: 767px) {}
 
 /********** Extra Small devices only **********/
 
-@media (max-width: 575px) {
-    /* .swipe-card {
-        width: 85vw;
-        height: 70vh;
-    } */
-}
+@media (max-width: 575px) {}

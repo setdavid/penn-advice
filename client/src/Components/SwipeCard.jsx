@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { noSwipeCard } from "../redux/ducks/swipe";
 
 function SwipeCard(props) {
-    let { text, immobile, boundPos } = props;
+    let { text, immobile, boundPos, color } = props;
 
     let exist = useRef(true);
     const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -23,6 +23,11 @@ function SwipeCard(props) {
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
 
+    let swipedColor = "#990000";
+    if (swipeAngle.direction == 1) {
+        swipedColor = "#011F5b";
+    }
+
     let swipeCardCSS = {
         // width: "50vh",
         // height: "75vh",
@@ -31,6 +36,7 @@ function SwipeCard(props) {
         left: `${isInitial ? "auto" : position.x - boundPos.x + "px"}`,
         top: `${isInitial ? "auto" : position.y - boundPos.y + "px"}`,
         opacity: `${swiped ? 0 : 1}`,
+        backgroundColor: `${swiped ? swipedColor : color}`,
         transitionDuration: `${swiped ? TIME_BETWEEN_SWIPES + "ms" : ""}`
     }
 
