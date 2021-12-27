@@ -160,31 +160,36 @@ p,
 
 /********** Large devices only **********/
 
-@media (min-width: 992px) and (max-width: 1199px) {}
+@media (min-width: 992px) and (max-width: 1199px) {
+    /* .swipe-card {
+        width: 50vh;
+        height: 70vh;
+    } */
+}
 
 /********** Medium devices only **********/
 
 @media (min-width: 768px) and (max-width: 991px) {
-    .swipe-card {
+    /* .swipe-card {
         width: 50vh;
         height: 70vh;
-    }
+    } */
 }
 
 /********** Small devices only **********/
 
 @media (min-width: 576px) and (max-width: 767px) {
-    .swipe-card {
+    /* .swipe-card {
         width: 50vh;
         height: 70vh;
-    }
+    } */
 }
 
 /********** Extra Small devices only **********/
 
 @media (max-width: 575px) {
-    .swipe-card {
+    /* .swipe-card {
         width: 85vw;
         height: 70vh;
-    }
+    } */
 }

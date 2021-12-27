@@ -20,12 +20,14 @@ function SwipeCard(props) {
     const VELOCITY_THRESHOLD = 2;
     const SWIPE_ANGLE_MAX = 3 * Math.PI / 8;
     const TIME_BETWEEN_SWIPES = 500;
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
 
     let swipeCardCSS = {
         // width: "50vh",
         // height: "75vh",
-        // width: `${modeIsMobile ? "80vw" : "50vh"}`,
-        // height: `${modeIsMobile ? "70vh" : "75vh"}`,
+        width: `${windowWidth < windowHeight ? "85vw" : "50vh"}`,
+        height: `${windowWidth < windowHeight ? "70vh" : "75vh"}`,
         left: `${isInitial ? "auto" : position.x - boundPos.x + "px"}`,
         top: `${isInitial ? "auto" : position.y - boundPos.y + "px"}`,
         opacity: `${swiped ? 0 : 1}`,

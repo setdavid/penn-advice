@@ -9,18 +9,22 @@ export let initialize = () => {
 let initializeEventListeners = () => {
     window.addEventListener("resize", () => {
         updateMode();
-
-        // console.log(windowWidth)
-        // console.log(store.getState().mode.modeIsMobile);
     });
 }
 
 let updateMode = () => {
     let windowWidth = window.innerWidth;
+    let windowHeight = window.innerHeight;
 
-    if (windowWidth < 992) {
-        store.dispatch(setMobile());
-    } else {
+    // if ((windowWidth < 992) && (windowWidth < windowHeight)) {
+    //     store.dispatch(setMobile());
+    // } else {
+    //     store.dispatch(setDesktop());
+    // }
+
+    if ((windowWidth >= 992) && (windowWidth > windowHeight)) {
         store.dispatch(setDesktop());
+    } else {
+        store.dispatch(setMobile());
     }
 }
