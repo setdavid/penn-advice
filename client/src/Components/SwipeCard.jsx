@@ -28,6 +28,9 @@ function SwipeCard(props) {
         swipedColor = "#011F5b";
     }
 
+    let rotateDirection = 1;
+    let distReturnFromBorder = returnPos.x - boundPos.x;
+
     let swipeCardCSS = {
         // width: "50vh",
         // height: "75vh",
@@ -37,6 +40,7 @@ function SwipeCard(props) {
         top: `${isInitial ? "auto" : position.y - boundPos.y + "px"}`,
         opacity: `${swiped ? 0 : 1}`,
         backgroundColor: `${swiped ? swipedColor : color}`,
+        transform: `rotate(${rotateDirection * (position.x - returnPos.x) / distReturnFromBorder * (distReturnFromBorder >= 0.1 * boundPos.width ? 7 : 0.5)}deg)`,
         transitionDuration: `${swiped ? TIME_BETWEEN_SWIPES + "ms" : ""}`
     }
 

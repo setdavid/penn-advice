@@ -120,7 +120,7 @@ p,
 .swipe-card {
     transition-property: left, top, opacity;
     transition-duration: 1ms;
-    transition-timing-function: ease-out;
+    transition-timing-function: cubic-bezier(0.5, 0, 0.75, 0);
     touch-action: none;
     /* background-color: #A9A9A9; */
     position: absolute;
@@ -139,6 +139,8 @@ p,
 }
 
 .swipe-card-return {
+    transition-property: left, top, transform;
+    transition-timing-function: ease-in-out;
     transition-duration: 0.5s !important;
 }
 
