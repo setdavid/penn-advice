@@ -120,9 +120,8 @@ p,
 .swipe-card {
     transition-property: left, top, opacity;
     transition-duration: 1ms;
-    transition-timing-function: cubic-bezier(0.5, 0, 0.75, 0);
+    transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
     touch-action: none;
-    /* background-color: #A9A9A9; */
     position: absolute;
     left: auto;
     top: auto;
@@ -130,8 +129,8 @@ p,
     height: 75vh;
     opacity: 1;
     color: white;
-    border-radius: 1.5rem;
-    border: black solid 2px;
+    border-radius: 1rem;
+    border: grey solid 2px;
     text-align: center;
     display: flex;
     align-items: center;

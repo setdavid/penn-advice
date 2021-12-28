@@ -17,7 +17,7 @@ function SwipeCard(props) {
 
     let dispatch = useDispatch();
 
-    const VELOCITY_THRESHOLD = 2;
+    const VELOCITY_THRESHOLD = 1;
     const SWIPE_ANGLE_MAX = 3 * Math.PI / 8;
     const TIME_BETWEEN_SWIPES = 500;
     const windowWidth = window.innerWidth;

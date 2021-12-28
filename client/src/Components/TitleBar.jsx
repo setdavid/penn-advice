@@ -15,17 +15,17 @@ function TitleBar() {
 
   return (
     <div id="title-bar" className="container-fluid" style={titleBarCSS}>
-      <div className="row d-flex" style={{ height: "60%", minHeight: "60%", paddingLeft: "5px" }}>
-        <div className="col-12" style={{ fontSize: "2.5rem" }}>
-          PennAdvice
+      <div className="row d-flex" style={{ height: "85%", minHeight: "85%", paddingTop: "7px" }}>
+        <div className="col-12" style={{ fontSize: "2.5rem", lineHeight: "1" }}>
+          <div>
+            PennAdvice
+          </div>
+          <div style={{ fontSize: "0.75rem" }}>
+            &nbsp; by Penn Spark Gray
+          </div>
         </div>
       </div>
-      <div className="row d-flex" style={{ height: "30%", minHeight: "30%", paddingLeft: "12px" }}>
-        <div className="col-12" style={{ fontSize: "0.75rem" }}>
-          by Penn Spark Gray
-        </div>
-      </div>
-      <div className="row" style={{ height: "10%", minHeight: "10%" }}>
+      <div className="row" style={{ height: "15%", minHeight: "15%" }}>
         <div className="percent-bar" style={{ width: `${percentLeft}%`, minWidth: `${percentLeft}%`, backgroundColor: "#990000" }} />
         <div className="percent-bar" style={{ width: `${percentRight}%`, minWidth: `${percentRight}%`, backgroundColor: "#011F5b" }} />
       </div>

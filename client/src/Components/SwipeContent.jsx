@@ -72,8 +72,8 @@ function SwipeContent() {
         <div ref={swipeContentRef} id="swipe-content" className="full-height container-fluid" style={swipeContentCSS}>
             <div className="row full-height">
                 <div className="col-12 full-height d-flex justify-content-center align-items-center">
-                    <SwipeCard immobile={true} boundPos={position} color="#A9A9A9" text={nextObj.text} />
-                    {hasSwipeCard ? <SwipeCard immobile={false} boundPos={position} color="#A9A9A9" text={currObj.text} /> : ""}
+                    <SwipeCard immobile={true} boundPos={position} color="#000000" text={nextObj.text} />
+                    {hasSwipeCard ? <SwipeCard immobile={false} boundPos={position} color="#000000" text={currObj.text} /> : ""}
                 </div>
             </div>
         </div>
