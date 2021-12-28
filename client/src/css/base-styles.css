@@ -107,7 +107,7 @@ p,
 
 #title-bar {
     position: relative;
-    box-shadow: 1.6px 3.2px 3.2px hsl(0deg 0% 0% / 0.45);
+    box-shadow: 2px 4px 4px hsl(0deg 0% 0% / 0.44);
     z-index: 1000;
     color: white;
     background-color: #212121;
