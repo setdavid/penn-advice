@@ -9,8 +9,7 @@ function MainContent() {
   let modeIsMobile = useSelector(state => state.mode.modeIsMobile);
 
   let mainContentCSS = {
-    height: `calc(100vh - ${TITLE_BAR_HEIGHT}px - ${modeIsMobile ? NAV_BAR_HEIGHT : 0}px)`,
-    background: "#303030"
+    height: `calc(100vh - ${TITLE_BAR_HEIGHT}px - ${modeIsMobile ? NAV_BAR_HEIGHT : 0}px)`
   }
 
   return (

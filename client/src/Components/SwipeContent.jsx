@@ -8,11 +8,7 @@ function SwipeContent() {
     let swipeContentRef = useRef();
     let [position, setPosition] = useState({ x: 0, y: 0 });
 
-    let swipeContentCSS = {
-        backgroundColor: "white",
-        overflow: "hidden",
-        background: "#424242"
-    }
+    let swipeContentCSS = {}
 
     let timer = useRef(0);
     let debounce = (callback) => {
@@ -51,7 +47,7 @@ function SwipeContent() {
         }
     }, [hasSwipeCard]);
 
-    const testArr = [{ text: "hello 1 testArr", percentRight: 0.25 }, { text: "hello 2 testArr", percentRight: 0.5 }, { text: "hello 3 testArr", percentRight: 0.75 }, { text: "hello 4 testArr", percentRight: 1 }];
+    const testArr = [{ text: "hello 1 testArr", percentRight: 0 }, { text: "hello 2 testArr", percentRight: 0.75 }, { text: "hello 3 testArr", percentRight: 0 }, { text: "hello 4 testArr", percentRight: 1 }];
 
     let currObj = testArr[index];
     let nextObj = testArr[index + 1];
@@ -60,7 +56,7 @@ function SwipeContent() {
         text: "NO NEW CONTENT",
         percentRight: Math.random()
     };
-    
+
     if (currObj === undefined) {
         currObj = emptyObj;
     }
