@@ -14,7 +14,7 @@ function TitleBar() {
 
   return (
     <div id="title-bar" className="container-fluid" style={titleBarCSS}>
-      <div className="row d-flex" style={{ height: "85%", minHeight: "85%", paddingTop: "7px" }}>
+      <div className="row d-flex" style={{ height: "90%", minHeight: "90%", paddingTop: "7px" }}>
         <div className="col-12" style={{ fontSize: "2.5rem", lineHeight: "1" }}>
           <div>
             PennAdvice
@@ -24,7 +24,7 @@ function TitleBar() {
           </div>
         </div>
       </div>
-      <div className="row" style={{ height: "15%", minHeight: "15%" }}>
+      <div className="row" style={{ height: "10%", minHeight: "10%" }}>
         <div className="percent-bar" style={{ width: `${percentLeft}%`, minWidth: `${percentLeft}%`, backgroundColor: "#990000", borderRight: `${percentLeft > 0 ? "1px solid white" : ""}` }} />
         <div className="percent-bar" style={{ width: `${percentRight}%`, minWidth: `${percentRight}%`, backgroundColor: "#011F5b", borderLeft: `${percentRight > 0 ? "1px solid white" : ""}` }} />
       </div>
