@@ -10,7 +10,8 @@ function SwipeContent() {
 
     let swipeContentCSS = {
         backgroundColor: "white",
-        overflow: "hidden"
+        overflow: "hidden",
+        background: "#424242"
     }
 
     let timer = useRef(0);

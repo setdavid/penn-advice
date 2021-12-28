@@ -2,7 +2,7 @@ import React from "react";
 
 function PersonalContent() {
     let personalContentCSS = {
-        backgroundColor: "white"
+        backgroundColor: "#424242"
     }
 
     return (

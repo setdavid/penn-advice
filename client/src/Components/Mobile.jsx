@@ -2,11 +2,11 @@ import React from "react";
 import SwipeContent from "./SwipeContent";
 
 function Mobile() {
-  let desktopCSS = {
+  let mobileCSS = {
   }
 
   return (
-    <div id="mobile-content" className="row full-height" style={desktopCSS}>
+    <div id="mobile-content" className="row full-height" style={mobileCSS}>
       <div className="col-12 full-height">
         <SwipeContent />
       </div>

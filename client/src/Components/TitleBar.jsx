@@ -9,8 +9,7 @@ function TitleBar() {
   percentRight *= 100;
 
   let titleBarCSS = {
-    height: `${TITLE_BAR_HEIGHT}px`,
-    backgroundColor: "white"
+    height: `${TITLE_BAR_HEIGHT}px`
   }
 
   return (
