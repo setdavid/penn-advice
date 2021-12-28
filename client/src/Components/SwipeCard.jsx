@@ -32,14 +32,12 @@ function SwipeCard(props) {
     let distReturnFromBorder = returnPos.x - boundPos.x;
 
     let swipeCardCSS = {
-        // width: "50vh",
-        // height: "75vh",
         width: `${windowWidth < windowHeight ? "85vw" : "50vh"}`,
         height: `${windowWidth < windowHeight ? "70vh" : "75vh"}`,
         left: `${isInitial ? "auto" : position.x - boundPos.x + "px"}`,
         top: `${isInitial ? "auto" : position.y - boundPos.y + "px"}`,
         opacity: `${swiped ? 0 : 1}`,
-        backgroundColor: `${swiped ? swipedColor : color}`,
+        background: `${swiped ? swipedColor : ""}`,
         transform: `rotate(${rotateDirection * (position.x - returnPos.x) / distReturnFromBorder * (distReturnFromBorder >= 0.1 * boundPos.width ? 7 : 0.5)}deg)`,
         transitionDuration: `${swiped ? TIME_BETWEEN_SWIPES + "ms" : ""}`
     }
@@ -207,8 +205,12 @@ function SwipeCard(props) {
     return (
         <React.Fragment>
             {immobile ? <div ref={swipeCardRef} className={"no-select swipe-card swipe-card-return"} style={swipeCardCSS}>
-                {text} (immobile)
-            </div> : <div ref={swipeCardRef} className={`no-select swipe-card ${!dragging && !swiped ? "swipe-card-return" : ""}`} style={swipeCardCSS}
+                <div className="swipe-card-content" style={{ backgroundColor: `${swiped ? swipedColor : color}` }}>
+                    <div>
+                        {text} (immobile)
+                    </div>
+                </div>
+            </div> : <div ref={swipeCardRef} className={`no-select swipe-card ${swiped ? "swipe-card-swiped" : ""} ${!dragging && !swiped ? "swipe-card-return" : ""}`} style={swipeCardCSS}
                 onMouseDown={handleMouseDown}
                 onMouseUp={handleEndDrag}
                 onMouseOut={handleEndDrag}
@@ -216,7 +218,11 @@ function SwipeCard(props) {
                 onTouchStart={handleTouchStart}
                 onTouchEnd={handleEndDrag}
                 onTouchMove={handleTouchMove}>
-                {text}
+                <div className="swipe-card-content" style={{ backgroundColor: `${swiped ? swipedColor : color}` }}>
+                    <div>
+                        {text}
+                    </div>
+                </div>
             </div>}
         </React.Fragment>
     );
