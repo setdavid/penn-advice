@@ -21,7 +21,6 @@ html {
     color: white;
     position: relative;
     scroll-behavior: auto;
-    /* scroll-behavior: smooth; */
 }
 
 body {
@@ -127,21 +126,37 @@ p,
 
 .nav-bar-btn>svg {
     transition-property: color;
-    transition-duration: 0.25s;
+    transition-duration: 5s;
 }
 
 #main-content {
     background: #303030;
 }
 
+#mobile-content {
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+#mobile-content>.col-12 {
+    position: absolute;
+    transition-property: left;
+    transition-duration: 5s;
+    top: 0;
+    left: 0;
+}
+
 #swipe-content {
-    background: white;
+    position: relative;
     overflow: hidden;
     background: #424242;
     box-shadow: inset 1.6px 3.2px 3.2px hsl(0deg 0% 0% / 0.45);
 }
 
 #personal-content {
+    position: relative;
     background: #303030;
 }
 

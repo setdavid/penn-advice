@@ -5,6 +5,7 @@ import { faClone, faUserNinja } from "@fortawesome/free-solid-svg-icons"
 import { setDisplay, SWIPE_CONTENT, PERSONAL_CONTENT } from "../redux/ducks/mobile";
 
 export let NAV_BAR_HEIGHT = 50;
+export let MOBILE_DISPLAY_TRANSITION_DURATION = 250
 
 function NavBar() {
     let modeIsMobile = useSelector(state => state.mode.modeIsMobile);
@@ -12,11 +13,13 @@ function NavBar() {
     const dispatch = useDispatch();
 
     let displayBtnCSS = {
-        color: "white"
+        color: "white",
+        transitionDuration: `${MOBILE_DISPLAY_TRANSITION_DURATION}ms`
     };
 
     let notDisplayBtnCSS = {
-        color: "#424242"
+        color: "#424242",
+        transitionDuration: `${MOBILE_DISPLAY_TRANSITION_DURATION}ms`
     };
 
     let navbarCSS = {
