@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { noSwipeCard } from "../redux/ducks/swipe";
 
 function SwipeCard(props) {
@@ -23,6 +23,8 @@ function SwipeCard(props) {
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
 
+    let stateWindowHeight = useSelector(state => state.windowConfig.windowHeight);
+
     let swipedColor = "#990000";
     if (swipeAngle.direction == 1) {
         swipedColor = "#011F5b";
@@ -32,8 +34,8 @@ function SwipeCard(props) {
     let distReturnFromBorder = returnPos.x - boundPos.x;
 
     let swipeCardCSS = {
-        width: `${windowWidth < windowHeight ? "85vw" : "50vh"}`,
-        height: `${windowWidth < windowHeight ? "70vh" : "75vh"}`,
+        width: `${windowWidth < windowHeight ? "85vw" : 0.5 * stateWindowHeight + "px"}`,
+        height: `${windowWidth < windowHeight ? 0.7 * stateWindowHeight + "px" : 0.75 * stateWindowHeight + "px"}`,
         left: `${isInitial ? "auto" : position.x - boundPos.x + "px"}`,
         top: `${isInitial ? "auto" : position.y - boundPos.y + "px"}`,
         opacity: `${swiped ? 0 : 1}`,

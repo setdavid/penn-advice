@@ -7,9 +7,10 @@ import { TITLE_BAR_HEIGHT } from "./TitleBar";
 
 function MainContent() {
   let modeIsMobile = useSelector(state => state.mode.modeIsMobile);
+  let windowHeight = useSelector(state => state.windowConfig.windowHeight);
 
   let mainContentCSS = {
-    height: `calc(100vh - ${TITLE_BAR_HEIGHT}px - ${modeIsMobile ? NAV_BAR_HEIGHT : 0}px)`
+    height: `calc(${windowHeight}px - ${TITLE_BAR_HEIGHT}px - ${modeIsMobile ? NAV_BAR_HEIGHT : 0}px)`
   }
 
   return (

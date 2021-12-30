@@ -32,6 +32,11 @@ body {
     transition-duration: 0.5s;
 }
 
+html, body {
+    height: 100%;
+    min-height: 100%;
+}
+
 a {
     cursor: pointer;
     color: inherit;
@@ -178,8 +183,8 @@ p,
     position: absolute;
     left: auto;
     top: auto;
-    width: 50vh;
-    height: 75vh;
+    width: 50%;
+    height: 75%;
     opacity: 1;
     color: white;
     border-radius: 1rem;

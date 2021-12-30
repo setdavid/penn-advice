@@ -1,20 +1,23 @@
 import store from "../redux/configureStore"
 import { setMobile, setDesktop } from "../redux/ducks/mode";
+import { setWindowHeight } from "../redux/ducks/window-config";
 
 export let initialize = () => {
     initializeEventListeners();
-    updateMode();
+    updateConfigs();
 }
 
 let initializeEventListeners = () => {
     window.addEventListener("resize", () => {
-        updateMode();
+        updateConfigs();
     });
 }
 
-let updateMode = () => {
+let updateConfigs = () => {
     let windowWidth = window.innerWidth;
     let windowHeight = window.innerHeight;
+
+    store.dispatch(setWindowHeight(windowHeight));
 
     // if ((windowWidth < 992) && (windowWidth < windowHeight)) {
     //     store.dispatch(setMobile());
