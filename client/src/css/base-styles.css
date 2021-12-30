@@ -110,7 +110,24 @@ p,
     box-shadow: 2px 4px 4px hsl(0deg 0% 0% / 0.44);
     z-index: 1000;
     color: white;
-    background-color: #212121;
+    /* background-color: #212121; */
+    background-color: black;
+}
+
+#nav-bar {
+    background-color: black;
+    /* border-top: #616161 solid 1px; */
+}
+
+.nav-bar-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-bar-btn>svg {
+    transition-property: color;
+    transition-duration: 0.25s;
 }
 
 #main-content {
@@ -121,15 +138,16 @@ p,
     background: white;
     overflow: hidden;
     background: #424242;
+    box-shadow: inset 1.6px 3.2px 3.2px hsl(0deg 0% 0% / 0.45);
 }
 
 #personal-content {
-    background: #424242;
+    background: #303030;
 }
 
-#swipe-content, #personal-content {
+/* #swipe-content, #personal-content {
     box-shadow: inset 1.6px 3.2px 3.2px hsl(0deg 0% 0% / 0.45);
-}
+} */
 
 .percent-bar {
     transition-property: width min-width;
