@@ -139,14 +139,27 @@ p,
     background: #303030;
     top: 0;
     margin: 0;
+    overflow: hidden;
 }
 
 #side-bar {
     position: relative;
+    background: linear-gradient(45deg, #990000, #011F5b);
 }
 
 #desktop-content {
-    margin-left: 0;
+    margin-left: 15px;
+}
+
+#desktop-content>.col-lg-4>div {
+    position: absolute;
+    transition-property: top;
+    transition-duration: 5s;
+    top: 0;
+    left: auto;
+    width: 100%;
+    min-width: 100%;
+    padding-left: 15px;
 }
 
 #mobile-content {

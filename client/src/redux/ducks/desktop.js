@@ -1,7 +1,6 @@
 const SET_DISPLAY = "SET_DISPLAY";
-export const SWIPE_CONTENT = "SWIPE_CONTENT";
-export const PERSONAL_CONTENT = "PERSONAL_CONTENT";
 export const ACCOUNT_CONTENT = "ACCOUNT_CONTENT";
+export const PERSONAL_CONTENT = "PERSONAL_CONTENT";
 
 export const setDisplay = (display) => ({
     type: SET_DISPLAY,
@@ -11,7 +10,7 @@ export const setDisplay = (display) => ({
 });
 
 const initialState = {
-    display: SWIPE_CONTENT
+    display: PERSONAL_CONTENT
 };
 
 const reducer = (state = initialState, action) => {

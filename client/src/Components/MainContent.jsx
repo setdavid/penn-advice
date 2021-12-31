@@ -22,7 +22,7 @@ function MainContent() {
           <div className="col-12 full-height">
             <Mobile />
           </div> :
-          <div className="col-12 full-height d-flex" style={{ paddingLeft: 0 }}>
+          <div className="col-12 full-height d-flex">
             <SideBar />
             <Desktop />
           </div>

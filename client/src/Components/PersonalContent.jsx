@@ -1,10 +1,11 @@
 import React from "react";
 
-function PersonalContent() {
+function PersonalContent(props) {
+    let { style } = props;
     let personalContentCSS = {}
 
     return (
-        <div id="personal-content" className="full-height" style={personalContentCSS}>
+        <div id="personal-content" className="full-height" style={{ ...style, ...personalContentCSS }}>
             Personal Content
         </div>
     );
