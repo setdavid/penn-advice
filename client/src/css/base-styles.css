@@ -199,6 +199,20 @@ p,
     padding-bottom: 15px;
 }
 
+#personal-content>.personal-card {
+    margin-top: 5px;
+}
+
+.personal-card {
+    border-radius: 1rem;
+    border: solid 2px #424242;
+    padding: 1rem
+}
+
+.personal-card-title {
+    font-size: 1.5rem;
+}
+
 /* #swipe-content, #personal-content {
     box-shadow: inset 1.6px 3.2px 3.2px hsl(0deg 0% 0% / 0.45);
 } */
