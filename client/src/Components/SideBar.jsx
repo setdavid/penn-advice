@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPenSquare, faUserSecret } from "@fortawesome/free-solid-svg-icons"
 import { TITLE_BAR_HEIGHT } from "./TitleBar";
 import { NAV_BAR_HEIGHT } from "./NavBar";
-import { ACCOUNT_CONTENT, PERSONAL_CONTENT, setDisplay } from "../redux/ducks/desktop";
+import { ACCOUNT_CONTENT, PERSONAL_CONTENT, setDisplayDesktop } from "../redux/ducks/desktop";
 
 export let SIDE_BAR_WIDTH = 60;
 export let DESKTOP_DISPLAY_TRANSITION_DURATION = 250
@@ -34,10 +34,10 @@ function SideBar() {
 
     return (
         <div id="side-bar" className="row full-height justify-content-center align-items-center" style={sidebarCSS}>
-            <div className="col-12 nav-bar-btn" onClick={() => dispatch(setDisplay(ACCOUNT_CONTENT))}>
+            <div className="col-12 nav-bar-btn" onClick={() => dispatch(setDisplayDesktop(ACCOUNT_CONTENT))}>
                 <FontAwesomeIcon icon={faUserSecret} size="lg" style={display == ACCOUNT_CONTENT ? displayBtnCSS : notDisplayBtnCSS} />
             </div>
-            <div className="col-12 nav-bar-btn" onClick={() => dispatch(setDisplay(PERSONAL_CONTENT))}>
+            <div className="col-12 nav-bar-btn" onClick={() => dispatch(setDisplayDesktop(PERSONAL_CONTENT))}>
                 <FontAwesomeIcon icon={faPenSquare} size="lg" style={display == PERSONAL_CONTENT ? displayBtnCSS : notDisplayBtnCSS} />
             </div>
         </div>
