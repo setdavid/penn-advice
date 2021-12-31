@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { noSwipeCard } from "../redux/ducks/swipe";
 
 function SwipeCard(props) {
-    let { text, immobile, boundPos, color } = props;
+    let { infoObj, immobile, boundPos, color } = props;
 
     let exist = useRef(true);
     const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -64,7 +64,7 @@ function SwipeCard(props) {
         return () => {
             window.removeEventListener("resize", useDebounce);
             exist.current = false;
-            console.log("cleanup: " + text);
+            console.log("cleanup: " + infoObj.text);
         }
     }, []);
 
@@ -204,13 +204,21 @@ function SwipeCard(props) {
         return v;
     }
 
+    const actualContent = <div style={{ paddingTop: 0.15 * stateWindowHeight + "px", fontFamily: "Comic Sans MS" }}>
+        <div style={{ fontSize: "2rem" }}>
+            {`${infoObj.type}: #${infoObj.index}`}
+        </div>
+        <br />
+        <div>
+            {infoObj.text}
+        </div>
+    </div >
+
     return (
         <React.Fragment>
             {immobile ? <div ref={swipeCardRef} className={"no-select swipe-card swipe-card-return"} style={swipeCardCSS}>
-                <div className="swipe-card-content" style={{ backgroundColor: `${swiped ? swipedColor : color}` }}>
-                    <div>
-                        {text} (immobile)
-                    </div>
+                <div className="swipe-card-content d-flex" style={{ backgroundColor: `${swiped ? swipedColor : color}` }}>
+                    {actualContent}
                 </div>
             </div> : <div ref={swipeCardRef} className={`no-select swipe-card ${swiped ? "swipe-card-swiped" : ""} ${!dragging && !swiped ? "swipe-card-return" : ""}`} style={swipeCardCSS}
                 onMouseDown={handleMouseDown}
@@ -220,10 +228,8 @@ function SwipeCard(props) {
                 onTouchStart={handleTouchStart}
                 onTouchEnd={handleEndDrag}
                 onTouchMove={handleTouchMove}>
-                <div className="swipe-card-content" style={{ backgroundColor: `${swiped ? swipedColor : color}` }}>
-                    <div>
-                        {text}
-                    </div>
+                <div className="swipe-card-content d-flex" style={{ backgroundColor: `${swiped ? swipedColor : color}` }}>
+                    {actualContent}
                 </div>
             </div>}
         </React.Fragment>

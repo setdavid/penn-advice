@@ -109,6 +109,11 @@ p,
     min-height: 100%;
 }
 
+.full-width {
+    width: 100%;
+    min-width: 100%;
+}
+
 #title-bar {
     position: relative;
     box-shadow: 2px 4px 4px hsl(0deg 0% 0% / 0.44);
@@ -236,7 +241,6 @@ p,
     border: 10px solid transparent;
     text-align: center;
     display: flex;
-    align-items: center;
     justify-content: center;
     background-clip: content-box;
 }
