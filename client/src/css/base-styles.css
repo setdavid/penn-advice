@@ -243,6 +243,14 @@ p,
     display: flex;
     justify-content: center;
     background-clip: content-box;
+    overflow: hidden;
+}
+
+.swipe-card-actual-content {
+    overflow: hidden;
+    margin-left: 15px;
+    margin-right: 15px;
+    font-family: serif;
 }
 
 .no-select {

@@ -204,9 +204,9 @@ function SwipeCard(props) {
         return v;
     }
 
-    const actualContent = <div style={{ paddingTop: 0.15 * stateWindowHeight + "px", fontFamily: "Comic Sans MS" }}>
+    const actualContent = <div className="swipe-card-actual-content" style={{ marginTop: `${0.1 * stateWindowHeight}px`, marginBottom: `${0.05 * stateWindowHeight}px` }}>
         <div style={{ fontSize: "2rem" }}>
-            {`${infoObj.type}: #${infoObj.index}`}
+            {`${infoObj.type} #${infoObj.index}`}
         </div>
         <br />
         <div>
