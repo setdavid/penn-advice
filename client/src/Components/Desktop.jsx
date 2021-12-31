@@ -1,9 +1,14 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import PersonalContent from "./PersonalContent";
+import { SIDE_BAR_WIDTH } from "./SideBar";
 import SwipeContent from "./SwipeContent";
 
 function Desktop() {
+  let modeIsMobile = useSelector(state => state.mode.modeIsMobile);
+
   let desktopCSS = {
+    width: `calc(100vw - ${modeIsMobile ? 0 : SIDE_BAR_WIDTH}px)`
   }
 
   return (

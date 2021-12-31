@@ -135,7 +135,18 @@ p,
 }
 
 #main-content {
+    position: relative;
     background: #303030;
+    top: 0;
+    margin: 0;
+}
+
+#side-bar {
+    position: relative;
+}
+
+#desktop-content {
+    margin-left: 0;
 }
 
 #mobile-content {

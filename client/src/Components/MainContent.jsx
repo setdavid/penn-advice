@@ -2,7 +2,9 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Desktop from "./Desktop";
 import Mobile from "./Mobile";
+import SideBar from "./SideBar";
 import { NAV_BAR_HEIGHT } from "./NavBar";
+import { SIDE_BAR_WIDTH } from "./SideBar";
 import { TITLE_BAR_HEIGHT } from "./TitleBar";
 
 function MainContent() {
@@ -10,15 +12,21 @@ function MainContent() {
   let windowHeight = useSelector(state => state.windowConfig.windowHeight);
 
   let mainContentCSS = {
-    height: `calc(${windowHeight}px - ${TITLE_BAR_HEIGHT}px - ${modeIsMobile ? NAV_BAR_HEIGHT : 0}px)`
+    height: `calc(${windowHeight}px - ${TITLE_BAR_HEIGHT}px - ${modeIsMobile ? NAV_BAR_HEIGHT : 0}px)`,
   }
 
   return (
     <div id="main-content" className="container-fluid" style={mainContentCSS}>
       <div className="row full-height">
-        <div className="col-12 full-height">
-          {modeIsMobile ? <Mobile /> : <Desktop />}
-        </div>
+        {modeIsMobile ?
+          <div className="col-12 full-height">
+            <Mobile />
+          </div> :
+          <div className="col-12 full-height d-flex" style={{ paddingLeft: 0 }}>
+            <SideBar />
+            <Desktop />
+          </div>
+        }
       </div>
     </div>
   );
