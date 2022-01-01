@@ -192,11 +192,24 @@ p,
 #personal-content {
     position: relative;
     background: #303030;
+    overflow-y: scroll;
+}
+
+#personal-content::-webkit-scrollbar {
+    display: none;
 }
 
 #personal-content, #account-content {
     padding-top: 15px;
     padding-bottom: 15px;
+}
+
+#personal-content-header {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    border-left: solid 5px #424242;
+    padding-left: 5px;
+    text-align: center;
 }
 
 #personal-content>.personal-card {
@@ -210,7 +223,24 @@ p,
 }
 
 .personal-card-title {
-    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.personal-card-count {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.personal-card-percent-bar {
+    position: relative;
+    height: 8px;
+    min-height: 8px;
+    display: flex;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    /* border: white 1px solid; */
 }
 
 /* #swipe-content, #personal-content {
@@ -221,6 +251,9 @@ p,
     transition-property: width min-width;
     transition-duration: 1s;
     z-index: 1000;
+    height: 100%;
+    min-height: 100%;
+    overflow: hidden;
 }
 
 .swipe-card {
@@ -267,9 +300,8 @@ p,
 
 .swipe-card-actual-content {
     overflow: hidden;
-    margin-left: 15px;
-    margin-right: 15px;
-    font-family: serif;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .no-select {

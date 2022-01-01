@@ -25,8 +25,8 @@ function TitleBar() {
         </div>
       </div>
       <div className="row" style={{ height: "10%", minHeight: "10%" }}>
-        <div className="percent-bar" style={{ width: `${percentLeft}%`, minWidth: `${percentLeft}%`, backgroundColor: "#990000", borderRight: `${percentLeft > 0 ? "1px solid white" : ""}` }} />
-        <div className="percent-bar" style={{ width: `${percentRight}%`, minWidth: `${percentRight}%`, backgroundColor: "#011F5b", borderLeft: `${percentRight > 0 ? "1px solid white" : ""}` }} />
+        <div className="percent-bar" style={{ width: `${percentLeft}%`, minWidth: `${percentLeft}%`, backgroundColor: "#990000", borderRight: `${percentLeft > 0 ? "2px solid white" : ""}` }} />
+        <div className="percent-bar" style={{ width: `${percentRight}%`, minWidth: `${percentRight}%`, backgroundColor: "#011F5b", borderLeft: `${percentRight > 0 ? "2px solid white" : ""}` }} />
       </div>
     </div>
   );
