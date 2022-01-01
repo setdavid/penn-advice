@@ -1,3 +1,5 @@
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
 function PersonalCard(props) {
@@ -7,10 +9,15 @@ function PersonalCard(props) {
     let percentRight = 100 * infoObj.percentRight;
     let percentLeft = 100 * (1 - infoObj.percentRight);
 
+    const handleDelete = () => {
+        console.log(`Delete ${infoObj.type} #${infoObj.index}`);
+    }
+
     return (
         <div className="personal-card" style={personalCardCSS}>
             <div className="personal-card-title">
                 {`${infoObj.type} #${infoObj.index}`}
+                <FontAwesomeIcon icon={faTrash} onClick={handleDelete} />
             </div>
             <div>
                 {infoObj.text}

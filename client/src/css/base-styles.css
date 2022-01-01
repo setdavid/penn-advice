@@ -128,6 +128,7 @@ p,
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .nav-bar-btn>svg {
@@ -203,8 +204,8 @@ p,
 #personal-content-header {
     font-size: 1.5rem;
     margin-bottom: 15px;
-    border-left: solid 5px white;
-    border-right: solid 5px white;
+    /* border-left: solid 5px white;
+    border-right: solid 5px white; */
     padding-left: 5px;
     text-align: center;
 }
@@ -221,6 +222,13 @@ p,
 
 .personal-card-title {
     font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.personal-card-title>svg {
+    cursor: pointer;
 }
 
 .personal-card-count {
