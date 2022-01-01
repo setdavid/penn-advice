@@ -64,7 +64,6 @@ function SwipeCard(props) {
         return () => {
             window.removeEventListener("resize", useDebounce);
             exist.current = false;
-            console.log("cleanup: " + infoObj.text);
         }
     }, []);
 
