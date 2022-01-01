@@ -11,6 +11,7 @@ function PersonalCard(props) {
 
     const handleDelete = () => {
         console.log(`Delete ${infoObj.type} #${infoObj.index}`);
+        fetch("/api");
     }
 
     return (
