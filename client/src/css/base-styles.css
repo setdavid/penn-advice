@@ -5,13 +5,11 @@
 } */
 
 :root {
-    --theme-color-1: #004785;
-    --theme-color-2: #057D82;
-    --theme-color-3: #073763;
-    --theme-color-4: #073763;
-    --theme-color-5: #073763;
-    --off-white: #f5f5f5;
-    --text-color: #444444;
+    --theme-color-1: #990000;
+    --theme-color-2: #011F5b;
+    --theme-color-3: #212121;
+    --theme-color-4: #424242;
+    --theme-color-5: #616161;
 }
 
 html {
@@ -119,13 +117,11 @@ p,
     box-shadow: 2px 4px 4px hsl(0deg 0% 0% / 0.44);
     z-index: 1000;
     color: white;
-    /* background-color: #212121; */
     background-color: black;
 }
 
 #nav-bar {
     background-color: black;
-    /* border-top: #616161 solid 1px; */
 }
 
 .nav-bar-btn {
@@ -141,7 +137,7 @@ p,
 
 #main-content {
     position: relative;
-    background: #303030;
+    background: var(--theme-color-3);
     top: 0;
     margin: 0;
     overflow: hidden;
@@ -149,7 +145,7 @@ p,
 
 #side-bar {
     position: relative;
-    background: linear-gradient(45deg, #990000, #011F5b);
+    background: linear-gradient(0deg, var(--theme-color-1), var(--theme-color-2), black);
 }
 
 #desktop-content {
@@ -185,13 +181,13 @@ p,
 #swipe-content {
     position: relative;
     overflow: hidden;
-    background: #424242;
+    background: var(--theme-color-4);
     box-shadow: inset 1.6px 3.2px 3.2px hsl(0deg 0% 0% / 0.45);
 }
 
 #personal-content {
     position: relative;
-    background: #303030;
+    background: var(--theme-color-3);
     overflow-y: scroll;
 }
 
@@ -207,7 +203,8 @@ p,
 #personal-content-header {
     font-size: 1.5rem;
     margin-bottom: 15px;
-    border-left: solid 5px #424242;
+    border-left: solid 5px white;
+    border-right: solid 5px white;
     padding-left: 5px;
     text-align: center;
 }
@@ -218,7 +215,7 @@ p,
 
 .personal-card {
     border-radius: 1rem;
-    border: solid 2px #424242;
+    border: solid 2px var(--theme-color-4);
     padding: 1rem
 }
 
@@ -269,7 +266,7 @@ p,
     opacity: 1;
     color: white;
     border-radius: 1rem;
-    background: linear-gradient(to right, #990000, #011F5b);
+    background: linear-gradient(to right, var(--theme-color-1), var(--theme-color-2));
     box-shadow: 0.5px 1px 1px hsl(0deg 0% 0% / 0.49);
 }
 

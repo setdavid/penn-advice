@@ -18,7 +18,7 @@ function NavBar() {
     };
 
     let notDisplayBtnCSS = {
-        color: "#424242",
+        color: "var(--theme-color-4)",
         transitionDuration: `${MOBILE_DISPLAY_TRANSITION_DURATION}ms`
     };
 

@@ -21,7 +21,7 @@ function SideBar() {
     };
 
     let notDisplayBtnCSS = {
-        color: "#424242",
+        color: "var(--theme-color-4)",
         transitionDuration: `${DESKTOP_DISPLAY_TRANSITION_DURATION}ms`,
         height: `calc(0.13 * (${window.innerHeight}px - ${TITLE_BAR_HEIGHT}px - ${modeIsMobile ? NAV_BAR_HEIGHT : 0}px))`
     };
