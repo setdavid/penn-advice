@@ -6,7 +6,7 @@ const PORT = 9000;
 app.listen(9000);
 
 app.get("/api", (req, res) => {
-  res.send("test success");
+  res.send({ "status": "DELETED" });
 });
 
 app.use((req, res) => {

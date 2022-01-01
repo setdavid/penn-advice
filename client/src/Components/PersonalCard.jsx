@@ -1,23 +1,27 @@
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { useState } from "react";
 
 function PersonalCard(props) {
     let { infoObj } = props;
     let personalCardCSS = {}
+    let [status, setStatus] = useState("ACTIVE");
 
     let percentRight = 100 * infoObj.percentRight;
     let percentLeft = 100 * (1 - infoObj.percentRight);
 
     const handleDelete = () => {
         console.log(`Delete ${infoObj.type} #${infoObj.index}`);
-        fetch("/api");
+        fetch("/api")
+            .then(res => res.json())
+            .then(data => setStatus(data["status"]), error => console.log(error));
     }
 
     return (
         <div className="personal-card" style={personalCardCSS}>
             <div className="personal-card-title">
-                {`${infoObj.type} #${infoObj.index}`}
+                {`${infoObj.type} #${infoObj.index} (${status})`}
                 <FontAwesomeIcon icon={faTrash} onClick={handleDelete} />
             </div>
             <div>
