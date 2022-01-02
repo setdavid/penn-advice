@@ -10,7 +10,7 @@ export const setLoggedOut = () => ({
 });
 
 const initialState = {
-    loggedIn: true
+    loggedIn: false
 };
 
 const reducer = (state = initialState, action) => {

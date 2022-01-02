@@ -117,6 +117,11 @@ p,
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 
+.App-header {
+    position: relative;
+    overflow: hidden;
+}
+
 #title-bar {
     position: relative;
     box-shadow: 2px 4px 4px hsl(0deg 0% 0% / 0.44);
@@ -155,13 +160,26 @@ p,
 }
 
 #login-page {
-    transition-property: top;
-    transition-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+    transition-property: opacity, transform;
+    transition-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+    ;
     position: absolute;
     top: 0;
+    opacity: 1;
+    transform: scale(1);
+    width: 100%;
+    padding: 0;
     background: linear-gradient(-45deg, var(--theme-color-2), black, var(--theme-color-1));
     z-index: 10000;
     box-shadow: 2px 4px 4px hsl(0deg 0% 0% / 0.44);
+    overflow: hidden;
+}
+
+#login-page>.row {
+    transition-property: opacity;
+    transition-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+    ;
+    opacity: 1;
 }
 
 #desktop-content {

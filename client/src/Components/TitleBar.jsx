@@ -17,7 +17,7 @@ function TitleBar() {
       <div className="row d-flex" style={{ height: "90%", minHeight: "90%", paddingTop: "7px" }}>
         <div className="col-12" style={{ fontSize: "2.5rem", lineHeight: "1" }}>
           <div>
-            PennAdvice
+            PennHub
           </div>
           <div style={{ fontSize: "0.75rem" }}>
             &nbsp; by Penn Spark Gray
