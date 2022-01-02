@@ -128,7 +128,7 @@ p,
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .nav-bar-btn>svg {
@@ -147,6 +147,14 @@ p,
 #side-bar {
     position: relative;
     background: linear-gradient(0deg, var(--theme-color-1), var(--theme-color-2), black);
+}
+
+#login-page {
+    transition-property: top;
+    position: absolute;
+    top: 0;
+    background: linear-gradient(-45deg, var(--theme-color-2), black, var(--theme-color-1));
+    z-index: 10000;
 }
 
 #desktop-content {
@@ -227,9 +235,9 @@ p,
     align-items: center;
 }
 
-.personal-card-title>svg {
+/* .personal-card-title>svg {
     cursor: pointer;
-}
+} */
 
 .personal-card-count {
     text-align: center;
