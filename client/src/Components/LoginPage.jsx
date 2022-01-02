@@ -98,6 +98,7 @@ function LoginPage() {
                                         name="username"
                                         value={username}
                                         onChange={e => setUsername(e.target.value)}
+                                        disabled={`${signedIn ? "disabled" : ""}`}
                                     />
                                 </label>
                             </div>
@@ -111,13 +112,14 @@ function LoginPage() {
                                         name="password"
                                         value={password}
                                         onChange={e => setPassword(e.target.value)}
+                                        disabled={`${signedIn ? "disabled" : ""}`}
                                     />
                                 </label>
                             </div>
                         </div>
                         <div className="row" style={{ marginBottom: "1rem" }} >
                             <div className="col-12 d-flex justify-content-center">
-                                <input className="clickable" type="submit" value="Log in" />
+                                <input className="clickable" type="submit" value="Log in" disabled={`${signedIn ? "disabled" : ""}`} />
                             </div>
                         </div>
                     </form>
