@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/penn-advice/static/css/main.b466f129.chunk.css",
-    "main.js": "/penn-advice/static/js/main.e5b73584.chunk.js",
-    "main.js.map": "/penn-advice/static/js/main.e5b73584.chunk.js.map",
+    "main.css": "/penn-advice/static/css/main.0c88399c.chunk.css",
+    "main.js": "/penn-advice/static/js/main.19680f98.chunk.js",
+    "main.js.map": "/penn-advice/static/js/main.19680f98.chunk.js.map",
     "runtime-main.js": "/penn-advice/static/js/runtime-main.c02f15eb.js",
     "runtime-main.js.map": "/penn-advice/static/js/runtime-main.c02f15eb.js.map",
-    "static/js/2.4314698b.chunk.js": "/penn-advice/static/js/2.4314698b.chunk.js",
-    "static/js/2.4314698b.chunk.js.map": "/penn-advice/static/js/2.4314698b.chunk.js.map",
+    "static/js/2.c21e2efa.chunk.js": "/penn-advice/static/js/2.c21e2efa.chunk.js",
+    "static/js/2.c21e2efa.chunk.js.map": "/penn-advice/static/js/2.c21e2efa.chunk.js.map",
     "static/js/3.a06986f8.chunk.js": "/penn-advice/static/js/3.a06986f8.chunk.js",
     "static/js/3.a06986f8.chunk.js.map": "/penn-advice/static/js/3.a06986f8.chunk.js.map",
     "index.html": "/penn-advice/index.html",
-    "static/css/main.b466f129.chunk.css.map": "/penn-advice/static/css/main.b466f129.chunk.css.map",
-    "static/js/2.4314698b.chunk.js.LICENSE.txt": "/penn-advice/static/js/2.4314698b.chunk.js.LICENSE.txt"
+    "static/css/main.0c88399c.chunk.css.map": "/penn-advice/static/css/main.0c88399c.chunk.css.map",
+    "static/js/2.c21e2efa.chunk.js.LICENSE.txt": "/penn-advice/static/js/2.c21e2efa.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.c02f15eb.js",
-    "static/js/2.4314698b.chunk.js",
-    "static/css/main.b466f129.chunk.css",
-    "static/js/main.e5b73584.chunk.js"
+    "static/js/2.c21e2efa.chunk.js",
+    "static/css/main.0c88399c.chunk.css",
+    "static/js/main.19680f98.chunk.js"
   ]
 }
