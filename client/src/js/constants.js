@@ -12,7 +12,7 @@ export const LOAD_NEXT_BUFFER_ON_INDEX = 4;
 export const BUFFER_SIZE = 10;
 
 export const CARD_VELOCITY_THRESHOLD = 1;
-export const CARD_SWIPE_ANGLE_MAX = 3 * Math.PI / 8;
+export const CARD_SWIPE_ANGLE_MAX = 2 * Math.PI / 8;
 export const TIME_BETWEEN_SWIPES = 500;
 
 export const TEST_ARR = [{ type: "Penn Life", index: 0, text: "hello 0 personal", count: 353, percentRight: 0 },

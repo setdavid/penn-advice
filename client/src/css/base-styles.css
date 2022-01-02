@@ -162,7 +162,7 @@ p,
 
 #side-bar {
     position: relative;
-    background: linear-gradient(0deg, var(--theme-color-1), var(--theme-color-2), black);
+    background: linear-gradient(0deg, var(--theme-color-1), var(--theme-color-2));
 }
 
 #login-page {
@@ -337,7 +337,7 @@ p,
     opacity: 1;
     color: white;
     border-radius: 1rem;
-    background: linear-gradient(to right, var(--theme-color-1), var(--theme-color-2));
+    background: linear-gradient(to right, var(--theme-color-1), black, var(--theme-color-2));
     box-shadow: 0.5px 1px 1px hsl(0deg 0% 0% / 0.49);
 }
 
