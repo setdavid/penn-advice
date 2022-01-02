@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import SwipeContent from "./SwipeContent";
 import PersonalContent from "./PersonalContent";
@@ -15,6 +15,12 @@ function Mobile() {
   let displaysCSS = {
     transitionDuration: `${MOBILE_DISPLAY_TRANSITION_DURATION}ms`
   }
+
+  useEffect(() => {
+    if (display == SWIPE_CONTENT) {
+      window.setTimeout(() => window.dispatchEvent(new Event("resize")), MOBILE_DISPLAY_TRANSITION_DURATION);
+    }
+  }, [display]);
 
   let displayValues = {};
 
