@@ -1,12 +1,9 @@
-import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { LOGIN_TRANSITION_DURATION } from "../js/constants";
 import { setLoggedIn } from "../redux/ducks/login";
-
-const LOGIN_TRANSITION_DURATION = 1500;
 
 function LoginPage() {
     let [username, setUsername] = useState("");

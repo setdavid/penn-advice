@@ -2,12 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPenSquare, faUserSecret } from "@fortawesome/free-solid-svg-icons"
-import { TITLE_BAR_HEIGHT } from "./TitleBar";
-import { NAV_BAR_HEIGHT } from "./NavBar";
+import { DESKTOP_DISPLAY_TRANSITION_DURATION, NAV_BAR_HEIGHT, SIDE_BAR_WIDTH, TITLE_BAR_HEIGHT } from "../js/constants";
 import { ACCOUNT_CONTENT, PERSONAL_CONTENT, setDisplayDesktop } from "../redux/ducks/desktop";
-
-export let SIDE_BAR_WIDTH = 60;
-export let DESKTOP_DISPLAY_TRANSITION_DURATION = 250
 
 function SideBar() {
     let modeIsMobile = useSelector(state => state.mode.modeIsMobile);

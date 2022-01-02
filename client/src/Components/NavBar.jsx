@@ -3,9 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClone, faUserSecret, faPenSquare } from "@fortawesome/free-solid-svg-icons"
 import { setDisplayMobile, SWIPE_CONTENT, PERSONAL_CONTENT, ACCOUNT_CONTENT } from "../redux/ducks/mobile";
-
-export let NAV_BAR_HEIGHT = 60;
-export let MOBILE_DISPLAY_TRANSITION_DURATION = 250
+import { MOBILE_DISPLAY_TRANSITION_DURATION, NAV_BAR_HEIGHT } from "../js/constants";
 
 function NavBar() {
     let modeIsMobile = useSelector(state => state.mode.modeIsMobile);

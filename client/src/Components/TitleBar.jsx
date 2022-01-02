@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-
-export let TITLE_BAR_HEIGHT = 80;
+import { TITLE_BAR_HEIGHT } from "../js/constants";
 
 function TitleBar() {
   let percentRight = useSelector(state => state.swipe.percentRight);

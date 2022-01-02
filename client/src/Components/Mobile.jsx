@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import SwipeContent from "./SwipeContent";
 import PersonalContent from "./PersonalContent";
 import { ACCOUNT_CONTENT, PERSONAL_CONTENT, SWIPE_CONTENT } from "../redux/ducks/mobile";
-import { MOBILE_DISPLAY_TRANSITION_DURATION } from "./NavBar";
+import { MOBILE_DISPLAY_TRANSITION_DURATION } from "../js/constants";
 import AccountContent from "./AccountContent";
 
 function Mobile() {

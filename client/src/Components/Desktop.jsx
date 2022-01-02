@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { ACCOUNT_CONTENT, PERSONAL_CONTENT } from "../redux/ducks/desktop";
 import AccountContent from "./AccountContent";
 import PersonalContent from "./PersonalContent";
-import { DESKTOP_DISPLAY_TRANSITION_DURATION, SIDE_BAR_WIDTH } from "./SideBar";
+import { DESKTOP_DISPLAY_TRANSITION_DURATION, SIDE_BAR_WIDTH } from "../js/constants";
 import SwipeContent from "./SwipeContent";
 
 function Desktop() {

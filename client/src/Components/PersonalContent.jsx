@@ -1,7 +1,7 @@
 import React from "react";
 import PersonalCard from "./PersonalCard";
 
-import { testArr } from "./SwipeContent";
+import { TEST_ARR } from "../js/constants";
 
 function PersonalContent(props) {
     let { style } = props;
@@ -12,10 +12,10 @@ function PersonalContent(props) {
             <div id="personal-content-header">
                 Personal Content
             </div>
-            <PersonalCard infoObj={testArr[0]} />
-            <PersonalCard infoObj={testArr[1]} />
-            <PersonalCard infoObj={testArr[2]} />
-            <PersonalCard infoObj={testArr[3]} />
+            <PersonalCard infoObj={TEST_ARR[0]} />
+            <PersonalCard infoObj={TEST_ARR[1]} />
+            <PersonalCard infoObj={TEST_ARR[2]} />
+            <PersonalCard infoObj={TEST_ARR[3]} />
         </div>
     );
 }
