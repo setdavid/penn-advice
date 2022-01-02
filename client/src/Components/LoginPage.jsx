@@ -2,21 +2,27 @@ import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoggedIn } from "../redux/ducks/login";
 
 const LOGIN_ENTER_DURATION = 1000;
 
 function LoginPage() {
     let [username, setUsername] = useState("");
     let [password, setPassword] = useState("");
-    let [loggedIn, setLoggedIn] = useState(false);
     let [note, setNote] = useState("");
 
-    let loginPageContentCSS = {}
+    let dispatch = useDispatch();
+    let loggedIn = useSelector(state => state.login.loggedIn);
+
+    let loginPageContentCSS = {
+        transitionDuration: `${LOGIN_ENTER_DURATION}ms`
+    }
 
     if (loggedIn) {
         loginPageContentCSS = {
+            ...loginPageContentCSS,
             top: "-100%",
-            transitionDuration: `${LOGIN_ENTER_DURATION}ms`
         }
     }
 
@@ -27,7 +33,7 @@ function LoginPage() {
             .then(res => res.json())
             .then(data => {
                 if (data.status == 0) {
-                    setLoggedIn(true);
+                    dispatch(setLoggedIn(true));
                 } else {
                     setNote(data.note);
                 }
@@ -84,7 +90,7 @@ function LoginPage() {
                         </div>
                         <div className="row" style={{ marginBottom: "1rem" }} >
                             <div className="col-12 d-flex justify-content-center">
-                                <input type="submit" value="Log in" />
+                                <input className="clickable" type="submit" value="Log in" />
                             </div>
                         </div>
                     </form>

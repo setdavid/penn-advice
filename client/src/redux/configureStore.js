@@ -5,6 +5,7 @@ import mobileReducer from "./ducks/mobile";
 import windowConfigReducer from "./ducks/window-config";
 import desktopReducer from "./ducks/desktop";
 import cardManagerReducer from "./ducks/card-manager";
+import loginReducer from "./ducks/login";
 
 const reducer = combineReducers({
     mode: modeReducer,
@@ -12,7 +13,8 @@ const reducer = combineReducers({
     mobile: mobileReducer,
     windowConfig: windowConfigReducer,
     desktop: desktopReducer,
-    cardManager: cardManagerReducer
+    cardManager: cardManagerReducer,
+    login: loginReducer
 });
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());

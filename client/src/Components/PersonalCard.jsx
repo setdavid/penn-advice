@@ -22,7 +22,7 @@ function PersonalCard(props) {
         <div className="personal-card" style={personalCardCSS}>
             <div className="personal-card-title">
                 {`${infoObj.type} #${infoObj.index} (${status})`}
-                <FontAwesomeIcon icon={faTrash} onClick={handleDelete} />
+                <FontAwesomeIcon className="clickable" icon={faTrash} onClick={handleDelete} />
             </div>
             <div>
                 {infoObj.text}
