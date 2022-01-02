@@ -169,10 +169,34 @@ p,
     transform: scale(1);
     width: 100%;
     padding: 0;
-    background: linear-gradient(-45deg, var(--theme-color-2), black, var(--theme-color-1));
+    background: linear-gradient(45deg, var(--theme-color-1), black, var(--theme-color-2));
+    background-size: 300% 300%;
     z-index: 10000;
     box-shadow: 2px 4px 4px hsl(0deg 0% 0% / 0.44);
     overflow: hidden;
+    animation: gradient-anim 15s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+}
+
+@keyframes gradient-anim {
+    0% {
+        background-position: 50% 50%;
+    }
+
+    25% {
+        background-position: 90% 50%;
+    }
+
+    50% {
+        background-position: 50% 50%;
+    }
+
+    75% {
+        background-position: 25% 50%;
+    }
+
+    100% {
+        background-position: 50% 50%;
+    }
 }
 
 #login-page>.row {

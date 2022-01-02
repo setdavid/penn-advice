@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoggedIn } from "../redux/ducks/login";
 
-const LOGIN_TRANSITION_DURATION = 1000;
+const LOGIN_TRANSITION_DURATION = 1500;
 
 function LoginPage() {
     let [username, setUsername] = useState("");
@@ -69,7 +69,7 @@ function LoginPage() {
 
     return (
         <div id="login-page" className="container-fluid full-height" style={loginPageContentCSS}>
-            <div className="row full-height" style={{ opacity: `${signedIn ? 0 : 1}`, transitionDuration: `${signedIn ? LOGIN_TRANSITION_DURATION / 5 : 5 * LOGIN_TRANSITION_DURATION}ms` }}>
+            <div className="row full-height" style={{ opacity: `${signedIn ? 0 : 1}`, transitionDuration: `${signedIn ? LOGIN_TRANSITION_DURATION / 4 : 3 * LOGIN_TRANSITION_DURATION}ms` }}>
                 <div className="col-12 full-height d-flex flex-column justify-content-center align-items-center">
                     <div className="row d-flex" style={{ marginBottom: "2rem" }}>
                         <div className="col-12" style={{ fontSize: "2.5rem", lineHeight: "1" }}>
