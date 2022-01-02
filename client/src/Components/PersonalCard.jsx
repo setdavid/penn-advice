@@ -21,7 +21,8 @@ function PersonalCard(props) {
     return (
         <div className="personal-card" style={personalCardCSS}>
             <div className="personal-card-title">
-                {`${infoObj.type} #${infoObj.index} (${status})`}
+                {`${infoObj.type} #${infoObj.index}`}
+                {/* {`${infoObj.type} #${infoObj.index} (${status})`} */}
                 <FontAwesomeIcon className="clickable" icon={faTrash} onClick={handleDelete} />
             </div>
             <div>
