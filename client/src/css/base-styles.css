@@ -167,7 +167,7 @@ p,
 
 #login-page {
     transition-property: opacity, transform;
-    transition-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+    transition-timing-function: cubic-bezier(0.32, 0, 0.67, 0);
     ;
     position: absolute;
     top: 0;
@@ -207,7 +207,7 @@ p,
 
 #login-page>.row {
     transition-property: opacity;
-    transition-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+    transition-timing-function: cubic-bezier(0.32, 0, 0.67, 0);
     ;
     opacity: 1;
 }
