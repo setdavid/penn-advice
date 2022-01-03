@@ -1,9 +1,21 @@
 var express = require('express');
-var router = express.Router();
+const router = express.Router();
+const {
+  createUser, 
+  validateUser, 
+  deleteUser,
+  getUserPosts,
+  createUserPost,
+  deleteUserPost
+} = require('../callbacks/users')
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+router.route('/')
+.get(validateUser)
+.post(createUser)
+.delete(deleteUser)
+router.route('/posts')
+.get(getUserPosts)
+.post(createUserPost)
+.delete(deleteUserPost)
 
-module.exports = router;
+module.exports = router
