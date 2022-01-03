@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { TIME_BETWEEN_SWIPES, CARD_SWIPE_ANGLE_MAX, CARD_VELOCITY_THRESHOLD } from "../js/constants";
+import { TIME_BETWEEN_SWIPES, CARD_SWIPE_ANGLE_MAX, CARD_VELOCITY_THRESHOLD, CARD_MIN_DISTANCE_THRESHOLD } from "../js/constants";
 import { noSwipeCard } from "../redux/ducks/swipe";
 
 function SwipeCard(props) {
@@ -166,7 +166,11 @@ function SwipeCard(props) {
         if (!swiped) {
             setDragging(false);
 
-            if (latestVel > CARD_VELOCITY_THRESHOLD && Math.abs(swipeAngle.theta) < CARD_SWIPE_ANGLE_MAX) {
+            if ((latestVel > CARD_VELOCITY_THRESHOLD) &&
+                (Math.abs(swipeAngle.theta) < CARD_SWIPE_ANGLE_MAX) &&
+                ((swipeAngle.direction == 1 && position.x - returnPos.x >= CARD_MIN_DISTANCE_THRESHOLD) ||
+                    (swipeAngle.direction == -1 && returnPos.x - position.x >= CARD_MIN_DISTANCE_THRESHOLD))) {
+
                 let factor = window.innerWidth / 5;
                 let ratio = Math.tan(swipeAngle.theta);
                 let sign = swipeAngle.direction;
