@@ -162,13 +162,30 @@ p,
 
 #side-bar {
     position: relative;
-    background: linear-gradient(0deg, var(--theme-color-1), var(--theme-color-2));
+    background: linear-gradient(0deg, var(--theme-color-2), black, var(--theme-color-1), black, var(--theme-color-2));
+    background-size: 200% 200%;
+    overflow: hidden;
+    animation: gradient-anim-side 60s linear infinite;
+}
+
+@keyframes gradient-anim-side {
+    0% {
+        background-position: 50% 0%;
+    }
+
+    /* 
+    50% {
+        background-position: 50% 100%;
+    } */
+
+    100% {
+        background-position: 50% 200%;
+    }
 }
 
 #login-page {
     transition-property: opacity, transform;
     transition-timing-function: cubic-bezier(0.32, 0, 0.67, 0);
-    ;
     position: absolute;
     top: 0;
     opacity: 1;
@@ -180,10 +197,10 @@ p,
     z-index: 10000;
     box-shadow: 2px 4px 4px hsl(0deg 0% 0% / 0.44);
     overflow: hidden;
-    animation: gradient-anim 15s cubic-bezier(0.37, 0, 0.63, 1) infinite;
+    animation: gradient-anim-login 15s cubic-bezier(0.37, 0, 0.63, 1) infinite;
 }
 
-@keyframes gradient-anim {
+@keyframes gradient-anim-login {
     0% {
         background-position: 50% 50%;
     }
