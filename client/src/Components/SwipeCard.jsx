@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TIME_BETWEEN_SWIPES, CARD_SWIPE_ANGLE_MAX, CARD_VELOCITY_THRESHOLD, CARD_MIN_DISTANCE_THRESHOLD, CARD_ASPECT_RATIO } from "../js/constants";
-import { noSwipeCard } from "../redux/ducks/swipe";
+import { noSwipeCard, setExternalSwipe } from "../redux/ducks/swipe";
 
 function SwipeCard(props) {
     let { infoObj, immobile, boundPos, color } = props;
@@ -15,14 +15,48 @@ function SwipeCard(props) {
     const [swipeAngle, setSwipeAngle] = useState({ theta: 0, direction: 1 });
     const [isInitial, setIsInitial] = useState(true);
     const [swiped, setSwiped] = useState(false);
+    const [external, setExternal] = useState(0);
 
     let dispatch = useDispatch();
     let mcHeight = useSelector(state => state.windowConfig.mcHeight);
     let modeIsMobile = useSelector(state => state.mode.modeIsMobile);
+    let externalSwipe = useSelector(state => state.swipe.externalSwipe);
 
-    let swipedColor = "#990000";
+    useEffect(() => {
+        if (externalSwipe != 0 && !immobile && !swiped && exist.current) {
+            if (isInitial) {
+                updateReturnPos();
+                setIsInitial(false);
+            }
+
+            setSwipeAngle({
+                direction: externalSwipe,
+                theta: 0
+            });
+            setExternal(2);
+        }
+    }, [externalSwipe]);
+
+    useEffect(() => {
+        if (external == 2) {
+            window.setTimeout(() => {
+                setExternal(1);
+                setPosition({
+                    x: returnPos.x + swipeAngle.direction * CARD_MIN_DISTANCE_THRESHOLD,
+                    y: returnPos.y
+                });
+            }, 10);
+        } else if (external == 1) {
+            window.setTimeout(() => {
+                swipeProcedure();
+                dispatch(setExternalSwipe(0));
+            }, 500);
+        }
+    }, [external]);
+
+    let swipedColor = "var(--theme-color-1)";
     if (swipeAngle.direction == 1) {
-        swipedColor = "#011F5b";
+        swipedColor = "var(--theme-color-2)";
     }
 
     let rotateDirection = 1;
@@ -167,25 +201,28 @@ function SwipeCard(props) {
                 (Math.abs(swipeAngle.theta) < CARD_SWIPE_ANGLE_MAX) &&
                 ((swipeAngle.direction == 1 && position.x - returnPos.x >= CARD_MIN_DISTANCE_THRESHOLD) ||
                     (swipeAngle.direction == -1 && returnPos.x - position.x >= CARD_MIN_DISTANCE_THRESHOLD))) {
-
-                let factor = window.innerWidth / 5;
-                let ratio = Math.tan(swipeAngle.theta);
-                let sign = swipeAngle.direction;
-
-                let swipedAway = {
-                    x: sign * factor + position.x,
-                    y: sign * factor * ratio + position.y
-                };
-
-                setSwiped(true);
-                setPosition(swipedAway);
-                setTimeout(() => {
-                    dispatch(noSwipeCard());
-                }, TIME_BETWEEN_SWIPES);
+                swipeProcedure();
             } else {
                 setPosition(returnPos);
             }
         }
+    }
+
+    const swipeProcedure = () => {
+        let factor = window.innerWidth / 5;
+        let ratio = Math.tan(swipeAngle.theta);
+        let sign = swipeAngle.direction;
+
+        let swipedAway = {
+            x: sign * factor + position.x,
+            y: sign * factor * ratio + position.y
+        };
+
+        setSwiped(true);
+        setPosition(swipedAway);
+        setTimeout(() => {
+            dispatch(noSwipeCard());
+        }, TIME_BETWEEN_SWIPES);
     }
 
     const velGen = (dx, dy, dt) => {

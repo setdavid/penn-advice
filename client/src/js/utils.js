@@ -29,13 +29,9 @@ let updateConfigs = () => {
 
     if (modeIsMobile) {
         store.dispatch(setMobile());
-    } else {
-        store.dispatch(setDesktop());
-    }
-
-    if (modeIsMobile) {
         store.dispatch(setMCHeight(windowHeight - TITLE_BAR_HEIGHT - NAV_BAR_HEIGHT));
     } else {
+        store.dispatch(setDesktop());
         store.dispatch(setMCHeight(windowHeight - TITLE_BAR_HEIGHT));
     }
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BUFFER_SIZE, LOAD_NEXT_BUFFER_ON_INDEX } from "../js/constants";
 import { setBuffer, setNextBuffer } from "../redux/ducks/card-manager";
-import { newPercentRight, newSwipeCard } from "../redux/ducks/swipe";
+import { newPercentRight, newSwipeCard, setExternalSwipe } from "../redux/ducks/swipe";
 import SwipeCard from "./SwipeCard";
 import { TITLE_BAR_HEIGHT, NAV_BAR_HEIGHT } from "../js/constants";
 
@@ -13,6 +13,7 @@ function SwipeContent() {
     let { buffer, nextBuffer } = useSelector(state => state.cardManager);
     let modeIsMobile = useSelector(state => state.mode.modeIsMobile);
     let mcHeight = useSelector(state => state.windowConfig.mcHeight);
+    let externalSwipe = useSelector(state => state.swipe.externalSwipe);
 
     let swipeContentCSS = {}
 
@@ -90,19 +91,37 @@ function SwipeContent() {
 
     return (
         <div ref={swipeContentRef} id="swipe-content" className="full-height container-fluid" style={swipeContentCSS}>
-            <div className="row full-height" style={{ height: `${modeIsMobile ? "" : `${0.9 * mcHeight}px`}` }}>
+            <div className={`row ${modeIsMobile ? "full-height" : ""}`} style={{ height: `${modeIsMobile ? "" : `${0.87 * mcHeight}px`}` }}>
                 <div className="col-12 full-height d-flex justify-content-center align-items-center">
                     <SwipeCard immobile={true} boundPos={position} color="#000000" infoObj={nextObj} />
                     {hasSwipeCard ? <SwipeCard immobile={false} boundPos={position} color="#000000" infoObj={currObj} /> : ""}
                 </div>
             </div>
-            <div className="row" style={{
-                height: `${modeIsMobile ? "" : `${0.1 * mcHeight}px`}`
-            }}>
-                <div className="col-12 d-flex justify-content-center align-items-center">
-
-                </div>
-            </div>
+            {modeIsMobile ? "" :
+                <div className="row" style={{
+                    height: `${0.13 * mcHeight}px`
+                }}>
+                    <div className="col-12 d-flex justify-content-center">
+                        <div className="swipe-btn left-swipe-btn clickable" onClick={() => {
+                            if (externalSwipe == 0) {
+                                dispatch(setExternalSwipe(-1));
+                            }
+                        }}>
+                            <div>
+                                L
+                            </div>
+                        </div>
+                        <div className="swipe-btn right-swipe-btn clickable" onClick={() => {
+                            if (externalSwipe == 0) {
+                                dispatch(setExternalSwipe(1));
+                            }
+                        }}>
+                            <div>
+                                W
+                            </div>
+                        </div>
+                    </div>
+                </div>}
         </div>
     );
 }
