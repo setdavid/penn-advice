@@ -18,10 +18,9 @@ const createUser = async (req,res) => {
       userPosts: []
     })
     const savedUser = await user.save()
-    res.status(200).json(savedUser)
+    res.status(200).json({success:true, data:savedUser})
     }catch(err){
-      console.log(err)
-      res.status(500).json({msg:err})
+      res.status(500).json({success:false,msg:err})
     }
   
   }
