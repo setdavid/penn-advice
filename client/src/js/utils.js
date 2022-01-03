@@ -1,7 +1,8 @@
 import store from "../redux/configureStore"
 import { setBuffer } from "../redux/ducks/card-manager";
 import { setMobile, setDesktop } from "../redux/ducks/mode";
-import { setWindowHeight } from "../redux/ducks/window-config";
+import { setMCHeight } from "../redux/ducks/window-config";
+import { NAV_BAR_HEIGHT, TITLE_BAR_HEIGHT } from "./constants";
 
 export let initialize = () => {
     console.log("Initializing React App...");
@@ -24,17 +25,17 @@ let updateConfigs = () => {
     let windowWidth = window.innerWidth;
     let windowHeight = window.innerHeight;
 
-    store.dispatch(setWindowHeight(windowHeight));
+    let modeIsMobile = !((windowWidth >= 992) && (windowWidth > windowHeight));
 
-    // if ((windowWidth < 992) && (windowWidth < windowHeight)) {
-    //     store.dispatch(setMobile());
-    // } else {
-    //     store.dispatch(setDesktop());
-    // }
-
-    if ((windowWidth >= 992) && (windowWidth > windowHeight)) {
-        store.dispatch(setDesktop());
-    } else {
+    if (modeIsMobile) {
         store.dispatch(setMobile());
+    } else {
+        store.dispatch(setDesktop());
+    }
+
+    if (modeIsMobile) {
+        store.dispatch(setMCHeight(windowHeight - TITLE_BAR_HEIGHT - NAV_BAR_HEIGHT));
+    } else {
+        store.dispatch(setMCHeight(windowHeight - TITLE_BAR_HEIGHT));
     }
 }

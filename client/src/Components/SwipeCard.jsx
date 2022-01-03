@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { TIME_BETWEEN_SWIPES, CARD_SWIPE_ANGLE_MAX, CARD_VELOCITY_THRESHOLD, CARD_MIN_DISTANCE_THRESHOLD } from "../js/constants";
+import { TIME_BETWEEN_SWIPES, CARD_SWIPE_ANGLE_MAX, CARD_VELOCITY_THRESHOLD, CARD_MIN_DISTANCE_THRESHOLD, CARD_ASPECT_RATIO } from "../js/constants";
 import { noSwipeCard } from "../redux/ducks/swipe";
 
 function SwipeCard(props) {
@@ -17,11 +17,8 @@ function SwipeCard(props) {
     const [swiped, setSwiped] = useState(false);
 
     let dispatch = useDispatch();
-
-    const windowWidth = window.innerWidth;
-    const windowHeight = window.innerHeight;
-
-    let stateWindowHeight = useSelector(state => state.windowConfig.windowHeight);
+    let mcHeight = useSelector(state => state.windowConfig.mcHeight);
+    let modeIsMobile = useSelector(state => state.mode.modeIsMobile);
 
     let swipedColor = "#990000";
     if (swipeAngle.direction == 1) {
@@ -32,8 +29,8 @@ function SwipeCard(props) {
     let distReturnFromBorder = returnPos.x - boundPos.x;
 
     let swipeCardCSS = {
-        width: `${windowWidth < windowHeight ? "85vw" : 0.5 * stateWindowHeight + "px"}`,
-        height: `${windowWidth < windowHeight ? 0.7 * stateWindowHeight + "px" : 0.75 * stateWindowHeight + "px"}`,
+        width: `${modeIsMobile ? "85vw" : 0.5 * mcHeight + "px"}`,
+        height: `${modeIsMobile ? 0.95 * mcHeight + "px" : 0.5 * CARD_ASPECT_RATIO * mcHeight + "px"}`,
         left: `${isInitial ? "auto" : position.x - boundPos.x + "px"}`,
         top: `${isInitial ? "auto" : position.y - boundPos.y + "px"}`,
         opacity: `${swiped ? 0 : 1}`,
@@ -205,7 +202,7 @@ function SwipeCard(props) {
         return v;
     }
 
-    const actualContent = <div className="swipe-card-actual-content" style={{ marginTop: `${0.1 * stateWindowHeight}px`, marginBottom: `${0.1 * stateWindowHeight}px` }}>
+    const actualContent = <div className="swipe-card-actual-content" style={{ marginTop: `${0.1 * mcHeight}px`, marginBottom: `${0.1 * mcHeight}px` }}>
         <div style={{ fontSize: "2rem", fontWeight: "bold", marginBottom: "10px" }}>
             {`${infoObj.type} #${infoObj.index}`}
         </div>

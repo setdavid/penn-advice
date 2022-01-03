@@ -4,12 +4,15 @@ import { BUFFER_SIZE, LOAD_NEXT_BUFFER_ON_INDEX } from "../js/constants";
 import { setBuffer, setNextBuffer } from "../redux/ducks/card-manager";
 import { newPercentRight, newSwipeCard } from "../redux/ducks/swipe";
 import SwipeCard from "./SwipeCard";
+import { TITLE_BAR_HEIGHT, NAV_BAR_HEIGHT } from "../js/constants";
 
 function SwipeContent() {
     let exist = useRef(true);
     let swipeContentRef = useRef();
     let [position, setPosition] = useState({ x: 0, y: 0 });
     let { buffer, nextBuffer } = useSelector(state => state.cardManager);
+    let modeIsMobile = useSelector(state => state.mode.modeIsMobile);
+    let mcHeight = useSelector(state => state.windowConfig.mcHeight);
 
     let swipeContentCSS = {}
 
@@ -87,10 +90,17 @@ function SwipeContent() {
 
     return (
         <div ref={swipeContentRef} id="swipe-content" className="full-height container-fluid" style={swipeContentCSS}>
-            <div className="row full-height">
+            <div className="row full-height" style={{ height: `${modeIsMobile ? "" : `${0.9 * mcHeight}px`}` }}>
                 <div className="col-12 full-height d-flex justify-content-center align-items-center">
                     <SwipeCard immobile={true} boundPos={position} color="#000000" infoObj={nextObj} />
                     {hasSwipeCard ? <SwipeCard immobile={false} boundPos={position} color="#000000" infoObj={currObj} /> : ""}
+                </div>
+            </div>
+            <div className="row" style={{
+                height: `${modeIsMobile ? "" : `${0.1 * mcHeight}px`}`
+            }}>
+                <div className="col-12 d-flex justify-content-center align-items-center">
+
                 </div>
             </div>
         </div>

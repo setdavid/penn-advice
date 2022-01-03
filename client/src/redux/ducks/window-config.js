@@ -1,20 +1,20 @@
-const SET_WINDOW_HEIGHT = "SET_WINDOW_HEIGHT";
+const SET_MC_HEIGHT = "SET_MC_HEIGHT";
 
-export const setWindowHeight = (windowHeight) => ({
-    type: SET_WINDOW_HEIGHT,
+export const setMCHeight = (mcHeight) => ({
+    type: SET_MC_HEIGHT,
     payload: {
-        windowHeight
+        mcHeight
     }
 });
 
 const initialState = {
-    windowHeight: 0
+    mcHeight: 0
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_WINDOW_HEIGHT:
-            return { ...state, windowHeight: action.payload.windowHeight };
+        case SET_MC_HEIGHT:
+            return { ...state, mcHeight: action.payload.mcHeight };
         default:
             return state;
     };

@@ -3,14 +3,14 @@ import { useSelector } from "react-redux";
 import Desktop from "./Desktop";
 import Mobile from "./Mobile";
 import SideBar from "./SideBar";
-import { NAV_BAR_HEIGHT, SIDE_BAR_WIDTH, TITLE_BAR_HEIGHT } from "../js/constants";
+import { NAV_BAR_HEIGHT, TITLE_BAR_HEIGHT } from "../js/constants";
 
 function MainContent() {
   let modeIsMobile = useSelector(state => state.mode.modeIsMobile);
-  let windowHeight = useSelector(state => state.windowConfig.windowHeight);
+  let mcHeight = useSelector(state => state.windowConfig.mcHeight);
 
   let mainContentCSS = {
-    height: `calc(${windowHeight}px - ${TITLE_BAR_HEIGHT}px - ${modeIsMobile ? NAV_BAR_HEIGHT : 0}px)`,
+    height: `${mcHeight}px`,
   }
 
   return (
