@@ -49,19 +49,21 @@ function LoginPage() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(`Username: ${username}, Password: ${password}`);
 
-        // fetch(`/api/login?username=${username}&password=${password}`)
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         if (data.status == 0) {
-        //             dispatch(setLoggedIn(true));
-        //         } else {
-        //             setNote(data.note);
-        //         }
-        //     });
+        fetch(`/user?username=${username}&password=${password}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    setNote("");
+                    dispatch(setLoggedIn(true));
+                } else {
+                    setNote(data.msg);
+                }
+            }, (err) => {
+                setNote(err.msg);
+            });
 
-        dispatch(setLoggedIn(true));
+        // dispatch(setLoggedIn(true));
     }
 
     return (

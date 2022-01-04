@@ -32,7 +32,7 @@ let numb1 = 0;
 let numb2 = 0;
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', usersRouter);
 app.use("/testAPI", testAPIRouter);
 
 app.post("/postSEX", (req, res) => {
