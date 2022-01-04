@@ -1,25 +1,30 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Desktop from "./Desktop";
 import Mobile from "./Mobile";
-import { NAV_BAR_HEIGHT } from "./NavBar";
-import { TITLE_BAR_HEIGHT } from "./TitleBar";
+import SideBar from "./SideBar";
+import { NAV_BAR_HEIGHT, TITLE_BAR_HEIGHT } from "../js/constants";
 
 function MainContent() {
-  let dispatch = useDispatch();
   let modeIsMobile = useSelector(state => state.mode.modeIsMobile);
+  let mcHeight = useSelector(state => state.windowConfig.mcHeight);
 
   let mainContentCSS = {
-    height: `calc(100vh - ${TITLE_BAR_HEIGHT}px - ${modeIsMobile ? NAV_BAR_HEIGHT : 0}px)`,
-    backgroundColor: "green"
+    height: `${mcHeight}px`,
   }
 
   return (
     <div id="main-content" className="container-fluid" style={mainContentCSS}>
       <div className="row full-height">
-        <div className="col-12 full-height">
-          {modeIsMobile ? <Mobile /> : <Desktop />}
-        </div>
+        {modeIsMobile ?
+          <div className="col-12 full-height">
+            <Mobile />
+          </div> :
+          <div className="col-12 full-height d-flex">
+            <SideBar />
+            <Desktop />
+          </div>
+        }
       </div>
     </div>
   );

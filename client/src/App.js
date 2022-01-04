@@ -4,14 +4,13 @@ import "./css/bootstrap-grid.min.css";
 import TitleBar from "./Components/TitleBar";
 import MainContent from "./Components/MainContent";
 import NavBar from "./Components/NavBar";
-import { initialize } from "./js/utils";
+import LoginPage from "./Components/LoginPage";
 
 function App() {
-  initialize();
-
   return (
     <div className="App">
       <header className="App-header">
+        <LoginPage />
         <TitleBar />
         <MainContent />
         <NavBar />
