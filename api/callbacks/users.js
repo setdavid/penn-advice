@@ -18,46 +18,49 @@ const createUser = async (req,res) => {
       userPosts: []
     })
     const savedUser = await user.save()
-    res.status(200).json({success:true, data:savedUser})
+    return res.status(200).json({success:true, data:savedUser})
     }catch(err){
-      res.status(500).json({success:false,msg:err})
+      return res.status(500).json({success:false,msg:err})
     }
   
   }
+
+  const validateUser = async (username, password) => {
+    const user = await User.findOne({username:username})
+    if (!user) return {success:false,msg:"user doesn't exist"}
+    const valid = await bcrypt.compare(password, user.password)
+    if (valid) return {success:true, data: user}
+    return {success:false, msg:"wrong password"}
+  }
   
-  const validateUser = async (req, res) => {
-    const {username, password} = req.body
+  const getUser = async (req, res) => {
+    const {username, password} = req.query
+    console.log(req.query)
     try{
-      const user = await User.findOne({username:username})
-      if(!user) return res.status(403)
-      .json({success:false,msg:"user doesn't exist"})
-      const valid = await bcrypt.compare(password, user.password)
-      if (valid) return res.status(200)
-      .json({success:true, data: user})
-      return res.status(403).json({success:false,msg:"wrong password"})
+      const valid =  await validateUser(username,password)
+      if(!valid.success) return res.status(403).json(valid)
+      else return res.status(200).json(valid)
     } catch(err){
       res.status(500).json({success:false, msg:err})
     }
   }
   
   const deleteUser = async (req,res) => {
-    const{username} = req.body
+    const{username, password} = req.body
     try{
-      const removed = await User.deleteOne({username: username})
-      console.log(username)
-      if(removed.deletedCount === 0) return res.status(403)
-      .json({success:false,msg:"user doesn't exist"})
-
-      return res.status(200)
-      .json({success:true, msg: `${username} has yeed his/her last haw.`})
-      
+      const valid =  await validateUser(username,password)
+      if(!valid.success) return res.status(403).json(valid)
+      else{
+        await User.deleteOne({username: username})
+        return res.status(200).json({success:true, msg: `${username} has yeed his/her last haw.`})
+      }
     } catch(err){
       return res.status(500).json({success:false, msg:err})
     }
   }
 
   const getUserPosts = async (req,res) => {
-      const {username} = req.body
+      const {username} = req.query
       try{
       const user = await User.findOne({username:username})
       if(!user) return res.status(403)
@@ -105,7 +108,7 @@ const createUser = async (req,res) => {
 
  module.exports = {
      createUser, 
-     validateUser, 
+     getUser, 
      deleteUser, 
      getUserPosts, 
      createUserPost, 
