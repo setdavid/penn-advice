@@ -2,7 +2,7 @@ var express = require('express');
 const router = express.Router();
 const {
   createUser, 
-  validateUser, 
+  getUser, 
   deleteUser,
   getUserPosts,
   createUserPost,
@@ -10,7 +10,7 @@ const {
 } = require('../callbacks/users')
 
 router.route('/')
-.get(validateUser)
+.get(getUser)
 .post(createUser)
 .delete(deleteUser)
 router.route('/posts')

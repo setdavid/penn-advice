@@ -8,6 +8,6 @@ postsSchema = mongoose.Schema({
     likes: {required: true, type: Number},
     dislikes: {required: true, type: Number},
     body: {required:true, type: String}
-}).createIndex({postIndex: 1},{unique: true})
+}).index({postIndex: 1},{unique: true})
 
 module.exports = mongoose.model('Posts', postsSchema)
