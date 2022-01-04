@@ -41,7 +41,12 @@ export const setExternalSwipe = (externalSwipe) => ({
 
 const initialState = {
     hasSwipeCard: true,
-    prevCard: {},
+    prevCard: {
+        type: "Nah",
+        index: "",
+        text: ":)",
+        percentRight: 0.5
+    },
     displayGhost: false,
     externalSwipe: 0,
 };
