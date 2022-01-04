@@ -32,15 +32,15 @@ function PersonalCard(props) {
                 {`${infoObj.count} entries`}
             </div>
             <div className="personal-card-percent-bar" >
-                <div className="percent-bar" style={{ width: `${percentLeft}%`, minWidth: `${percentLeft}%`, backgroundColor: "#990000", borderRight: `${percentLeft > 0 ? "2px solid white" : ""}` }} />
-                <div className="percent-bar" style={{ width: `${percentRight}%`, minWidth: `${percentRight}%`, backgroundColor: "#011F5b", borderLeft: `${percentRight > 0 ? "2px solid white" : ""}` }} />
+                <div className="percent-bar" style={{ width: `${percentLeft}%`, minWidth: `${percentLeft}%`, backgroundColor: "var(--theme-color-1)", borderRight: `${percentLeft > 0 ? "2px solid white" : ""}` }} />
+                <div className="percent-bar" style={{ width: `${percentRight}%`, minWidth: `${percentRight}%`, backgroundColor: "var(--theme-color-2)", borderLeft: `${percentRight > 0 ? "2px solid white" : ""}` }} />
             </div>
             <div className="d-flex justify-content-between" >
                 <div>
-                    {`${percentLeft}%`}
+                    {`${Math.round(percentLeft)}%`}
                 </div>
                 <div>
-                    {`${percentRight}%`}
+                    {`${Math.round(percentRight)}%`}
                 </div>
             </div>
         </div>

@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TIME_BETWEEN_SWIPES, CARD_SWIPE_ANGLE_MAX, CARD_VELOCITY_THRESHOLD, CARD_MIN_DISTANCE_THRESHOLD, CARD_ASPECT_RATIO } from "../js/constants";
-import { noSwipeCard, setExternalSwipe } from "../redux/ducks/swipe";
+import { noSwipeCard, setDisplayGhost, setExternalSwipe } from "../redux/ducks/swipe";
 
 function SwipeCard(props) {
-    let { infoObj, immobile, boundPos, color } = props;
+    let { infoObj, immobile, boundPos, color, ghost } = props;
 
     let exist = useRef(true);
     const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -21,6 +21,7 @@ function SwipeCard(props) {
     let mcHeight = useSelector(state => state.windowConfig.mcHeight);
     let modeIsMobile = useSelector(state => state.mode.modeIsMobile);
     let externalSwipe = useSelector(state => state.swipe.externalSwipe);
+    let displayGhost = useSelector(state => state.swipe.displayGhost);
 
     useEffect(() => {
         if (externalSwipe != 0 && !immobile && !swiped && exist.current) {
@@ -71,6 +72,32 @@ function SwipeCard(props) {
         background: `${swiped ? swipedColor : ""}`,
         transform: `rotate(${rotateDirection * (position.x - returnPos.x) / distReturnFromBorder * (distReturnFromBorder >= 0.1 * boundPos.width ? 7 : 0.5)}deg)`,
         transitionDuration: `${swiped ? TIME_BETWEEN_SWIPES + "ms" : ""}`
+    }
+
+    if (ghost) {
+        if (displayGhost) {
+            swipeCardCSS = {
+                ...swipeCardCSS,
+                opacity: 1
+            }
+        } else {
+            swipeCardCSS = {
+                ...swipeCardCSS,
+                opacity: 0,
+                height: "0"
+            }
+        }
+    }
+
+    let percentRight = 100 * infoObj.percentRight;
+    let percentLeft = 100 * (1 - infoObj.percentRight);
+
+    let percentBarRight = percentRight;
+    let percentBarLeft = percentLeft;
+
+    if (!displayGhost) {
+        percentBarRight = 50;
+        percentBarLeft = 50;
     }
 
     let timer = useRef(0);
@@ -239,33 +266,54 @@ function SwipeCard(props) {
         return v;
     }
 
-    const actualContent = <div className="swipe-card-actual-content" style={{ marginTop: `${0.1 * mcHeight}px`, marginBottom: `${0.1 * mcHeight}px` }}>
-        <div style={{ fontSize: "2rem", fontWeight: "bold", marginBottom: "10px" }}>
-            {`${infoObj.type} #${infoObj.index}`}
-        </div>
-        <div>
-            {infoObj.text}
-        </div>
-    </div >
+    const actualContent =
+        <div className="swipe-card-actual-content" style={{ marginTop: `${0.1 * mcHeight}px`, marginBottom: `${0.1 * mcHeight}px` }}>
+            <div style={{ fontSize: "1.5rem", fontWeight: "bold", marginBottom: "10px" }}>
+                {`${infoObj.type} #${infoObj.index}`}
+            </div>
+            <div>
+                {infoObj.text}
+            </div>
+        </div >
 
     return (
         <React.Fragment>
-            {immobile ? <div ref={swipeCardRef} className={"no-select swipe-card swipe-card-return"} style={swipeCardCSS}>
-                <div className="swipe-card-content d-flex" style={{ backgroundColor: `${swiped ? swipedColor : color}` }}>
-                    {actualContent}
-                </div>
-            </div> : <div ref={swipeCardRef} className={`no-select swipe-card ${swiped ? "swipe-card-swiped" : ""} ${!dragging && !swiped ? "swipe-card-return" : ""}`} style={swipeCardCSS}
-                onMouseDown={handleMouseDown}
-                onMouseUp={handleEndDrag}
-                onMouseOut={handleEndDrag}
-                onMouseMove={handleMouseMove}
-                onTouchStart={handleTouchStart}
-                onTouchEnd={handleEndDrag}
-                onTouchMove={handleTouchMove}>
-                <div className="swipe-card-content d-flex" style={{ backgroundColor: `${swiped ? swipedColor : color}` }}>
-                    {actualContent}
-                </div>
-            </div>}
+            {immobile ?
+                (ghost ? <div ref={swipeCardRef} className="no-select swipe-card swipe-card-return ghost-card" style={swipeCardCSS} onClick={() => dispatch(setDisplayGhost(false))} onTouchEnd={() => dispatch(setDisplayGhost(false))}>
+                    <div className="swipe-card-content d-flex" style={{ backgroundColor: `${swiped ? swipedColor : color}` }}>
+                        <div style={{ position: "absolute", padding: `${modeIsMobile ? 0.02 * mcHeight : 0.03 * mcHeight}px ${0.05 * mcHeight}px`, width: "100%" }}>
+                            <div className="ghost-percent-bar" >
+                                <div className="percent-bar" style={{ width: `${percentBarLeft}%`, minWidth: `${percentBarLeft}%`, backgroundColor: "var(--theme-color-1)", borderRight: `${percentLeft > 0 ? "2px solid white" : ""}` }} />
+                                <div className="percent-bar" style={{ width: `${percentBarRight}%`, minWidth: `${percentBarRight}%`, backgroundColor: "var(--theme-color-2)", borderLeft: `${percentRight > 0 ? "2px solid white" : ""}` }} />
+                            </div>
+                            <div className="d-flex justify-content-between" >
+                                <div>
+                                    {`${Math.round(percentLeft)}%`}
+                                </div>
+                                <div>
+                                    {`${Math.round(percentRight)}%`}
+                                </div>
+                            </div>
+                        </div>
+                        {actualContent}
+                    </div>
+                </div> : <div ref={swipeCardRef} className="no-select swipe-card swipe-card-return" style={swipeCardCSS}>
+                    <div className="swipe-card-content d-flex" style={{ backgroundColor: `${swiped ? swipedColor : color}` }}>
+                        {actualContent}
+                    </div>
+                </div>)
+                : <div ref={swipeCardRef} className={`no-select swipe-card ${swiped ? "swipe-card-swiped" : ""} ${!dragging && !swiped ? "swipe-card-return" : ""}`} style={swipeCardCSS}
+                    onMouseDown={handleMouseDown}
+                    onMouseUp={handleEndDrag}
+                    onMouseOut={handleEndDrag}
+                    onMouseMove={handleMouseMove}
+                    onTouchStart={handleTouchStart}
+                    onTouchEnd={handleEndDrag}
+                    onTouchMove={handleTouchMove}>
+                    <div className="swipe-card-content d-flex" style={{ backgroundColor: `${swiped ? swipedColor : color}` }}>
+                        {actualContent}
+                    </div>
+                </div>}
         </React.Fragment>
     );
 }

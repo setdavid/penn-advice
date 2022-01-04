@@ -1,6 +1,7 @@
 const NO_SWIPE_CARD = "NO_SWIPE_CARD";
 const NEW_SWIPE_CARD = "NEW_SWIPE_CARD";
-const NEW_PERCENT_RIGHT = "NEW_PERCENT_RIGHT";
+const SET_PREV_CARD = "SET_PREV_CARD";
+const SET_DISPLAY_GHOST = "SET_DISPLAY_GHOST";
 const SET_EXTERNAL_SWIPE = "SET_EXTERNAL_SWIPE";
 
 export const noSwipeCard = () => ({
@@ -17,10 +18,17 @@ export const newSwipeCard = () => ({
     }
 });
 
-export const newPercentRight = (percent) => ({
-    type: NEW_PERCENT_RIGHT,
+export const setPrevCard = (prevCard) => ({
+    type: SET_PREV_CARD,
     payload: {
-        percent: percent
+        prevCard
+    }
+});
+
+export const setDisplayGhost = (displayGhost) => ({
+    type: SET_DISPLAY_GHOST,
+    payload: {
+        displayGhost
     }
 });
 
@@ -33,8 +41,9 @@ export const setExternalSwipe = (externalSwipe) => ({
 
 const initialState = {
     hasSwipeCard: true,
-    percentRight: 1,
-    externalSwipe: 0
+    prevCard: {},
+    displayGhost: false,
+    externalSwipe: 0,
 };
 
 const reducer = (state = initialState, action) => {
@@ -43,8 +52,10 @@ const reducer = (state = initialState, action) => {
             return { ...state, hasSwipeCard: false };
         case NEW_SWIPE_CARD:
             return { ...state, hasSwipeCard: true };
-        case NEW_PERCENT_RIGHT:
-            return { ...state, percentRight: action.payload.percent };
+        case SET_PREV_CARD:
+            return { ...state, prevCard: action.payload.prevCard };
+        case SET_DISPLAY_GHOST:
+            return { ...state, displayGhost: action.payload.displayGhost };
         case SET_EXTERNAL_SWIPE:
             return { ...state, externalSwipe: action.payload.externalSwipe };
         default:

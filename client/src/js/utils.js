@@ -2,7 +2,7 @@ import store from "../redux/configureStore"
 import { setBuffer } from "../redux/ducks/card-manager";
 import { setMobile, setDesktop } from "../redux/ducks/mode";
 import { setMCHeight } from "../redux/ducks/window-config";
-import { NAV_BAR_HEIGHT, TITLE_BAR_HEIGHT } from "./constants";
+import { NAV_BAR_HEIGHT, TEST_ARR, TITLE_BAR_HEIGHT } from "./constants";
 
 export let initialize = () => {
     console.log("Initializing React App...");
@@ -13,12 +13,13 @@ export let initialize = () => {
 
     updateConfigs();
 
-    fetch("/api/get_cards")
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            store.dispatch(setBuffer(data));
-        }, err => console.log(err));
+    // fetch("/api/get_cards")
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         console.log(data);
+    //         store.dispatch(setBuffer(data));
+    //     }, err => console.log(err));
+    store.dispatch(setBuffer(TEST_ARR))
 }
 
 let updateConfigs = () => {

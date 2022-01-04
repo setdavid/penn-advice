@@ -381,7 +381,7 @@ p,
     color: white;
     border-radius: 1rem;
     background: linear-gradient(to right, var(--theme-color-1), black, var(--theme-color-2));
-    box-shadow: 0.5px 1px 1px hsl(0deg 0% 0% / 0.49);
+    /* box-shadow: 0.5px 1px 1px hsl(0deg 0% 0% / 0.49); */
 }
 
 .swipe-card-return {
@@ -415,9 +415,29 @@ p,
     padding-right: 15px;
 }
 
+.ghost-card {
+    transition-property: opacity, height !important;
+    transition-duration: 500ms !important;
+    background: var(--theme-color-3) !important;
+    overflow: hidden !important;
+    /* background: linear-gradient(to right, var(--theme-color-3), var(--theme-color-4), var(--theme-color-5)) !important; */
+}
+
+.ghost-percent-bar {
+    position: relative;
+    height: 8px;
+    min-height: 8px;
+    display: flex;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    /* border: white 1px solid; */
+}
+
 .swipe-btn {
     font-weight: bold;
-    font-size: 5vh;
+    font-size: 4vh;
     text-align: center;
     border-radius: 10px;
     height: 7vh;
@@ -426,8 +446,8 @@ p,
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 5vh;
-    margin-right: 5vh;
+    margin-left: 2vh;
+    margin-right: 2vh;
     box-shadow: 0.5px 1px 1px hsl(0deg 0% 0% / 0.49);
     position: relative;
     top: 0;
@@ -437,6 +457,10 @@ p,
 
 .left-swipe-btn:hover {
     background-color: var(--theme-color-1);
+}
+
+.middle-swipe-btn:hover {
+    background-color: black;
 }
 
 .right-swipe-btn:hover {
