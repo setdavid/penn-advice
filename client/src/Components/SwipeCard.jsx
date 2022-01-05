@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { TIME_BETWEEN_SWIPES, CARD_SWIPE_ANGLE_MAX, CARD_VELOCITY_THRESHOLD, CARD_MIN_DISTANCE_THRESHOLD, CARD_ASPECT_RATIO } from "../js/constants";
+import { TIME_BETWEEN_SWIPES, CARD_SWIPE_ANGLE_MAX, CARD_VELOCITY_THRESHOLD, CARD_MIN_DISTANCE_THRESHOLD, CARD_ASPECT_RATIO, GHOST_CARD_TRANSITION_DURATION } from "../js/constants";
 import { noSwipeCard, setDisplayGhost, setExternalSwipe } from "../redux/ducks/swipe";
 
 function SwipeCard(props) {
@@ -71,7 +71,7 @@ function SwipeCard(props) {
         opacity: `${swiped ? 0 : 1}`,
         background: `${swiped ? swipedColor : ""}`,
         transform: `rotate(${rotateDirection * (position.x - returnPos.x) / distReturnFromBorder * (distReturnFromBorder >= 0.1 * boundPos.width ? 7 : 0.5)}deg)`,
-        transitionDuration: `${swiped ? TIME_BETWEEN_SWIPES + "ms" : ""}`
+        transitionDuration: `${ghost ? (GHOST_CARD_TRANSITION_DURATION + "ms") : (swiped ? TIME_BETWEEN_SWIPES + "ms" : "")}`
     }
 
     if (ghost) {
@@ -279,7 +279,7 @@ function SwipeCard(props) {
     return (
         <React.Fragment>
             {immobile ?
-                (ghost ? <div ref={swipeCardRef} className="no-select swipe-card swipe-card-return ghost-card" style={swipeCardCSS} onClick={() => dispatch(setDisplayGhost(false))} onTouchEnd={() => dispatch(setDisplayGhost(false))}>
+                (ghost ? <div ref={swipeCardRef} className="no-select swipe-card ghost-card" style={swipeCardCSS} onClick={() => dispatch(setDisplayGhost(false))} onTouchEnd={() => dispatch(setDisplayGhost(false))}>
                     <div className="swipe-card-content d-flex" style={{ backgroundColor: `${swiped ? swipedColor : color}` }}>
                         <div style={{ position: "absolute", padding: `${modeIsMobile ? 0.02 * mcHeight : 0.03 * mcHeight}px ${0.05 * mcHeight}px`, width: "100%" }}>
                             <div className="ghost-percent-bar" >

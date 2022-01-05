@@ -125,7 +125,7 @@ function SwipeContent() {
             <div className={`row ${modeIsMobile ? "full-height" : ""}`} style={{ height: `${modeIsMobile ? "" : `${0.87 * mcHeight}px`}` }}>
                 <div className="col-12 full-height d-flex justify-content-center align-items-center">
                     <SwipeCard immobile boundPos={position} color="#000000" infoObj={nextObj} />
-                    {hasSwipeCard ? <SwipeCard boundPos={position} color="#000000" infoObj={currObj} /> : ""}
+                    {hasSwipeCard ? <SwipeCard immobile={displayGhost ? true : false} boundPos={position} color="#000000" infoObj={currObj} /> : ""}
                     <SwipeCard immobile ghost boundPos={position} color="#000000" infoObj={prevCard} />
                 </div>
             </div>
@@ -134,17 +134,17 @@ function SwipeContent() {
                     height: `${0.13 * mcHeight}px`
                 }}>
                     <div className="col-12 d-flex justify-content-center">
-                        <div className="swipe-btn left-swipe-btn clickable" onClick={() => handleClickSwipeBtns(-1)} onTouchEnd={() => handleClickSwipeBtns(-1)}>
+                        <div className="swipe-btn left-swipe-btn clickable" onClick={() => handleClickSwipeBtns(-1)}>
                             <div>
                                 L
                             </div>
                         </div>
-                        <div className="swipe-btn middle-swipe-btn clickable" style={{ fontSize: "3vh" }} onClick={() => dispatch(setDisplayGhost(true))} onTouchEnd={() => dispatch(setDisplayGhost(true))}>
+                        <div className="swipe-btn middle-swipe-btn clickable" style={{ fontSize: "3vh" }} onClick={() => dispatch(setDisplayGhost(true))}>
                             <div>
                                 <FontAwesomeIcon icon={faUndo} />
                             </div>
                         </div>
-                        <div className="swipe-btn right-swipe-btn clickable" onClick={() => handleClickSwipeBtns(1)} onTouchEnd={() => handleClickSwipeBtns(1)}>
+                        <div className="swipe-btn right-swipe-btn clickable" onClick={() => handleClickSwipeBtns(1)}>
                             <div>
                                 W
                             </div>

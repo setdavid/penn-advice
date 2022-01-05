@@ -2,6 +2,7 @@ import { faDoorOpen, faUserSecret } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { SWITCH_SIZE } from "../js/constants";
 import { setLoggedOut } from "../redux/ducks/login";
 import { setGhostMode } from "../redux/ducks/mode";
 
@@ -43,26 +44,26 @@ function AccountContent(props) {
                     <div className="row">
                         <div className="col-12">
                             <div>
-                                <span>
-                                    Ghost Mode
+                                <span style={{ maxWidth: "50%" }}>
+                                    Show Ghost Card After Swipe
                                 </span>
-                                <span className="d-flex clickable" style={{ width: "20px", border: "1px white solid" }}
+                                <span id="ghost-mode-switch" className="d-flex clickable" style={{ height: `${SWITCH_SIZE}px` }}
                                     onClick={() => {
                                         if (ghostMode) {
                                             dispatch(setGhostMode(false));
                                         } else {
                                             dispatch(setGhostMode(true));
                                         }
-                                    }}
-                                    onTouchEnd={() => {
-                                        if (ghostMode) {
-                                            dispatch(setGhostMode(false));
-                                        } else {
-                                            dispatch(setGhostMode(true));
-                                        }
                                     }}>
+                                    <div id="ghost-mode-switch-dot" style={{
+                                        width: `${SWITCH_SIZE}px`,
+                                        height: `${SWITCH_SIZE}px`,
+                                        left: `${ghostMode ? `calc(100% - ${SWITCH_SIZE}px)` : "0"}`,
+                                    }}>
+
+                                    </div>
                                     <div className="switch-comp" style={{ width: `${ghostMode ? 100 : 0}%`, minWidth: `${ghostMode ? 100 : 0}%`, backgroundColor: "var(--theme-color-1)" }} />
-                                    <div className="switch-comp" style={{ width: `${ghostMode ? 0 : 100}%`, minWidth: `${ghostMode ? 0 : 100}%`, backgroundColor: "var(--theme-color-2)" }} />
+                                    <div className="switch-comp" style={{ width: `${ghostMode ? 0 : 100}%`, minWidth: `${ghostMode ? 0 : 100}%`, backgroundColor: "var(--theme-color-4)" }} />
                                 </span>
                             </div>
                         </div>
