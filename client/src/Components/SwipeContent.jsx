@@ -18,6 +18,7 @@ function SwipeContent() {
     let externalSwipe = useSelector(state => state.swipe.externalSwipe);
     let prevCard = useSelector(state => state.swipe.prevCard);
     let displayGhost = useSelector(state => state.swipe.displayGhost);
+    let ghostMode = useSelector(state => state.mode.ghostMode);
 
     let dispatch = useDispatch();
 
@@ -80,10 +81,13 @@ function SwipeContent() {
                 dispatch(setNextBuffer(TEST_ARR));
             }
 
+            if (ghostMode) {
+                dispatch(setDisplayGhost(true));
+            }
+
             batch(() => {
                 dispatch(newSwipeCard());
                 dispatch(setPrevCard(currObj));
-                dispatch(setDisplayGhost(true));
             });
         }
     }, [hasSwipeCard]);
@@ -140,7 +144,7 @@ function SwipeContent() {
                                 <FontAwesomeIcon icon={faUndo} />
                             </div>
                         </div>
-                        <div className="swipe-btn right-swipe-btn clickable" onClick={() => handleClickSwipeBtns(1)} onTouchEnd={() => handleClickSwipeBtns(-1)}>
+                        <div className="swipe-btn right-swipe-btn clickable" onClick={() => handleClickSwipeBtns(1)} onTouchEnd={() => handleClickSwipeBtns(1)}>
                             <div>
                                 W
                             </div>

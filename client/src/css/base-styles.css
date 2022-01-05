@@ -10,6 +10,7 @@
     --theme-color-3: #212121;
     --theme-color-4: #424242;
     --theme-color-5: #616161;
+    --text-color-1: #666666;
 }
 
 html {
@@ -285,6 +286,17 @@ p,
     left: 0;
 }
 
+#preferences>.row {
+    margin-top: 10px;
+}
+
+#preferences>.row>div>div {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0px;
+    border-top: 1px solid var(--text-color-1);
+}
+
 #swipe-content {
     position: relative;
     overflow: hidden;
@@ -295,16 +307,16 @@ p,
 #personal-content {
     position: relative;
     background: var(--theme-color-3);
-    overflow-y: scroll;
-}
-
-#personal-content::-webkit-scrollbar {
-    display: none;
 }
 
 #personal-content, #account-content {
     padding-top: 15px;
     padding-bottom: 15px;
+    overflow-y: scroll;
+}
+
+#personal-content::-webkit-scrollbar, #account-content::-webkit-scrollbar {
+    display: none;
 }
 
 #personal-content-header {
@@ -358,8 +370,8 @@ p,
     box-shadow: inset 1.6px 3.2px 3.2px hsl(0deg 0% 0% / 0.45);
 } */
 
-.percent-bar {
-    transition-property: width min-width;
+.percent-bar, .switch-comp {
+    transition-property: width, min-width;
     transition-duration: 1s;
     z-index: 1000;
     height: 100%;

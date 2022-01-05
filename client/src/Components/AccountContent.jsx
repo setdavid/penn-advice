@@ -1,14 +1,16 @@
 import { faDoorOpen, faUserSecret } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setLoggedOut } from "../redux/ducks/login";
+import { setGhostMode } from "../redux/ducks/mode";
 
 function AccountContent(props) {
     let { style } = props;
     let accountContentCSS = {}
 
     let dispatch = useDispatch();
+    let ghostMode = useSelector(state => state.mode.ghostMode);
 
     return (
         <div id="account-content" className="full-height" style={{ ...style, ...accountContentCSS }}>
@@ -26,6 +28,44 @@ function AccountContent(props) {
                 <div className="col-12 d-flex justify-content-center" style={{ marginTop: "10px", fontWeight: "bold" }}>
                     <div onClick={() => dispatch(setLoggedOut())} className="clickable">
                         Log out &nbsp;<FontAwesomeIcon icon={faDoorOpen} size="lg" />
+                    </div>
+                </div>
+            </div>
+            <div className="row">
+                <div id="preferences" className="col-12" style={{ marginTop: "50px" }}>
+                    <div className="row" style={{ fontWeight: "bold" }}>
+                        <div className="col-12">
+                            <div style={{ border: "none" }}>
+                                Preferences
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-12">
+                            <div>
+                                <span>
+                                    Ghost Mode
+                                </span>
+                                <span className="d-flex clickable" style={{ width: "20px", border: "1px white solid" }}
+                                    onClick={() => {
+                                        if (ghostMode) {
+                                            dispatch(setGhostMode(false));
+                                        } else {
+                                            dispatch(setGhostMode(true));
+                                        }
+                                    }}
+                                    onTouchEnd={() => {
+                                        if (ghostMode) {
+                                            dispatch(setGhostMode(false));
+                                        } else {
+                                            dispatch(setGhostMode(true));
+                                        }
+                                    }}>
+                                    <div className="switch-comp" style={{ width: `${ghostMode ? 100 : 0}%`, minWidth: `${ghostMode ? 100 : 0}%`, backgroundColor: "var(--theme-color-1)" }} />
+                                    <div className="switch-comp" style={{ width: `${ghostMode ? 0 : 100}%`, minWidth: `${ghostMode ? 0 : 100}%`, backgroundColor: "var(--theme-color-2)" }} />
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

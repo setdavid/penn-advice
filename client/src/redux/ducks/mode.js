@@ -1,7 +1,8 @@
 const SET_MOBILE = "SET_MOBILE";
 const SET_DESKTOP = "SET_DESKTOP";
+const SET_GHOST_MODE = "SET_GHOST_MODE";
 
-export const setMobile= () => ({
+export const setMobile = () => ({
     type: SET_MOBILE,
     payload: {
 
@@ -15,8 +16,16 @@ export const setDesktop = () => ({
     }
 });
 
+export const setGhostMode = (ghostMode) => ({
+    type: SET_GHOST_MODE,
+    payload: {
+        ghostMode
+    }
+});
+
 const initialState = {
-    modeIsMobile: false
+    modeIsMobile: false,
+    ghostMode: true
 };
 
 const reducer = (state = initialState, action) => {
@@ -25,6 +34,8 @@ const reducer = (state = initialState, action) => {
             return { ...state, modeIsMobile: true };
         case SET_DESKTOP:
             return { ...state, modeIsMobile: false };
+        case SET_GHOST_MODE:
+            return { ...state, ghostMode: action.payload.ghostMode };
         default:
             return state;
     };
