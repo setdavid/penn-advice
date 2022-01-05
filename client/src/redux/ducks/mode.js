@@ -25,7 +25,7 @@ export const setGhostMode = (ghostMode) => ({
 
 const initialState = {
     modeIsMobile: false,
-    ghostMode: true
+    ghostMode: false
 };
 
 const reducer = (state = initialState, action) => {

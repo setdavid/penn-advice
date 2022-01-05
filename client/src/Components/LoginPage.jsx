@@ -91,7 +91,7 @@ function LoginPage() {
             setNote("passwords don't match");
         } else if (password.length < 5) {
             setNote("passwords must be at least 5 characters");
-        }else {
+        } else {
             const body = {
                 username,
                 password
