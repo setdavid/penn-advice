@@ -121,8 +121,6 @@ function LoginPage() {
                     setNote("SERVER ERROR");
                 });
         }
-
-        // dispatch(setLoggedIn(true));
     }
 
     const displaysCSS = {
@@ -210,14 +208,14 @@ function LoginPage() {
                                         <input className="clickable" type="submit" value="Log in" disabled={`${signedIn ? "disabled" : ""}`} />
                                     </div> */}
                                     <div className="col-12 d-flex justify-content-center align-items-center">
-                                        <button className="clickable login-btn login-submit-btn" disabled={`${signedIn ? "disabled" : ""}`}>
+                                        <button className="clickable std-btn" disabled={`${signedIn ? "disabled" : ""}`}>
                                             Log In
                                         </button>
                                     </div>
                                 </div>
                             </form>
                             <div className="row d-flex">
-                                <div className="col-12 clickable login-btn" onClick={toggleCreateUser}>
+                                <div className="col-12 clickable std-btn" onClick={toggleCreateUser}>
                                     <div>
                                         Create New User
                                     </div>
@@ -270,14 +268,14 @@ function LoginPage() {
                                 </div>
                                 <div className="row d-flex" style={{ marginBottom: "2rem" }} >
                                     <div className="col-12 d-flex justify-content-center align-items-center">
-                                        <button className="clickable login-btn login-submit-btn" disabled={`${signedIn ? "disabled" : ""}`}>
+                                        <button className="clickable std-btn" disabled={`${signedIn ? "disabled" : ""}`}>
                                             Create New User
                                         </button>
                                     </div>
                                 </div>
                             </form>
                             <div className="row d-flex">
-                                <div className="col-12 clickable login-btn" onClick={toggleLoginUser}>
+                                <div className="col-12 clickable std-btn" onClick={toggleLoginUser}>
                                     <div>
                                         Cancel
                                     </div>

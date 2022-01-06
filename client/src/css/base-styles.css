@@ -242,18 +242,16 @@ p,
     align-items: center;
 }
 
-.login-btn {
+.std-btn {
     border-radius: 7px;
-    border: solid 1px white
-}
-
-.login-submit-btn {
+    border: solid 1px white;
     padding: 0 15px;
     background: transparent;
     color: white;
     font-size: inherit;
     line-height: inherit;
     font-family: inherit;
+    text-align: center;
 }
 
 #desktop-content {
@@ -261,7 +259,9 @@ p,
 }
 
 #desktop-content>.col-lg-4>div {
-    position: absolute;
+    position: relative;
+    display: flex;
+    flex-direction: column;
     transition-property: top;
     transition-duration: 5s;
     top: 0;
@@ -286,16 +286,28 @@ p,
     left: 0;
 }
 
-#preferences>.row {
-    margin-top: 10px;
+.account-content-header {
+    margin-top: 30px;
 }
 
-#preferences>.row>div>div {
+.account-content-header>.row:nth-child(1) {
+    font-weight: bold;
+}
+
+.account-content-header>.row:nth-child(1)>.col-12>.row {
+    border: none;
+}
+
+.account-content-header>.row>.col-12>.row {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 10px 0px;
+    padding: 13px 0px;
     border-top: 1px solid var(--text-color-1);
+}
+
+.account-content-header>.row>.col-12>.row>.col-6:nth-child(2) {
+    display: flex;
+    justify-content: end;
 }
 
 #swipe-content {
@@ -311,8 +323,8 @@ p,
 }
 
 #personal-content, #account-content {
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     overflow-y: scroll;
     overflow-x: hidden;
 }

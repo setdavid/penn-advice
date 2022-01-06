@@ -1,13 +1,12 @@
-const SET_LOGGED_IN = "LOGGED_IN";
-const SET_LOGGED_OUT = "LOGGED_OUT";
+const SET_LOGGED_IN = "SET_LOGGED_IN";
 
-export const setLoggedIn = () => ({
-    type: SET_LOGGED_IN
+export const setLoggedIn = (loggedIn) => ({
+    type: SET_LOGGED_IN,
+    payload: {
+        loggedIn
+    }
 });
 
-export const setLoggedOut = () => ({
-    type: SET_LOGGED_OUT
-});
 
 const initialState = {
     loggedIn: true
@@ -16,9 +15,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_LOGGED_IN:
-            return { ...state, loggedIn: true };
-        case SET_LOGGED_OUT:
-            return { ...state, loggedIn: false };
+            return { ...state, loggedIn: action.payload.loggedIn };
         default:
             return state;
     };
