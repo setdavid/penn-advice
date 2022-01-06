@@ -12,17 +12,9 @@ export let initialize = () => {
     });
 
     updateConfigs();
-
-    // fetch("/api/get_cards")
-    //     .then(res => res.json())
-    //     .then(data => {
-    //         console.log(data);
-    //         store.dispatch(setBuffer(data));
-    //     }, err => console.log(err));
-    store.dispatch(setBuffer(TEST_ARR))
 }
 
-let updateConfigs = () => {
+export let updateConfigs = () => {
     let windowWidth = window.innerWidth;
     let windowHeight = window.innerHeight;
 
@@ -35,4 +27,12 @@ let updateConfigs = () => {
         store.dispatch(setDesktop());
         store.dispatch(setMCHeight(windowHeight - TITLE_BAR_HEIGHT));
     }
+
+    // fetch("/api/get_cards")
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         console.log(data);
+    //         store.dispatch(setBuffer(data));
+    //     }, err => console.log(err));
+    store.dispatch(setBuffer(TEST_ARR))
 }

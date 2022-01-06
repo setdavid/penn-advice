@@ -5,8 +5,9 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { batch, useDispatch, useSelector } from "react-redux";
 import { LOGIN_TRANSITION_DURATION, LOGIN_DISPLAY_TRANSITION_DURATION } from "../js/constants";
-import { setLoggedIn } from "../redux/ducks/login";
+import { setDisplayApp, setLoggedIn } from "../redux/ducks/login";
 import { setUserData } from "../redux/ducks/user";
+import { updateConfigs } from "../js/utils";
 
 const LOGIN_USER = "LOGIN_USER";
 const CREATE_USER = "CREATE_USER";
@@ -23,20 +24,20 @@ function LoginPage() {
     let dispatch = useDispatch();
     let loggedIn = useSelector(state => state.login.loggedIn);
 
-    let loginPageContentCSS = {
+    let loginPageCSS = {
         transitionDuration: `${LOGIN_TRANSITION_DURATION}ms`,
         width: `${displayPage ? "100%" : "0"}`
     }
 
     if (signedIn) {
-        loginPageContentCSS = {
-            ...loginPageContentCSS,
+        loginPageCSS = {
+            ...loginPageCSS,
             opacity: 0,
             transform: "scale(25)"
         }
     } else {
-        loginPageContentCSS = {
-            ...loginPageContentCSS,
+        loginPageCSS = {
+            ...loginPageCSS,
             opacity: 1,
             transform: "scale(1)"
         }
@@ -65,28 +66,36 @@ function LoginPage() {
     const handleLogin = (e) => {
         e.preventDefault();
 
-        fetch(`/user?username=${username}&password=${password}`)
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    clearFields();
+        // fetch(`/user?username=${username}&password=${password}`)
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         if (data.success) {
+        //             clearFields();
+        //             updateConfigs();
 
-                    batch(() => {
-                        dispatch(setLoggedIn(true));
-                        dispatch(setUserData(data.data));
-                    });
-                } else {
-                    if (typeof data.msg == "string") {
-                        setNote(data.msg);
-                    } else {
-                        setNote("SERVER ERROR");
-                    }
-                }
-            }, (err) => {
-                setNote("SERVER ERROR");
-            });
+        //             batch(() => {
+        //                 dispatch(setLoggedIn(true));
+        //                 dispatch(setDisplayApp(true));
+        //                 dispatch(setUserData(data.data));
+        //             });
+        //         } else {
+        //             if (typeof data.msg == "string") {
+        //                 setNote(data.msg);
+        //             } else {
+        //                 setNote("SERVER ERROR");
+        //             }
+        //         }
+        //     }, (err) => {
+        //         setNote("SERVER ERROR");
+        //     });
 
-        // dispatch(setLoggedIn(true));
+        clearFields();
+        updateConfigs();
+
+        batch(() => {
+            dispatch(setLoggedIn(true));
+            dispatch(setDisplayApp(true));
+        });
     }
 
     const handleCreateUser = (e) => {
@@ -157,7 +166,7 @@ function LoginPage() {
     }
 
     return (
-        <div id="login-page" className="container-fluid full-height" style={loginPageContentCSS}>
+        <div id="login-page" className="container-fluid full-height" style={loginPageCSS}>
             <div className="row full-height" style={{ opacity: `${signedIn ? 0 : 1}`, transitionDuration: `${signedIn ? LOGIN_TRANSITION_DURATION / 4 : 3 * LOGIN_TRANSITION_DURATION}ms` }}>
                 <div className="col-12 full-height d-flex flex-column justify-content-center align-items-center" >
                     <div className="row d-flex" style={{ marginBottom: "2rem" }}>

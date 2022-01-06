@@ -8,7 +8,12 @@ import cardManagerReducer from "./ducks/card-manager";
 import loginReducer from "./ducks/login";
 import userReducer from "./ducks/user";
 
-const reducer = combineReducers({
+const REDUX_RESET = "REDUX_RESET";
+export const reduxReset = () => ({
+    type: REDUX_RESET
+});
+
+const appReducer = combineReducers({
     mode: modeReducer,
     swipe: swipeReducer,
     mobile: mobileReducer,
@@ -19,6 +24,14 @@ const reducer = combineReducers({
     user: userReducer
 });
 
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const rootReducer = (state, action) => {
+    if (action.type == REDUX_RESET) {
+        return appReducer(undefined, action);
+    } else {
+        return appReducer(state, action);
+    }
+}
+
+const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 export default store;

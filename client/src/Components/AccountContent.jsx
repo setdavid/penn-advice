@@ -1,10 +1,12 @@
 import { faDoorOpen, faUserSecret, faUserSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { SWITCH_SIZE } from "../js/constants";
-import { setLoggedIn } from "../redux/ducks/login";
+import { batch, useDispatch, useSelector } from "react-redux";
+import { LOGIN_TRANSITION_DURATION, SWITCH_SIZE } from "../js/constants";
+import { reduxReset } from "../redux/configureStore";
+import { setDisplayApp, setLoggedIn } from "../redux/ducks/login";
 import { setGhostMode, GHOST_MODE_NONE, GHOST_MODE_BAR } from "../redux/ducks/mode";
+import { setUserData } from "../redux/ducks/user";
 
 function AccountContent(props) {
     let { style } = props;
@@ -16,6 +18,15 @@ function AccountContent(props) {
     let dispatch = useDispatch();
     let ghostMode = useSelector(state => state.mode.ghostMode);
     let userData = useSelector(state => state.user.userData);
+
+    const handleLogOut = () => {
+        dispatch(setLoggedIn(false));
+        dispatch(setUserData({}));
+
+        window.setTimeout(() => {
+            dispatch(reduxReset());
+        }, LOGIN_TRANSITION_DURATION);
+    }
 
     const handleDeleteUser = (e) => {
         e.preventDefault();
@@ -37,7 +48,7 @@ function AccountContent(props) {
                 console.log(data);
                 if (data.success) {
                     clearFields();
-                    dispatch(setLoggedIn(false));
+                    handleLogOut();
                 } else {
                     if (typeof data.msg == "string") {
                         setNote(data.msg);
@@ -127,7 +138,7 @@ function AccountContent(props) {
                                     Log Out
                                 </div>
                                 <div className="col-6">
-                                    <div onClick={() => dispatch(setLoggedIn(false))} className="clickable">
+                                    <div onClick={handleLogOut} className="clickable">
                                         <FontAwesomeIcon icon={faDoorOpen} size="lg" />
                                     </div>
                                 </div>
