@@ -4,7 +4,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SWITCH_SIZE } from "../js/constants";
 import { setLoggedOut } from "../redux/ducks/login";
-import { setGhostMode } from "../redux/ducks/mode";
+import { setGhostMode, GHOST_MODE_NONE, GHOST_MODE_BAR } from "../redux/ducks/mode";
 
 function AccountContent(props) {
     let { style } = props;
@@ -45,25 +45,25 @@ function AccountContent(props) {
                         <div className="col-12">
                             <div>
                                 <span style={{ maxWidth: "50%" }}>
-                                    Show Ghost Card After Swipe
+                                    Show Ghost Bar After Swipe
                                 </span>
                                 <span id="ghost-mode-switch" className="d-flex clickable" style={{ height: `${SWITCH_SIZE}px` }}
                                     onClick={() => {
-                                        if (ghostMode) {
-                                            dispatch(setGhostMode(false));
+                                        if (ghostMode != GHOST_MODE_NONE) {
+                                            dispatch(setGhostMode(GHOST_MODE_NONE));
                                         } else {
-                                            dispatch(setGhostMode(true));
+                                            dispatch(setGhostMode(GHOST_MODE_BAR));
                                         }
                                     }}>
                                     <div id="ghost-mode-switch-dot" style={{
                                         width: `${SWITCH_SIZE}px`,
                                         height: `${SWITCH_SIZE}px`,
-                                        left: `${ghostMode ? `calc(100% - ${SWITCH_SIZE}px)` : "0"}`,
+                                        left: `${ghostMode != GHOST_MODE_NONE ? `calc(100% - ${SWITCH_SIZE}px)` : "0"}`,
                                     }}>
 
                                     </div>
-                                    <div className="switch-comp" style={{ width: `${ghostMode ? 100 : 0}%`, minWidth: `${ghostMode ? 100 : 0}%`, backgroundColor: "var(--theme-color-1)" }} />
-                                    <div className="switch-comp" style={{ width: `${ghostMode ? 0 : 100}%`, minWidth: `${ghostMode ? 0 : 100}%`, backgroundColor: "var(--theme-color-4)" }} />
+                                    <div className="switch-comp" style={{ width: `${ghostMode != GHOST_MODE_NONE ? 100 : 0}%`, minWidth: `${ghostMode != GHOST_MODE_NONE ? 100 : 0}%`, backgroundColor: "var(--theme-color-1)" }} />
+                                    <div className="switch-comp" style={{ width: `${ghostMode != GHOST_MODE_NONE ? 0 : 100}%`, minWidth: `${ghostMode != GHOST_MODE_NONE ? 0 : 100}%`, backgroundColor: "var(--theme-color-4)" }} />
                                 </span>
                             </div>
                         </div>

@@ -4,9 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { batch, useDispatch, useSelector } from "react-redux";
 import { BUFFER_SIZE, LOAD_NEXT_BUFFER_ON_INDEX, TEST_ARR } from "../js/constants";
 import { setBuffer, setNextBuffer } from "../redux/ducks/card-manager";
-import { setPrevCard, newSwipeCard, setExternalSwipe, setDisplayGhost } from "../redux/ducks/swipe";
+import { setPrevCard, newSwipeCard, setExternalSwipe, setDisplayGhost, DISPLAY_GHOST_BAR, DISPLAY_GHOST_CARD, DISPLAY_GHOST_NONE } from "../redux/ducks/swipe";
 import SwipeCard from "./SwipeCard";
 import { TITLE_BAR_HEIGHT, NAV_BAR_HEIGHT } from "../js/constants";
+import { GHOST_MODE_BAR, GHOST_MODE_CARD, GHOST_MODE_NONE } from "../redux/ducks/mode";
 
 function SwipeContent() {
     let exist = useRef(true);
@@ -23,17 +24,6 @@ function SwipeContent() {
     let dispatch = useDispatch();
 
     let swipeContentCSS = {}
-
-    let ghostCSS = {}
-    if (displayGhost) {
-        ghostCSS = {
-
-        }
-    } else {
-        ghostCSS = {
-
-        }
-    }
 
     let timer = useRef(0);
     let debounce = (callback) => {
@@ -81,8 +71,10 @@ function SwipeContent() {
                 dispatch(setNextBuffer(TEST_ARR));
             }
 
-            if (ghostMode) {
-                dispatch(setDisplayGhost(true));
+            if (ghostMode == GHOST_MODE_BAR) {
+                dispatch(setDisplayGhost(DISPLAY_GHOST_BAR));
+            } else if (ghostMode == GHOST_MODE_CARD) {
+                dispatch(setDisplayGhost(DISPLAY_GHOST_CARD));
             }
 
             batch(() => {
@@ -93,7 +85,7 @@ function SwipeContent() {
     }, [hasSwipeCard]);
 
     const handleClickSwipeBtns = (direction) => {
-        if (externalSwipe == 0 && !displayGhost) {
+        if (externalSwipe == 0 && displayGhost == DISPLAY_GHOST_NONE) {
             dispatch(setExternalSwipe(direction));
         }
     }
@@ -123,9 +115,9 @@ function SwipeContent() {
     return (
         <div ref={swipeContentRef} id="swipe-content" className="full-height container-fluid" style={swipeContentCSS}>
             <div className={`row ${modeIsMobile ? "full-height" : ""}`} style={{ height: `${modeIsMobile ? "" : `${0.87 * mcHeight}px`}` }}>
-                <div className="col-12 full-height d-flex justify-content-center align-items-center">
+                <div className="col-12 full-height d-flex justify-content-center align-items-center" onClick={() => dispatch(setDisplayGhost(DISPLAY_GHOST_NONE))} onTouchEnd={() => dispatch(setDisplayGhost(DISPLAY_GHOST_NONE))}>
                     <SwipeCard immobile boundPos={position} color="#000000" infoObj={nextObj} />
-                    {hasSwipeCard ? <SwipeCard immobile={displayGhost ? true : false} boundPos={position} color="#000000" infoObj={currObj} /> : ""}
+                    {hasSwipeCard ? <SwipeCard immobile={displayGhost != DISPLAY_GHOST_NONE ? true : false} boundPos={position} color="#000000" infoObj={currObj} /> : ""}
                     <SwipeCard immobile ghost boundPos={position} color="#000000" infoObj={prevCard} />
                 </div>
             </div>
@@ -139,7 +131,7 @@ function SwipeContent() {
                                 L
                             </div>
                         </div>
-                        <div className="swipe-btn middle-swipe-btn clickable" style={{ fontSize: "3vh" }} onClick={() => dispatch(setDisplayGhost(true))}>
+                        <div className="swipe-btn middle-swipe-btn clickable" style={{ fontSize: "3vh" }} onClick={() => dispatch(setDisplayGhost(DISPLAY_GHOST_CARD))}>
                             <div>
                                 <FontAwesomeIcon icon={faUndo} />
                             </div>

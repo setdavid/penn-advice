@@ -1,6 +1,9 @@
 const SET_MOBILE = "SET_MOBILE";
 const SET_DESKTOP = "SET_DESKTOP";
 const SET_GHOST_MODE = "SET_GHOST_MODE";
+export const GHOST_MODE_NONE = "GHOST_MODE_NONE";
+export const GHOST_MODE_BAR = "GHOST_MODE_BAR";
+export const GHOST_MODE_CARD = "GHOST_MODE_CARD";
 
 export const setMobile = () => ({
     type: SET_MOBILE,
@@ -25,7 +28,7 @@ export const setGhostMode = (ghostMode) => ({
 
 const initialState = {
     modeIsMobile: false,
-    ghostMode: false
+    ghostMode: GHOST_MODE_NONE
 };
 
 const reducer = (state = initialState, action) => {
