@@ -73,6 +73,10 @@ function SwipeContent() {
 
             if (ghostMode == GHOST_MODE_BAR) {
                 dispatch(setDisplayGhost(DISPLAY_GHOST_BAR));
+
+                // window.setTimeout(() => {
+                //     dispatch(setDisplayGhost(DISPLAY_GHOST_NONE));
+                // }, 1000);
             } else if (ghostMode == GHOST_MODE_CARD) {
                 dispatch(setDisplayGhost(DISPLAY_GHOST_CARD));
             }

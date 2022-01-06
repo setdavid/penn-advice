@@ -254,6 +254,7 @@ function SwipeCard(props) {
         };
 
         setSwiped(true);
+        // setPosition(returnPos);
         setPosition(swipedAway);
         setTimeout(() => {
             dispatch(noSwipeCard());
