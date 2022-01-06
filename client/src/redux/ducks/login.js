@@ -9,7 +9,7 @@ export const setLoggedIn = (loggedIn) => ({
 
 
 const initialState = {
-    loggedIn: true
+    loggedIn: false
 };
 
 const reducer = (state = initialState, action) => {

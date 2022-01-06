@@ -11,31 +11,48 @@ function AccountContent(props) {
     let accountContentCSS = {}
     let [confirmPassword, setConfirmPassword] = useState("");
     let [confirmDeleteUser, setConfirmDeleteUser] = useState(false);
+    let [note, setNote] = useState("");
 
     let dispatch = useDispatch();
     let ghostMode = useSelector(state => state.mode.ghostMode);
+    let userData = useSelector(state => state.user.userData);
 
     const handleDeleteUser = (e) => {
         e.preventDefault();
 
-        // fetch(`/user?username=${username}&password=${password}`)
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         if (data.success) {
-        //             clearFields();
-        //             dispatch(setLoggedIn(true));
-        //         } else {
-        //             if (typeof data.msg == "string") {
-        //                 setNote(data.msg);
-        //             } else {
-        //                 setNote("SERVER ERROR");
-        //             }
-        //         }
-        //     }, (err) => {
-        //         setNote("SERVER ERROR");
-        //     });
+        const body = {
+            username: userData.username,
+            password: confirmPassword
+        }
 
-        dispatch(setLoggedIn(false));
+        fetch(`/user`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.success) {
+                    clearFields();
+                    dispatch(setLoggedIn(false));
+                } else {
+                    if (typeof data.msg == "string") {
+                        setNote(data.msg);
+                    } else {
+                        setNote("SERVER ERROR");
+                    }
+                }
+            }, (err) => {
+                setNote("SERVER ERROR");
+            });
+    }
+
+    const clearFields = () => {
+        setConfirmPassword("");
+        setNote("");
     }
 
     return (
@@ -138,7 +155,10 @@ function AccountContent(props) {
                                     Are you sure? All user data will be deleted...
                                 </div>
                                 <div className="col-6">
-                                    <div onClick={() => setConfirmDeleteUser(false)} className="clickable std-btn">
+                                    <div onClick={() => {
+                                        setConfirmDeleteUser(false);
+                                        clearFields();
+                                    }} className="clickable std-btn">
                                         Cancel
                                     </div>
                                 </div>
@@ -149,6 +169,9 @@ function AccountContent(props) {
                                         <label>
                                             Confirm Password
                                             <br />
+                                            {note == "" ? "" : <span style={{ color: "red", fontSize: "0.75rem" }}>
+                                                {note}
+                                            </span>}
                                             <input
                                                 style={{ width: "100%" }}
                                                 type="text"

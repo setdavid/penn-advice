@@ -3,9 +3,10 @@ import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { batch, useDispatch, useSelector } from "react-redux";
 import { LOGIN_TRANSITION_DURATION, LOGIN_DISPLAY_TRANSITION_DURATION } from "../js/constants";
 import { setLoggedIn } from "../redux/ducks/login";
+import { setUserData } from "../redux/ducks/user";
 
 const LOGIN_USER = "LOGIN_USER";
 const CREATE_USER = "CREATE_USER";
@@ -69,7 +70,11 @@ function LoginPage() {
             .then(data => {
                 if (data.success) {
                     clearFields();
-                    dispatch(setLoggedIn(true));
+
+                    batch(() => {
+                        dispatch(setLoggedIn(true));
+                        dispatch(setUserData(data.data));
+                    });
                 } else {
                     if (typeof data.msg == "string") {
                         setNote(data.msg);
