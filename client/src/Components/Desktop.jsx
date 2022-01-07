@@ -43,8 +43,12 @@ function Desktop() {
   return (
     <div id="desktop-content" className="row full-height" style={desktopCSS}>
       <div className="col-lg-4 full-height">
-        <AccountContent style={{ ...displaysCSS, top: `${displayValues.accountContent}%` }} />
-        <PersonalContent style={{ ...displaysCSS, top: `${displayValues.personalContent}%` }} />
+        <div className="row full-height" style={{ ...displaysCSS, top: `${displayValues.accountContent}%` }} >
+          <AccountContent />
+        </div>
+        <div className="row full-height" style={{ ...displaysCSS, top: `${displayValues.personalContent}%` }} >
+          <PersonalContent />
+        </div>
       </div>
       <div className="col-lg-8 full-height">
         <SwipeContent />

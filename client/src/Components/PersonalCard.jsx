@@ -19,28 +19,38 @@ function PersonalCard(props) {
     }
 
     return (
-        <div className="personal-card" style={personalCardCSS}>
-            <div className="personal-card-title">
-                {`${infoObj.type} #${infoObj.index}`}
-                {/* {`${infoObj.type} #${infoObj.index} (${status})`} */}
-                <FontAwesomeIcon className="clickable" icon={faTrash} onClick={handleDelete} />
-            </div>
-            <div>
-                {infoObj.text}
-            </div>
-            <div className="personal-card-count" >
-                {`${infoObj.count} entries`}
-            </div>
-            <div className="personal-card-percent-bar" >
-                <div className="percent-bar" style={{ width: `${percentLeft}%`, minWidth: `${percentLeft}%`, backgroundColor: "var(--theme-color-1)", borderRight: `${percentLeft > 0 ? "2px solid white" : ""}` }} />
-                <div className="percent-bar" style={{ width: `${percentRight}%`, minWidth: `${percentRight}%`, backgroundColor: "var(--theme-color-2)", borderLeft: `${percentRight > 0 ? "2px solid white" : ""}` }} />
-            </div>
-            <div className="d-flex justify-content-between" >
-                <div>
-                    {`${Math.round(percentLeft)}%`}
+        <div className="personal-card row" style={personalCardCSS}>
+            <div className="col-12">
+                <div className="row">
+                    <div className="col-12 personal-card-title">
+                        {`${infoObj.type} #${infoObj.index}`}
+                        {/* {`${infoObj.type} #${infoObj.index} (${status})`} */}
+                        <FontAwesomeIcon className="clickable" icon={faTrash} onClick={handleDelete} />
+                    </div>
                 </div>
-                <div>
-                    {`${Math.round(percentRight)}%`}
+                <div className="row">
+                    <div className="col-12">
+                        {infoObj.text}
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-12">
+                        <div className="personal-card-count" >
+                            {`${infoObj.count} entries`}
+                        </div>
+                        <div className="personal-card-percent-bar" >
+                            <div className="percent-bar" style={{ width: `${percentLeft}%`, minWidth: `${percentLeft}%`, backgroundColor: "var(--theme-color-1)", borderRight: `${percentLeft > 0 ? "2px solid white" : ""}` }} />
+                            <div className="percent-bar" style={{ width: `${percentRight}%`, minWidth: `${percentRight}%`, backgroundColor: "var(--theme-color-2)", borderLeft: `${percentRight > 0 ? "2px solid white" : ""}` }} />
+                        </div>
+                        <div className="d-flex justify-content-between" >
+                            <div>
+                                {`${Math.round(percentLeft)}%`}
+                            </div>
+                            <div>
+                                {`${Math.round(percentRight)}%`}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
