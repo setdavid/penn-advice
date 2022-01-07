@@ -30,7 +30,8 @@ function PersonalContent(props) {
     }
 
     const handleSubmit = () => {
-
+        console.log("handle submit");
+        clearFields();
     }
 
     return (
@@ -75,10 +76,7 @@ function PersonalContent(props) {
                             }} className="clickable std-btn">
                                 Cancel
                             </div>
-                            <div onClick={() => {
-                                setCreateCard(false);
-                                clearFields();
-                            }} className="clickable std-btn">
+                            <div onClick={handleSubmit} className="clickable std-btn">
                                 Submit
                             </div>
                         </div>

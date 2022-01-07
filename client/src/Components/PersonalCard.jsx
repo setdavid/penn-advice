@@ -13,9 +13,9 @@ function PersonalCard(props) {
 
     const handleDelete = () => {
         console.log(`Delete ${infoObj.type} #${infoObj.index}`);
-        fetch("/api/delete")
-            .then(res => res.json())
-            .then(data => setStatus(data["status"]), error => console.log(error));
+        // fetch("/api/delete")
+        //     .then(res => res.json())
+        //     .then(data => setStatus(data["status"]), error => console.log(error));
     }
 
     return (
