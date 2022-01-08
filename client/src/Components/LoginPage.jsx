@@ -7,7 +7,7 @@ import { batch, useDispatch, useSelector } from "react-redux";
 import { LOGIN_TRANSITION_DURATION, LOGIN_DISPLAY_TRANSITION_DURATION } from "../js/constants";
 import { setDisplayApp, setLoggedIn } from "../redux/ducks/login";
 import { setUserData } from "../redux/ducks/user";
-import { updateConfigs } from "../js/utils";
+import { getUserCards, updateConfigs } from "../js/utils";
 
 const LOGIN_USER = "LOGIN_USER";
 const CREATE_USER = "CREATE_USER";
@@ -71,10 +71,7 @@ function LoginPage() {
         setNote("");
 
         fetch(`/user?username=${username}&password=${password}`)
-            .then(res => {
-                setLoading(false);
-                return res.json();
-            })
+            .then(res => res.json())
             .then(data => {
                 if (data.success) {
                     clearFields();
@@ -84,13 +81,18 @@ function LoginPage() {
                         dispatch(setLoggedIn(true));
                         dispatch(setDisplayApp(true));
                         dispatch(setUserData(data.data));
+                        getUserCards(data.data.userPosts);
                     });
+
+                    setLoading(false);
                 } else {
                     if (typeof data.msg == "string") {
                         setNote(data.msg);
                     } else {
                         setNote("SERVER ERROR");
                     }
+
+                    setLoading(false);
                 }
             }, (err) => {
                 setNote("SERVER ERROR");
@@ -129,21 +131,20 @@ function LoginPage() {
                 },
                 body: JSON.stringify(body)
             })
-                .then(res => {
-                    setLoading(false);
-                    return res.json();
-                })
+                .then(res => res.json())
                 .then(data => {
-                    console.log(data);
                     if (data.success) {
                         clearFields();
                         setDisplay(LOGIN_USER);
+                        setLoading(false);
                     } else {
                         if (typeof data.msg == "string") {
                             setNote(data.msg);
                         } else {
                             setNote("SERVER ERROR");
                         }
+
+                        setLoading(false);
                     }
                 }, (err) => {
                     setNote("SERVER ERROR");

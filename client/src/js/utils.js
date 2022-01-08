@@ -1,6 +1,7 @@
 import store from "../redux/configureStore"
 import { setBuffer } from "../redux/ducks/card-manager";
 import { setMobile, setDesktop } from "../redux/ducks/mode";
+import { setUserCards } from "../redux/ducks/user";
 import { setMCHeight } from "../redux/ducks/window-config";
 import { NAV_BAR_HEIGHT, TEST_ARR, TITLE_BAR_HEIGHT } from "./constants";
 
@@ -34,5 +35,25 @@ export let updateConfigs = () => {
     //         console.log(data);
     //         store.dispatch(setBuffer(data));
     //     }, err => console.log(err));
-    store.dispatch(setBuffer(TEST_ARR))
+    store.dispatch(setBuffer(TEST_ARR));
+}
+
+export let getUserCards = async (userPosts) => {
+    // let userPosts = store.getState().user.userData.userPosts;
+    // if (userPosts) {
+    //     let userCards = new Array(userPosts.length);
+
+    //     for (let i = 0; i < userPosts.length; i++) {
+    //         userCards[i] = await fetch("/posts/getbyindex")
+    //             .then(res => res.json())
+    //             .then(data => {
+    //                 console.log(data);
+    //                 store.dispatch(setBuffer(data));
+    //             }, err => console.log(err));
+    //     }
+
+    //     store.dispatch(setUserCards(userCards));
+    // } else {
+    //     console.log("no userPosts array");
+    // }
 }

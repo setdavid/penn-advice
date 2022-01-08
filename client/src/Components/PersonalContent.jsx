@@ -10,7 +10,9 @@ function PersonalContent(props) {
     let [createCard, setCreateCard] = useState(false);
     let [note, setNote] = useState("");
     let [text, setText] = useState("");
-    let userData = useSelector(state => state.user.userData);
+    let user = useSelector(state => state.user);
+    let userData = user.userData;
+    let userCards = user.userCards;
 
     let createCardCSS = {}
 
@@ -64,6 +66,14 @@ function PersonalContent(props) {
             });
     }
 
+    let keyIndex = 0;
+    let personalCardsArr = <React.Fragment>
+        {TEST_ARR.map((cardObj) => {
+            keyIndex++;
+            return <PersonalCard key={keyIndex} infoObj={cardObj} />
+        })}
+    </React.Fragment>
+
     return (
         <div id="personal-content" className="col-12 full-height" style={personalContentCSS}>
             <div className="row">
@@ -114,10 +124,11 @@ function PersonalContent(props) {
 
                 </div>
             </div>
-            <PersonalCard infoObj={TEST_ARR[0]} />
+            {personalCardsArr}
+            {/* <PersonalCard infoObj={TEST_ARR[0]} />
             <PersonalCard infoObj={TEST_ARR[1]} />
             <PersonalCard infoObj={TEST_ARR[2]} />
-            <PersonalCard infoObj={TEST_ARR[3]} />
+            <PersonalCard infoObj={TEST_ARR[3]} /> */}
         </div >
     );
 }
