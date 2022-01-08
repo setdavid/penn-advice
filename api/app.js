@@ -9,6 +9,7 @@ require('dotenv/config')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var postsRouter = require('./routes/posts');
 var testAPIRouter = require("./routes/testAPI");
 var app = express();
 
@@ -33,6 +34,7 @@ let numb2 = 0;
 
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
+app.use('/posts', postsRouter);
 app.use("/testAPI", testAPIRouter);
 
 app.post("/postSEX", (req, res) => {

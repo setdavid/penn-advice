@@ -75,30 +75,14 @@ const getUserPosts = async (req, res) => {
 
 }
 
-const createUserPost = async (req, res) => {
-  const { username, body } = req.body;
-
+const createUserPost = async (req) => {
+  const { username, postID } = req.body
   try {
-    const postIndexObj = await PostIndex.findOneAndUpdate({ type: "Penn Life" }, { $inc: { postIndex: 1 } });
-    if (!postIndexObj) return res.status(403).json({ success: false, msg: "post index error" });
-    let postIndex = postIndexObj.postIndex + 1;
-
-    const post = new Post({
-      type: "Penn Life",
-      poster: username,
-      postIndex: postIndex,
-      leftCount: 0,
-      rightCount: 0,
-      body
-    });
-    const savedPost = await post.save();
-
-    const update = await User.updateOne({ username: username }, { $push: { userPosts: postIndex } });
-    console.log(update);
-    if (!update.modifiedCount) return res.status(403).json({ success: false, msg: "user doesn't exist" })
-    return res.status(200).json({ success: true, data: postIndex })
+    const update = await User.updateOne({ username: username }, { $push: { userPosts: postID } })
+    if (!update.matchedCount) return { success: false, status: 403, msg: "user doesn't exist" }
+    return { success: true, status: 200, data: postID }
   } catch (err) {
-    return res.status(500).json({ success: false, msg: err })
+    return { success: false, status: 500, msg: err }
   }
 }
 

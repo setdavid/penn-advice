@@ -35,11 +35,12 @@ function PersonalContent(props) {
 
     const handleSubmit = () => {
         const body = {
-            username: userData.username,
-            body: text
+            poster: userData.username,
+            body: text,
+            type: "Penn Life"
         }
 
-        fetch(`/user/posts`, {
+        fetch(`/posts`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -52,6 +53,7 @@ function PersonalContent(props) {
             })
             .then(data => {
                 if (data.success) {
+                    console.log(data);
                     clearFields();
                     setCreateCard(false);
                 } else {
