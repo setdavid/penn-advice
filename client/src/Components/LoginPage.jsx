@@ -17,6 +17,7 @@ function LoginPage() {
     let [password, setPassword] = useState("");
     let [confirmPassword, setConfirmPassword] = useState("");
     let [note, setNote] = useState("");
+    let [loading, setLoading] = useState(false);
     let [displayPage, setDisplayPage] = useState(true);
     let [signedIn, setSignedIn] = useState(false);
     let [display, setDisplay] = useState(LOGIN_USER);
@@ -61,49 +62,59 @@ function LoginPage() {
         setPassword("");
         setConfirmPassword("");
         setNote("");
+        setLoading(false);
     }
 
     const handleLogin = (e) => {
         e.preventDefault();
+        setLoading(true);
+        setNote("");
 
-        // fetch(`/user?username=${username}&password=${password}`)
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         if (data.success) {
-        //             clearFields();
-        //             updateConfigs();
+        fetch(`/user?username=${username}&password=${password}`)
+            .then(res => {
+                setLoading(false);
+                return res.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    clearFields();
+                    updateConfigs();
 
-        //             batch(() => {
-        //                 dispatch(setLoggedIn(true));
-        //                 dispatch(setDisplayApp(true));
-        //                 dispatch(setUserData(data.data));
-        //             });
-        //         } else {
-        //             if (typeof data.msg == "string") {
-        //                 setNote(data.msg);
-        //             } else {
-        //                 setNote("SERVER ERROR");
-        //             }
-        //         }
-        //     }, (err) => {
-        //         setNote("SERVER ERROR");
-        //     });
+                    batch(() => {
+                        dispatch(setLoggedIn(true));
+                        dispatch(setDisplayApp(true));
+                        dispatch(setUserData(data.data));
+                    });
+                } else {
+                    if (typeof data.msg == "string") {
+                        setNote(data.msg);
+                    } else {
+                        setNote("SERVER ERROR");
+                    }
+                }
+            }, (err) => {
+                setNote("SERVER ERROR");
+            });
 
-        clearFields();
-        updateConfigs();
+        // clearFields();
+        // updateConfigs();
 
-        batch(() => {
-            dispatch(setLoggedIn(true));
-            dispatch(setDisplayApp(true));
-        });
+        // batch(() => {
+        //     dispatch(setLoggedIn(true));
+        //     dispatch(setDisplayApp(true));
+        // });
     }
 
     const handleCreateUser = (e) => {
         e.preventDefault();
+        setLoading(true);
+        setNote("");
 
         if (password != confirmPassword) {
+            setLoading(false);
             setNote("passwords don't match");
         } else if (password.length < 5) {
+            setLoading(false);
             setNote("passwords must be at least 5 characters");
         } else {
             const body = {
@@ -118,7 +129,10 @@ function LoginPage() {
                 },
                 body: JSON.stringify(body)
             })
-                .then(res => res.json())
+                .then(res => {
+                    setLoading(false);
+                    return res.json();
+                })
                 .then(data => {
                     console.log(data);
                     if (data.success) {
@@ -169,6 +183,20 @@ function LoginPage() {
         <div id="login-page" className="container-fluid full-height" style={loginPageCSS}>
             <div className="row full-height" style={{ opacity: `${signedIn ? 0 : 1}`, transitionDuration: `${signedIn ? LOGIN_TRANSITION_DURATION / 4 : 3 * LOGIN_TRANSITION_DURATION}ms` }}>
                 <div className="col-12 full-height d-flex flex-column justify-content-center align-items-center" >
+                    <div style={{ height: "2rem", minWidth: "200px" }}>
+                        {note == "" ? "" : <div className="row d-flex" style={{ marginBottom: "1rem", color: "red", fontSize: "0.75rem", textAlign: "center" }}>
+                            <div className="col-12" >
+                                <div>
+                                    {note}
+                                </div>
+                            </div>
+                        </div>}
+                        {loading ? <div className="row d-flex" >
+                            <div className="col-12" >
+                                <div className="login-loading" />
+                            </div>
+                        </div> : ""}
+                    </div>
                     <div className="row d-flex" style={{ marginBottom: "2rem" }}>
                         <div className="col-12" style={{ fontSize: "2.5rem", lineHeight: "1" }}>
                             <div>
@@ -179,13 +207,6 @@ function LoginPage() {
                             </div>
                         </div>
                     </div>
-                    {note == "" ? "" : <div className="row d-flex" style={{ marginBottom: "1rem", color: "red", fontSize: "0.75rem" }}>
-                        <div className="col-12" >
-                            <div>
-                                {note}
-                            </div>
-                        </div>
-                    </div>}
                     <div className="row" style={{ width: "100%", position: "relative", flexWrap: "nowrap", alignItems: "start" }}>
                         <div className="col-12 login-display" style={{ ...displaysCSS, left: `${displayValue}vw` }}>
                             <form onSubmit={handleLogin} >
@@ -218,9 +239,6 @@ function LoginPage() {
                                     </div>
                                 </div>
                                 <div className="row d-flex" style={{ marginBottom: "2rem" }} >
-                                    {/* <div className="col-12 d-flex justify-content-center">
-                                        <input className="clickable" type="submit" value="Log in" disabled={`${signedIn ? "disabled" : ""}`} />
-                                    </div> */}
                                     <div className="col-12 d-flex justify-content-center align-items-center">
                                         <button className="clickable std-btn" disabled={`${signedIn ? "disabled" : ""}`}>
                                             Log In

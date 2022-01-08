@@ -249,6 +249,35 @@ p,
     align-items: center;
 }
 
+.login-loading {
+    animation: login-loading-anim 3s infinite;
+    width: 1rem;
+    height: 1rem;
+    position: relative;
+    transform: rotate(0deg);
+    border-radius: 0%;
+    left: 0%;
+    background-color: white;
+}
+
+@keyframes login-loading-anim {
+    0% {
+        left: 0%;
+        transform: rotate(0deg);
+    }
+
+    50% {
+        left: 100%;
+        transform: rotate(720deg);
+    }
+
+    100% {
+        left: 0%;
+        transform: rotate(0deg);
+    }
+}
+
+
 .std-btn {
     border-radius: 7px;
     border: solid 1px white;
