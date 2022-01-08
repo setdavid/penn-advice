@@ -46,9 +46,10 @@ const initialState = {
     hasSwipeCard: true,
     prevCard: {
         type: "Nah",
-        index: "",
-        text: ":)",
-        percentRight: 0.5
+        postIndex: "",
+        body: ":)",
+        rightCount: 50,
+        leftCount: 50,
     },
     displayGhost: DISPLAY_GHOST_NONE,
     externalSwipe: 0,

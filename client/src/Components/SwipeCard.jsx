@@ -97,11 +97,12 @@ function SwipeCard(props) {
         }
     }
 
-    let percentRight = 100 * infoObj.percentRight;
-    let percentLeft = 100 * (1 - infoObj.percentRight);
+    let totalCount = infoObj.leftCount + infoObj.rightCount;
+    let rightPercent = 100 * infoObj.rightCount / totalCount;
+    let leftPercent = 100 * infoObj.leftCount / totalCount;
 
-    let percentBarRight = percentRight;
-    let percentBarLeft = percentLeft;
+    let percentBarRight = rightPercent;
+    let percentBarLeft = leftPercent;
 
     if (displayGhost == DISPLAY_GHOST_NONE) {
         percentBarRight = 50;
@@ -278,10 +279,10 @@ function SwipeCard(props) {
     const actualContent =
         <div className="swipe-card-actual-content" style={{ marginTop: `${0.1 * mcHeight}px`, marginBottom: `${0.1 * mcHeight}px` }}>
             <div style={{ fontSize: "1.5rem", fontWeight: "bold", marginBottom: "10px" }}>
-                {`${infoObj.type} #${infoObj.index}`}
+                {`${infoObj.type} #${infoObj.postIndex}`}
             </div>
             <div>
-                {infoObj.text}
+                {infoObj.body}
             </div>
         </div >
 
@@ -292,15 +293,15 @@ function SwipeCard(props) {
                     <div className="swipe-card-content d-flex" style={{ backgroundColor: `${swiped ? swipedColor : color}` }}>
                         <div style={{ position: "absolute", padding: `${displayGhost == DISPLAY_GHOST_BAR ? (10) : (modeIsMobile ? 0.02 * mcHeight : 0.03 * mcHeight)}px ${0.05 * mcHeight}px`, width: "100%" }}>
                             <div className="ghost-percent-bar" >
-                                <div className="percent-bar" style={{ width: `${percentBarLeft}%`, minWidth: `${percentBarLeft}%`, backgroundColor: "var(--theme-color-1)", borderRight: `${percentLeft > 0 ? "2px solid white" : ""}` }} />
-                                <div className="percent-bar" style={{ width: `${percentBarRight}%`, minWidth: `${percentBarRight}%`, backgroundColor: "var(--theme-color-2)", borderLeft: `${percentRight > 0 ? "2px solid white" : ""}` }} />
+                                <div className="percent-bar" style={{ width: `${percentBarLeft}%`, minWidth: `${percentBarLeft}%`, backgroundColor: "var(--theme-color-1)", borderRight: `${leftPercent > 0 ? "2px solid white" : ""}` }} />
+                                <div className="percent-bar" style={{ width: `${percentBarRight}%`, minWidth: `${percentBarRight}%`, backgroundColor: "var(--theme-color-2)", borderLeft: `${rightPercent > 0 ? "2px solid white" : ""}` }} />
                             </div>
                             <div className="d-flex justify-content-between" >
                                 <div>
-                                    {`${Math.round(percentLeft)}%`}
+                                    {`${Math.round(leftPercent)}%`}
                                 </div>
                                 <div>
-                                    {`${Math.round(percentRight)}%`}
+                                    {`${Math.round(rightPercent)}%`}
                                 </div>
                             </div>
                         </div>

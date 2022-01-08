@@ -5,8 +5,8 @@ postsSchema = mongoose.Schema({
     poster: {required: true, type: String},
     postIndex: {required: true, type: Number},
     timePosted: {required: true, type: Date},
-    likes: {required: true, type: Number},
-    dislikes: {required: true, type: Number},
+    leftCount: {required: true, type: Number},
+    rightCount: {required: true, type: Number},
     body: {required:true, type: String}
 }).index({postIndex: 1},{unique: true})
 

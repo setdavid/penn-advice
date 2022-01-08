@@ -99,9 +99,10 @@ function SwipeContent() {
 
     const emptyObj = {
         type: "Penn Life",
-        index: "?",
-        text: "NO NEW CONTENT (but swiping is fun :) )",
-        percentRight: Math.random(),
+        postIndex: "?",
+        body: "NO NEW CONTENT (but swiping is fun :) )",
+        rightCount: Math.random() * 100,
+        leftCount: Math.random() * 100,
     };
 
     if (index + 1 >= BUFFER_SIZE) {
