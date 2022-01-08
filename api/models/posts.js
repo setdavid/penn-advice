@@ -4,7 +4,7 @@ postsSchema = mongoose.Schema({
     type: {required:true, type:String},
     poster: {required: true, type: String},
     postIndex: {required: true, type: Number},
-    timePosted: {required: true, type: Date},
+    timePosted: {required: false, type: Date},
     leftCount: {required: true, type: Number},
     rightCount: {required: true, type: Number},
     body: {required:true, type: String}

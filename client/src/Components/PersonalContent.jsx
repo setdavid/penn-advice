@@ -3,12 +3,14 @@ import PersonalCard from "./PersonalCard";
 
 import { TEST_ARR } from "../js/constants";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 function PersonalContent(props) {
     let personalContentCSS = {};
     let [createCard, setCreateCard] = useState(false);
     let [note, setNote] = useState("");
     let [text, setText] = useState("");
+    let userData = useSelector(state => state.user.userData);
 
     let createCardCSS = {}
 
@@ -30,8 +32,36 @@ function PersonalContent(props) {
     }
 
     const handleSubmit = () => {
-        console.log("handle submit");
-        clearFields();
+        const body = {
+            username: userData.username,
+            body: text
+        }
+
+        fetch(`/user/posts`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        })
+            .then(res => {
+                // setLoading(false);
+                return res.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    clearFields();
+                    setCreateCard(false);
+                } else {
+                    if (typeof data.msg == "string") {
+                        setNote(data.msg);
+                    } else {
+                        setNote("SERVER ERROR");
+                    }
+                }
+            }, (err) => {
+                setNote("SERVER ERROR");
+            });
     }
 
     return (
