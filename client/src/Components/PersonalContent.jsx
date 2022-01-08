@@ -3,7 +3,9 @@ import PersonalCard from "./PersonalCard";
 
 import { TEST_ARR } from "../js/constants";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserCards } from "../redux/ducks/user";
+import { getUserCards } from "../js/utils";
 
 function PersonalContent(props) {
     let personalContentCSS = {};
@@ -13,6 +15,7 @@ function PersonalContent(props) {
     let user = useSelector(state => state.user);
     let userData = user.userData;
     let userCards = user.userCards;
+    let dispatch = useDispatch();
 
     let createCardCSS = {}
 
@@ -33,20 +36,39 @@ function PersonalContent(props) {
         setText("");
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const body = {
             poster: userData.username,
             body: text,
             type: "Penn Life"
         }
 
-        fetch(`/posts`, {
+        await fetch(`/posts`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(body)
         })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    console.log(data);
+                    refreshUserPersonalCards();
+                } else {
+                    if (typeof data.msg == "string") {
+                        setNote(data.msg);
+                    } else {
+                        setNote("SERVER ERROR");
+                    }
+                }
+            }, (err) => {
+                setNote("SERVER ERROR");
+            });
+    }
+
+    const refreshUserPersonalCards = async () => {
+        await fetch(`/user/posts?username=${userData.username}`)
             .then(res => {
                 // setLoading(false);
                 return res.json();
@@ -54,6 +76,7 @@ function PersonalContent(props) {
             .then(data => {
                 if (data.success) {
                     console.log(data);
+                    getUserCards(data.data);
                     clearFields();
                     setCreateCard(false);
                 } else {
@@ -69,11 +92,19 @@ function PersonalContent(props) {
     }
 
     let keyIndex = 0;
-    let personalCardsArr = <React.Fragment>
-        {TEST_ARR.map((cardObj) => {
+    let personalCardsArr = new Array(userCards.length);
+
+    for (let i = userCards.length - 1; i >= 0; i--) {
+        personalCardsArr[userCards.length - 1 - i] = <PersonalCard key={keyIndex} infoObj={userCards[i]} />;
+        keyIndex++;
+    }
+
+    let personalCardsComp = <React.Fragment>
+        {/* {userCards.map((cardObj) => {
             keyIndex++;
             return <PersonalCard key={keyIndex} infoObj={cardObj} />
-        })}
+        })} */}
+        {personalCardsArr}
     </React.Fragment>
 
     return (
@@ -126,7 +157,7 @@ function PersonalContent(props) {
 
                 </div>
             </div>
-            {personalCardsArr}
+            {personalCardsComp}
             {/* <PersonalCard infoObj={TEST_ARR[0]} />
             <PersonalCard infoObj={TEST_ARR[1]} />
             <PersonalCard infoObj={TEST_ARR[2]} />

@@ -2,11 +2,17 @@ const Post = require('../models/posts');
 const PostIndex = require("../models/postIndex");
 const { createUserPost } = require("./users");
 
-const fetchPosts = async (req, res) => {
-  const postIndexes = req.body.data
-  forEach(postIndexes, (postIndex) => {
-    Posts.findOne({ name: "posts", postList })
-  })
+const fetchPost = async (req, res) => {
+  const { postIndex } = req.query
+  console.log(postIndex);
+
+  try {
+    const post = await Post.findOne({ postIndex });
+    if (!post) return res.status(403).json({ success: false, msg: "post doesn't exist" })
+    else return res.status(200).json({ success: true, data: post })
+  } catch (err) {
+    res.status(500).json({ success: false, msg: err })
+  }
 }
 
 const createPost = async (req, res) => {
@@ -40,7 +46,7 @@ const deletePost = async (req, res) => {
 }
 
 module.exports = {
-  fetchPosts,
+  fetchPost,
   createPost,
   deletePost
 };

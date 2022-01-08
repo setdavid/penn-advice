@@ -3,13 +3,13 @@ const router = express.Router();
 const mongoose = require('mongoose')
 
 let {
-    fetchPosts,
+    fetchPost,
     createPost,
     deletePost
 } = require("../callbacks/posts");
 
 router.route('/')
-    .get(fetchPosts)
+    .get(fetchPost)
     .post(createPost)
     .delete(deletePost)
 

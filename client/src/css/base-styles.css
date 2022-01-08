@@ -249,8 +249,8 @@ p,
     align-items: center;
 }
 
-.login-loading {
-    animation: login-loading-anim 3s infinite;
+.loading {
+    animation: loading-anim 3s infinite;
     width: 1rem;
     height: 1rem;
     position: relative;
@@ -260,7 +260,7 @@ p,
     background-color: white;
 }
 
-@keyframes login-loading-anim {
+@keyframes loading-anim {
     0% {
         left: 0%;
         transform: rotate(0deg);

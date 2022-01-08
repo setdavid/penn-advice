@@ -40,20 +40,27 @@ export let updateConfigs = () => {
 
 export let getUserCards = async (userPosts) => {
     // let userPosts = store.getState().user.userData.userPosts;
-    // if (userPosts) {
-    //     let userCards = new Array(userPosts.length);
+    if (userPosts) {
+        let userCards = new Array(userPosts.length);
 
-    //     for (let i = 0; i < userPosts.length; i++) {
-    //         userCards[i] = await fetch("/posts/getbyindex")
-    //             .then(res => res.json())
-    //             .then(data => {
-    //                 console.log(data);
-    //                 store.dispatch(setBuffer(data));
-    //             }, err => console.log(err));
-    //     }
+        for (let i = 0; i < userPosts.length; i++) {
+            await fetch(`/posts?postIndex=${userPosts[i]}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        userCards[i] = data.data;
+                    } else {
+                        console.log(`SERVER ERROR: ${data.msg}`);
+                    }
+                }, (err) => {
+                    console.log("SERVER ERROR");
+                });
+        }
+        console.log(userCards);
+        store.dispatch(setUserCards(userCards));
+    } else {
+        console.log("no userPosts array");
+    }
 
-    //     store.dispatch(setUserCards(userCards));
-    // } else {
-    //     console.log("no userPosts array");
-    // }
+    console.log("finished getting user cards")
 }

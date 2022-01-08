@@ -12,6 +12,11 @@ function PersonalCard(props) {
     let rightPercent = 100 * infoObj.rightCount / totalCount;
     let leftPercent = 100 * infoObj.leftCount / totalCount;
 
+    if (totalCount === 0) {
+        rightPercent = 50;
+        leftPercent = 50;
+    }
+
     const handleDelete = () => {
         console.log(`Delete ${infoObj.type} #${infoObj.postIndex}`);
         // fetch("/api/delete")

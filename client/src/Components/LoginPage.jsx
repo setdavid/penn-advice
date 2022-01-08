@@ -65,7 +65,7 @@ function LoginPage() {
         setLoading(false);
     }
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
         setLoading(true);
         setNote("");
@@ -76,13 +76,16 @@ function LoginPage() {
                 if (data.success) {
                     clearFields();
                     updateConfigs();
+                    getUserCards(data.data.userPosts);
+                    console.log("after");
 
                     batch(() => {
                         dispatch(setLoggedIn(true));
                         dispatch(setDisplayApp(true));
                         dispatch(setUserData(data.data));
-                        getUserCards(data.data.userPosts);
                     });
+
+                    console.log("after 2");
 
                     setLoading(false);
                 } else {
@@ -194,7 +197,7 @@ function LoginPage() {
                         </div>}
                         {loading ? <div className="row d-flex" >
                             <div className="col-12" >
-                                <div className="login-loading" />
+                                <div className="loading" />
                             </div>
                         </div> : ""}
                     </div>
