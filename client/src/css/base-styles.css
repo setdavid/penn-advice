@@ -250,7 +250,7 @@ p,
 }
 
 .loading {
-    animation: loading-anim 3s infinite;
+    animation: loading-anim 1s infinite;
     width: 1rem;
     height: 1rem;
     position: relative;
@@ -260,21 +260,27 @@ p,
     background-color: white;
 }
 
+.loading-wrapper {
+    overflow-x: hidden;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 @keyframes loading-anim {
     0% {
-        left: 0%;
+        left: -110%;
         transform: rotate(0deg);
-    }
-
-    50% {
-        left: 100%;
-        transform: rotate(720deg);
     }
 
     100% {
+        left: 110%;
+        transform: rotate(720deg);
+    }
+
+    /* 100% {
         left: 0%;
         transform: rotate(0deg);
-    }
+    } */
 }
 
 

@@ -195,7 +195,7 @@ function LoginPage() {
                             </div>
                         </div>}
                         {loading ? <div className="row d-flex" >
-                            <div className="col-12" >
+                            <div className="col-12 loading-wrapper" >
                                 <div className="loading" />
                             </div>
                         </div> : ""}
