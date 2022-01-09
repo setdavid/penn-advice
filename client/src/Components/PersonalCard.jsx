@@ -41,7 +41,7 @@ function PersonalCard(props) {
                 <div className="row">
                     <div className="col-12">
                         <div className="personal-card-count" >
-                            {`${totalCount} entries`}
+                            {`${totalCount} views`}
                         </div>
                         <div className="personal-card-percent-bar" >
                             <div className="percent-bar" style={{ width: `${leftPercent}%`, minWidth: `${leftPercent}%`, backgroundColor: "var(--theme-color-1)", borderRight: `${leftPercent > 0 ? "2px solid white" : ""}` }} />

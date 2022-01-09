@@ -39,28 +39,29 @@ export let updateConfigs = () => {
 }
 
 export let getUserCards = async (userPosts) => {
-    // let userPosts = store.getState().user.userData.userPosts;
-    if (userPosts) {
-        let userCards = new Array(userPosts.length);
+    return new Promise(async (resolve, reject) => {
+        if (userPosts) {
+            let userCards = new Array(userPosts.length);
 
-        for (let i = 0; i < userPosts.length; i++) {
-            await fetch(`/posts?postIndex=${userPosts[i]}`)
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        userCards[i] = data.data;
-                    } else {
-                        console.log(`SERVER ERROR: ${data.msg}`);
-                    }
-                }, (err) => {
-                    console.log("SERVER ERROR");
-                });
+            for (let i = 0; i < userPosts.length; i++) {
+                await fetch(`/posts?postIndex=${userPosts[i]}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            userCards[i] = data.data;
+                        } else {
+                            console.log(`SERVER ERROR: ${data.msg}`);
+                        }
+                    }, (err) => {
+                        console.log("SERVER ERROR");
+                    });
+            }
+
+            store.dispatch(setUserCards(userCards));
+            console.log(userCards)
+            resolve({ success: true });
+        } else {
+            reject({ success: false, msg: "invalid userPosts array" });
         }
-        console.log(userCards);
-        store.dispatch(setUserCards(userCards));
-    } else {
-        console.log("no userPosts array");
-    }
-
-    console.log("finished getting user cards")
+    });
 }

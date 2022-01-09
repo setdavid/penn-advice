@@ -70,24 +70,22 @@ function LoginPage() {
         setLoading(true);
         setNote("");
 
-        fetch(`/user?username=${username}&password=${password}`)
+        await fetch(`/user?username=${username}&password=${password}`)
             .then(res => res.json())
-            .then(data => {
+            .then(async data => {
                 if (data.success) {
-                    clearFields();
-                    updateConfigs();
-                    getUserCards(data.data.userPosts);
-                    console.log("after");
-
-                    batch(() => {
-                        dispatch(setLoggedIn(true));
-                        dispatch(setDisplayApp(true));
-                        dispatch(setUserData(data.data));
+                    await getUserCards(data.data.userPosts).then(res => {
+                        clearFields();
+                        updateConfigs();
+                        batch(() => {
+                            dispatch(setLoggedIn(true));
+                            dispatch(setDisplayApp(true));
+                            dispatch(setUserData(data.data));
+                        });
+                    }).catch(rej => {
+                        setNote(rej.msg);
+                        setLoading(false);
                     });
-
-                    console.log("after 2");
-
-                    setLoading(false);
                 } else {
                     if (typeof data.msg == "string") {
                         setNote(data.msg);
@@ -100,6 +98,7 @@ function LoginPage() {
             }, (err) => {
                 setNote("SERVER ERROR");
             });
+
 
         // clearFields();
         // updateConfigs();
