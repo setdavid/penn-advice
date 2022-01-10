@@ -15,7 +15,7 @@ router.route('/')
 .delete(deleteUser)
 router.route('/posts')
 .get(getUserPosts)
-.post(createUserPost)
-.delete(deleteUserPost)
+// .post(createUserPost)
+// .delete(deleteUserPost)
 
 module.exports = router

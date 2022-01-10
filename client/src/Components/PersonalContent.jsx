@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import PersonalCard from "./PersonalCard";
 
 import { TEST_ARR } from "../js/constants";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setUserCards } from "../redux/ducks/user";
+import { useSelector } from "react-redux";
 import { getUserCards } from "../js/utils";
 
 function PersonalContent(props) {
@@ -12,10 +10,10 @@ function PersonalContent(props) {
     let [createCard, setCreateCard] = useState(false);
     let [note, setNote] = useState("");
     let [text, setText] = useState("");
+    let [loading, setLoading] = useState(false);
     let user = useSelector(state => state.user);
     let userData = user.userData;
     let userCards = user.userCards;
-    let dispatch = useDispatch();
 
     let createCardCSS = {}
 
@@ -37,6 +35,8 @@ function PersonalContent(props) {
     }
 
     const handleSubmit = async () => {
+        setLoading(true);
+
         const body = {
             poster: userData.username,
             body: text,
@@ -51,34 +51,30 @@ function PersonalContent(props) {
             body: JSON.stringify(body)
         })
             .then(res => res.json())
-            .then(data => {
+            .then(async data => {
                 if (data.success) {
                     console.log(data);
-                    refreshUserPersonalCards();
-                } else {
-                    if (typeof data.msg == "string") {
-                        setNote(data.msg);
-                    } else {
-                        setNote("SERVER ERROR");
-                    }
-                }
-            }, (err) => {
-                setNote("SERVER ERROR");
-            });
-    }
 
-    const refreshUserPersonalCards = async () => {
-        await fetch(`/user/posts?username=${userData.username}`)
-            .then(res => {
-                // setLoading(false);
-                return res.json();
-            })
-            .then(data => {
-                if (data.success) {
-                    console.log(data);
-                    getUserCards(data.data);
-                    clearFields();
-                    setCreateCard(false);
+                    await fetch(`/user/posts?username=${userData.username}`)
+                        .then(res => res.json())
+                        .then(async data => {
+                            if (data.success) {
+                                await getUserCards(data.data).then(res => {
+                                    clearFields();
+                                    setCreateCard(false);
+                                }).catch(rej => {
+                                    setNote(rej.msg);
+                                });
+                            } else {
+                                if (typeof data.msg == "string") {
+                                    setNote(data.msg);
+                                } else {
+                                    setNote("SERVER ERROR");
+                                }
+                            }
+                        }, (err) => {
+                            setNote("SERVER ERROR");
+                        });
                 } else {
                     if (typeof data.msg == "string") {
                         setNote(data.msg);
@@ -89,6 +85,8 @@ function PersonalContent(props) {
             }, (err) => {
                 setNote("SERVER ERROR");
             });
+
+        setLoading(false);
     }
 
     let keyIndex = 0;
@@ -119,6 +117,11 @@ function PersonalContent(props) {
                     + Create New Card
                 </div>
             </div>
+            {loading ? <div className="row">
+                <div className="col-12 loading-wrapper">
+                    <div className="loading" />
+                </div>
+            </div> : ""}
             <div id="personal-content-create-card" className="row toggle-height personal-card" style={{ ...createCardCSS, maxHeight: `${createCard ? "100%" : "0"}` }}>
                 <div className="col-12">
                     <div className="row">

@@ -2,11 +2,14 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { getUserCards } from "../js/utils";
 
 function PersonalCard(props) {
     let { infoObj } = props;
     let personalCardCSS = {}
-    let [status, setStatus] = useState("ACTIVE");
+    let [loading, setLoading] = useState(false);
+    let userData = useSelector(state => state.user.userData);
 
     let totalCount = infoObj.leftCount + infoObj.rightCount;
     let rightPercent = 100 * infoObj.rightCount / totalCount;
@@ -17,11 +20,54 @@ function PersonalCard(props) {
         leftPercent = 50;
     }
 
-    const handleDelete = () => {
-        console.log(`Delete ${infoObj.type} #${infoObj.postIndex}`);
-        // fetch("/api/delete")
-        //     .then(res => res.json())
-        //     .then(data => setStatus(data["status"]), error => console.log(error));
+    const handleDelete = async () => {
+        setLoading(true);
+
+        const body = {
+            postIndex: infoObj.postIndex,
+            username: userData.username
+        }
+
+        await fetch(`/posts`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        })
+            .then(res => res.json())
+            .then(async data => {
+                if (data.success) {
+                    await fetch(`/user/posts?username=${userData.username}`)
+                        .then(res => res.json())
+                        .then(async data => {
+                            if (data.success) {
+                                await getUserCards(data.data).catch(rej => {
+                                    console.log(rej.msg);
+                                });
+                            } else {
+                                if (typeof data.msg == "string") {
+                                    console.log(data.msg);
+                                } else {
+                                    console.log("SERVER ERROR");
+                                }
+                            }
+                        }, (err) => {
+                            console.log("SERVER ERROR");
+                        });
+                } else {
+                    if (typeof data.msg == "string") {
+                        console.log(data.msg);
+                    } else {
+                        console.log("SERVER ERROR");
+                    }
+                }
+            }, (err) => {
+                console.log("SERVER ERROR");
+            });
+
+        setLoading(false);
+        console.log("deleted");
     }
 
     return (
@@ -38,6 +84,11 @@ function PersonalCard(props) {
                         {infoObj.body}
                     </div>
                 </div>
+                {loading ? <div className="row">
+                    <div className="col-12 loading-wrapper">
+                        <div className="loading" />
+                    </div>
+                </div> : ""}
                 <div className="row">
                     <div className="col-12">
                         <div className="personal-card-count" >
