@@ -2,14 +2,17 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUserCards } from "../js/utils";
+import { setUserIsFetching } from "../redux/ducks/user";
 
 function PersonalCard(props) {
     let { infoObj } = props;
     let personalCardCSS = {}
     let [loading, setLoading] = useState(false);
     let userData = useSelector(state => state.user.userData);
+    let userIsFetching = useSelector(state => state.user.userIsFetching);
+    let dispatch = useDispatch();
 
     let totalCount = infoObj.leftCount + infoObj.rightCount;
     let rightPercent = 100 * infoObj.rightCount / totalCount;
@@ -21,6 +24,8 @@ function PersonalCard(props) {
     }
 
     const handleDelete = async () => {
+        if (userIsFetching) return
+        dispatch(setUserIsFetching(true));
         setLoading(true);
 
         const body = {
@@ -66,8 +71,8 @@ function PersonalCard(props) {
                 console.log("SERVER ERROR");
             });
 
+        dispatch(setUserIsFetching(false));
         setLoading(false);
-        console.log("deleted");
     }
 
     return (

@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import PersonalCard from "./PersonalCard";
 
 import { TEST_ARR } from "../js/constants";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getUserCards } from "../js/utils";
+import { setUserIsFetching } from "../redux/ducks/user";
 
 function PersonalContent(props) {
     let personalContentCSS = {};
@@ -14,6 +15,8 @@ function PersonalContent(props) {
     let user = useSelector(state => state.user);
     let userData = user.userData;
     let userCards = user.userCards;
+    let userIsFetching = user.userIsFetching;
+    let dispatch = useDispatch();
 
     let createCardCSS = {}
 
@@ -35,6 +38,8 @@ function PersonalContent(props) {
     }
 
     const handleSubmit = async () => {
+        if (userIsFetching) return
+        dispatch(setUserIsFetching(true));
         setLoading(true);
 
         const body = {
@@ -87,6 +92,7 @@ function PersonalContent(props) {
             });
 
         setLoading(false);
+        dispatch(setUserIsFetching(false));
     }
 
     let keyIndex = 0;
@@ -126,7 +132,7 @@ function PersonalContent(props) {
                 <div className="col-12">
                     <div className="row">
                         <div className="col-12">
-                            <form onSubmit={handleSubmit} style={{ fontFamily: "inherit" }}>
+                            <form style={{ fontFamily: "inherit" }}>
                                 <label>
                                     What would you like to say?
                                     <br />
