@@ -78,15 +78,19 @@ function PersonalCard(props) {
     return (
         <div className="personal-card row" style={personalCardCSS}>
             <div className="col-12">
-                <div className="row">
+                <div className="row" style={{ marginBottom: "0.5rem" }}>
                     <div className="col-12 personal-card-title">
-                        {`${infoObj.type} #${infoObj.postIndex}`}
+                        <h5>
+                            {`${infoObj.type} #${infoObj.postIndex}`}
+                        </h5>
                         <FontAwesomeIcon className="clickable" icon={faTrash} onClick={handleDelete} />
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-12">
-                        {infoObj.body}
+                        <p>
+                            {infoObj.body}
+                        </p>
                     </div>
                 </div>
                 {loading ? <div className="row">

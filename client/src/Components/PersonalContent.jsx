@@ -114,13 +114,17 @@ function PersonalContent(props) {
     return (
         <div id="personal-content" className="col-12 full-height" style={personalContentCSS}>
             <div className="row">
-                <div className="col-12" id="personal-content-header">
-                    Personal Content
+                <div className="col-12">
+                    <h3 id="personal-content-header">
+                        Personal Content
+                    </h3>
                 </div>
             </div>
             <div className="row personal-card clickable" onClick={() => setCreateCard(true)}>
-                <div className="col-12 personal-card-title">
-                    + Create New Card
+                <div className="col-12">
+                    <h6 style={{ marginBottom: "0" }}>
+                        + Create New Card
+                    </h6>
                 </div>
             </div>
             {loading ? <div className="row">
@@ -152,15 +156,15 @@ function PersonalContent(props) {
                     </div>
                     <div className="row">
                         <div className="col-12 d-flex justify-content-between">
-                            <div onClick={() => {
+                            <button onClick={() => {
                                 setCreateCard(false);
                                 clearFields();
-                            }} className="clickable std-btn">
+                            }} className="std-btn">
                                 Cancel
-                            </div>
-                            <div onClick={handleSubmit} className="clickable std-btn">
+                            </button>
+                            <button onClick={handleSubmit} className="std-btn">
                                 Submit
-                            </div>
+                            </button>
                         </div>
                     </div>
 

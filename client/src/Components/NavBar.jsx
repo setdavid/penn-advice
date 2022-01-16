@@ -29,17 +29,17 @@ function NavBar() {
     return (
         <div id="nav-bar" className="container-fluid" style={navbarCSS}>
             <div className="row full-height">
-                <div className="col-4 full-height nav-bar-btn clickable" onClick={() => dispatch(setDisplayMobile(ACCOUNT_CONTENT))}>
+                <div className="col-4 full-height nav-bar-btn" onClick={() => dispatch(setDisplayMobile(ACCOUNT_CONTENT))}>
                     <FontAwesomeIcon icon={faUserSecret} size="lg" style={display == ACCOUNT_CONTENT ? displayBtnCSS : notDisplayBtnCSS} />
                 </div>
                 {display == SWIPE_CONTENT ?
-                    <div className="col-4 full-height nav-bar-btn clickable" onClick={() => dispatch(setDisplayGhost(DISPLAY_GHOST_CARD))}>
+                    <div className="col-4 full-height nav-bar-btn" onClick={() => dispatch(setDisplayGhost(DISPLAY_GHOST_CARD))}>
                         <FontAwesomeIcon icon={faUndo} size="lg" style={display == SWIPE_CONTENT ? displayBtnCSS : notDisplayBtnCSS} />
                     </div>
-                    : <div className="col-4 full-height nav-bar-btn clickable" onClick={() => dispatch(setDisplayMobile(SWIPE_CONTENT))}>
+                    : <div className="col-4 full-height nav-bar-btn" onClick={() => dispatch(setDisplayMobile(SWIPE_CONTENT))}>
                         <FontAwesomeIcon icon={faClone} size="lg" style={display == SWIPE_CONTENT ? displayBtnCSS : notDisplayBtnCSS} />
                     </div>}
-                <div className="col-4 full-height nav-bar-btn clickable" onClick={() => dispatch(setDisplayMobile(PERSONAL_CONTENT))}>
+                <div className="col-4 full-height nav-bar-btn" onClick={() => dispatch(setDisplayMobile(PERSONAL_CONTENT))}>
                     <FontAwesomeIcon icon={faPenSquare} size="lg" style={display == PERSONAL_CONTENT ? displayBtnCSS : notDisplayBtnCSS} />
                 </div>
             </div>

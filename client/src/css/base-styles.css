@@ -49,56 +49,38 @@ a:hover {
     text-decoration: inherit;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 {
+h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
     margin-bottom: 0.5rem;
     font-weight: 500;
     line-height: 1.2;
 }
 
-h1,
-.h1 {
+h1 {
     font-size: 2.5rem;
 }
 
-h2,
-.h2 {
+h2 {
     font-size: 2rem;
 }
 
-h3,
-.h3 {
+h3 {
     font-size: 1.75rem;
 }
 
-h4,
-.h4 {
+h4 {
     font-size: 1.5rem;
 }
 
-h5,
-.h5 {
+h5 {
     font-size: 1.25rem;
 }
 
-h6,
-.h6 {
+h6 {
     font-size: 1rem;
 }
 
-p,
-.p {
+p {
     margin-top: 0;
     margin-bottom: 1rem;
 }
@@ -113,7 +95,7 @@ p,
     min-width: 100%;
 }
 
-.clickable {
+.clickable, .std-btn, .nav-bar-btn, button {
     cursor: pointer;
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     -webkit-touch-callout: none;
@@ -333,6 +315,10 @@ p,
     margin-top: 30px;
 }
 
+.account-content-header h5 {
+    margin-bottom: 0;
+}
+
 .account-content-header>.row .col-12, .account-content-header>.row .col-6 {
     padding-top: 13px;
     padding-bottom: 13px;
@@ -378,11 +364,6 @@ p,
 }
 
 #personal-content-header {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    /* border-left: solid 5px white;
-    border-right: solid 5px white; */
-    padding-left: 5px;
     text-align: center;
 }
 
@@ -404,10 +385,13 @@ p,
 }
 
 .personal-card-title {
-    font-weight: bold;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.personal-card-title>h5 {
+    margin-bottom: 0;
 }
 
 /* .personal-card-title>svg {

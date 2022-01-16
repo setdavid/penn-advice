@@ -1,6 +1,6 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { TITLE_BAR_HEIGHT } from "../js/constants";
+import Logo from "./Logo";
 
 function TitleBar() {
   // let percentRight = useSelector(state => state.swipe.percentRight);
@@ -14,13 +14,8 @@ function TitleBar() {
   return (
     <div id="title-bar" className="container-fluid" style={titleBarCSS}>
       <div className="row full-height align-items-center">
-        <div className="col-12 " style={{ fontSize: "2.5rem", lineHeight: "1" }}>
-          <div>
-            PennHub
-          </div>
-          <div style={{ fontSize: "0.75rem" }}>
-            &nbsp; by Penn Spark Gray
-          </div>
+        <div className="col-12">
+          <Logo />
         </div>
       </div>
       {/* <div className="row d-flex" style={{ height: "90%", minHeight: "90%", paddingTop: "7px" }}>

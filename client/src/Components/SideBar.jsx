@@ -30,10 +30,10 @@ function SideBar() {
 
     return (
         <div id="side-bar" className="row full-height justify-content-center align-items-center" style={sidebarCSS}>
-            <div className="col-12 nav-bar-btn clickable" onClick={() => dispatch(setDisplayDesktop(ACCOUNT_CONTENT))}>
+            <div className="col-12 nav-bar-btn" onClick={() => dispatch(setDisplayDesktop(ACCOUNT_CONTENT))}>
                 <FontAwesomeIcon icon={faUserSecret} size="lg" style={display == ACCOUNT_CONTENT ? displayBtnCSS : notDisplayBtnCSS} />
             </div>
-            <div className="col-12 nav-bar-btn clickable" onClick={() => dispatch(setDisplayDesktop(PERSONAL_CONTENT))}>
+            <div className="col-12 nav-bar-btn" onClick={() => dispatch(setDisplayDesktop(PERSONAL_CONTENT))}>
                 <FontAwesomeIcon icon={faPenSquare} size="lg" style={display == PERSONAL_CONTENT ? displayBtnCSS : notDisplayBtnCSS} />
             </div>
         </div>

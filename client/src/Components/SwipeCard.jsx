@@ -278,12 +278,12 @@ function SwipeCard(props) {
 
     const actualContent =
         <div className="swipe-card-actual-content" style={{ marginTop: `${0.1 * mcHeight}px`, marginBottom: `${0.1 * mcHeight}px` }}>
-            <div style={{ fontSize: "1.5rem", fontWeight: "bold", marginBottom: "10px" }}>
+            <h4>
                 {`${infoObj.type} #${infoObj.postIndex}`}
-            </div>
-            <div>
+            </h4>
+            <p>
                 {infoObj.body}
-            </div>
+            </p>
         </div >
 
     return (

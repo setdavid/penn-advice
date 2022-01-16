@@ -8,6 +8,7 @@ import { LOGIN_TRANSITION_DURATION, LOGIN_DISPLAY_TRANSITION_DURATION } from "..
 import { setDisplayApp, setLoggedIn } from "../redux/ducks/login";
 import { setUserData } from "../redux/ducks/user";
 import { getUserCards, updateConfigs } from "../js/utils";
+import Logo from "./Logo";
 
 const LOGIN_USER = "LOGIN_USER";
 const CREATE_USER = "CREATE_USER";
@@ -202,12 +203,7 @@ function LoginPage() {
                     </div>
                     <div className="row d-flex" style={{ marginBottom: "2rem" }}>
                         <div className="col-12" style={{ fontSize: "2.5rem", lineHeight: "1" }}>
-                            <div>
-                                PennHub
-                            </div>
-                            <div style={{ fontSize: "0.75rem" }}>
-                                &nbsp; by Penn Spark Gray
-                            </div>
+                            <Logo />
                         </div>
                     </div>
                     <div className="row" style={{ width: "100%", position: "relative", flexWrap: "nowrap", alignItems: "start" }}>
@@ -243,17 +239,17 @@ function LoginPage() {
                                 </div>
                                 <div className="row d-flex" style={{ marginBottom: "2rem" }} >
                                     <div className="col-12 d-flex justify-content-center align-items-center">
-                                        <button className="clickable std-btn" disabled={`${signedIn ? "disabled" : ""}`}>
+                                        <button className="std-btn" disabled={`${signedIn ? "disabled" : ""}`}>
                                             Log In
                                         </button>
                                     </div>
                                 </div>
                             </form>
                             <div className="row d-flex">
-                                <div className="col-12 clickable std-btn" onClick={toggleCreateUser}>
-                                    <div>
+                                <div className="col-12">
+                                    <button className="std-btn" onClick={toggleCreateUser} disabled={`${signedIn ? "disabled" : ""}`}>
                                         Create New User
-                                    </div>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -303,17 +299,17 @@ function LoginPage() {
                                 </div>
                                 <div className="row d-flex" style={{ marginBottom: "2rem" }} >
                                     <div className="col-12 d-flex justify-content-center align-items-center">
-                                        <button className="clickable std-btn" disabled={`${signedIn ? "disabled" : ""}`}>
+                                        <button className="std-btn" disabled={`${signedIn ? "disabled" : ""}`}>
                                             Create New User
                                         </button>
                                     </div>
                                 </div>
                             </form>
                             <div className="row d-flex">
-                                <div className="col-12 clickable std-btn" onClick={toggleLoginUser}>
-                                    <div>
+                                <div className="col-12" >
+                                    <button className="std-btn" onClick={toggleLoginUser} disabled={`${signedIn ? "disabled" : ""}`}>
                                         Cancel
-                                    </div>
+                                    </button>
                                 </div>
                             </div>
                         </div>

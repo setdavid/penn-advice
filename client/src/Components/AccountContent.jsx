@@ -73,15 +73,19 @@ function AccountContent(props) {
                 </div>
             </div>
             <div className="row">
-                <div className="col-12 d-flex justify-content-center" style={{ marginTop: "10px", fontSize: "1.5rem", fontWeight: "bold" }}>
-                    User #12345
+                <div className="col-12 d-flex justify-content-center" style={{ marginTop: "10px" }}>
+                    <h2>
+                        User #12345
+                    </h2>
                 </div>
             </div>
             <div className="row">
                 <div id="preferences" className="col-12 account-content-header">
                     <div className="row">
                         <div className="col-12">
-                            Preferences
+                            <h5>
+                                Preferences
+                            </h5>
                         </div>
                     </div>
                     <div className="row">
@@ -115,7 +119,9 @@ function AccountContent(props) {
                 <div id="account-settings" className="col-12 account-content-header">
                     <div className="row">
                         <div className="col-12">
-                            Account Settings
+                            <h5>
+                                Account Settings
+                            </h5>
                         </div>
                     </div>
                     <div className="row">
@@ -123,9 +129,7 @@ function AccountContent(props) {
                             Log Out
                         </div>
                         <div className="col-6">
-                            <div onClick={handleLogOut} className="clickable">
-                                <FontAwesomeIcon icon={faDoorOpen} size="lg" />
-                            </div>
+                            <FontAwesomeIcon icon={faDoorOpen} size="lg" className="clickable" onClick={handleLogOut} />
                         </div>
                     </div>
                     <div className="row">
@@ -133,9 +137,7 @@ function AccountContent(props) {
                             Delete User
                         </div>
                         <div className="col-6">
-                            <div onClick={() => setConfirmDeleteUser(true)} className="clickable">
-                                <FontAwesomeIcon icon={faUserSlash} size="lg" />
-                            </div>
+                            <FontAwesomeIcon icon={faUserSlash} size="lg" className="clickable" onClick={() => setConfirmDeleteUser(true)} />
                         </div>
                     </div>
                     <div className="row toggle-height" style={{ maxHeight: `${confirmDeleteUser ? "100%" : "0"}`, borderBottom: "solid 1px var(--text-color-1)" }}>
@@ -145,12 +147,12 @@ function AccountContent(props) {
                                     Are you sure? All user data will be deleted...
                                 </div>
                                 <div className="col-6">
-                                    <div onClick={() => {
+                                    <button onClick={() => {
                                         setConfirmDeleteUser(false);
                                         clearFields();
-                                    }} className="clickable std-btn">
+                                    }} className="std-btn">
                                         Cancel
-                                    </div>
+                                    </button>
                                 </div>
                             </div>
                             <form onSubmit={handleDeleteUser} style={{ paddingBottom: "13px" }}>
@@ -172,7 +174,7 @@ function AccountContent(props) {
                                         </label>
                                     </div>
                                     <div className="col-6 d-flex align-items-end justify-content-end" style={{ border: "none" }}>
-                                        <button className="clickable std-btn" style={{ background: "var(--theme-color-1)", fontWeight: "bold" }}>
+                                        <button className="std-btn" style={{ background: "var(--theme-color-1)", fontWeight: "bold" }}>
                                             DELETE USER
                                         </button>
                                     </div>
