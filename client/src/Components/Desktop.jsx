@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { ACCOUNT_CONTENT, PERSONAL_CONTENT } from "../redux/ducks/desktop";
 import AccountContent from "./AccountContent";
 import PersonalContent from "./PersonalContent";
-import { DESKTOP_DISPLAY_TRANSITION_DURATION, SIDE_BAR_WIDTH } from "../js/constants";
+import { DESKTOP_DISPLAY_TRANSITION_DURATION } from "../js/constants";
 import SwipeContent from "./SwipeContent";
 
 function Desktop() {
@@ -11,7 +11,6 @@ function Desktop() {
   let display = useSelector(state => state.desktop.display);
 
   let desktopCSS = {
-    width: `calc(100vw - ${modeIsMobile ? 0 : SIDE_BAR_WIDTH}px)`
   }
 
   let displaysCSS = {

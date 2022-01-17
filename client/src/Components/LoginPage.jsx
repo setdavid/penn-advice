@@ -71,55 +71,55 @@ function LoginPage() {
         setLoading(true);
         setNote("");
 
-        await fetch(`/user?username=${username}&password=${password}`)
-            .then(res => res.json())
-            .then(async data => {
-                if (data.success) {
-                    await getUserCards(data.data.userPosts).then(res => {
-                        clearFields();
-                        updateConfigs();
-                        batch(() => {
-                            dispatch(setLoggedIn(true));
-                            dispatch(setDisplayApp(true));
-                            dispatch(setUserData(data.data));
-                        });
-                    }).catch(rej => {
-                        setNote(rej.msg);
-                        setLoading(false);
-                    });
-                } else {
-                    if (typeof data.msg == "string") {
-                        setNote(data.msg);
-                    } else {
-                        setNote("SERVER ERROR");
-                    }
+        if (username === "" && password === "") {
+            clearFields();
+            updateConfigs();
 
-                    setLoading(false);
-                }
-            }, (err) => {
-                setNote("SERVER ERROR");
+            batch(() => {
+                dispatch(setLoggedIn(true));
+                dispatch(setDisplayApp(true));
+                dispatch(setUserData({}));
             });
+        } else {
+            await fetch(`/user?username=${username}&password=${password}`)
+                .then(res => res.json())
+                .then(async data => {
+                    if (data.success) {
+                        await getUserCards(data.data.userPosts).then(res => {
+                            clearFields();
+                            updateConfigs();
+                            batch(() => {
+                                dispatch(setLoggedIn(true));
+                                dispatch(setDisplayApp(true));
+                                dispatch(setUserData(data.data));
+                            });
+                        }).catch(rej => {
+                            setNote(rej.msg);
+                        });
+                    } else {
+                        if (typeof data.msg == "string") {
+                            setNote(data.msg);
+                        } else {
+                            setNote("SERVER ERROR");
+                        }
+                    }
+                }, (err) => {
+                    setNote("SERVER ERROR");
+                });
 
+        }
 
-        // clearFields();
-        // updateConfigs();
-
-        // batch(() => {
-        //     dispatch(setLoggedIn(true));
-        //     dispatch(setDisplayApp(true));
-        // });
+        setLoading(false);
     }
 
-    const handleCreateUser = (e) => {
+    const handleCreateUser = async (e) => {
         e.preventDefault();
         setLoading(true);
         setNote("");
 
         if (password != confirmPassword) {
-            setLoading(false);
             setNote("passwords don't match");
         } else if (password.length < 5) {
-            setLoading(false);
             setNote("passwords must be at least 5 characters");
         } else {
             const body = {
@@ -127,7 +127,7 @@ function LoginPage() {
                 password
             }
 
-            fetch(`/user`, {
+            await fetch(`/user`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -139,20 +139,19 @@ function LoginPage() {
                     if (data.success) {
                         clearFields();
                         setDisplay(LOGIN_USER);
-                        setLoading(false);
                     } else {
                         if (typeof data.msg == "string") {
                             setNote(data.msg);
                         } else {
                             setNote("SERVER ERROR");
                         }
-
-                        setLoading(false);
                     }
                 }, (err) => {
                     setNote("SERVER ERROR");
                 });
         }
+
+        setLoading(false);
     }
 
     const displaysCSS = {

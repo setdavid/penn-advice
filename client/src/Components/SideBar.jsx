@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPenSquare, faUserSecret } from "@fortawesome/free-solid-svg-icons"
-import { DESKTOP_DISPLAY_TRANSITION_DURATION, NAV_BAR_HEIGHT, SIDE_BAR_WIDTH, TITLE_BAR_HEIGHT } from "../js/constants";
+import { DESKTOP_DISPLAY_TRANSITION_DURATION, NAV_BAR_HEIGHT, TITLE_BAR_HEIGHT } from "../js/constants";
 import { ACCOUNT_CONTENT, PERSONAL_CONTENT, setDisplayDesktop } from "../redux/ducks/desktop";
 
 function SideBar() {
@@ -24,12 +24,11 @@ function SideBar() {
 
     let sidebarCSS = {
         display: `${modeIsMobile ? "none" : "block"}`,
-        height: `calc(${window.innerHeight}px - ${TITLE_BAR_HEIGHT}px - ${modeIsMobile ? NAV_BAR_HEIGHT : 0}px)`,
-        width: `${SIDE_BAR_WIDTH}px`
+        height: `calc(${window.innerHeight}px - ${TITLE_BAR_HEIGHT}px - ${modeIsMobile ? NAV_BAR_HEIGHT : 0}px)`
     }
 
     return (
-        <div id="side-bar" className="row full-height justify-content-center align-items-center" style={sidebarCSS}>
+        <div id="side-bar" className="full-height justify-content-center align-items-center" style={sidebarCSS}>
             <div className="col-12 nav-bar-btn" onClick={() => dispatch(setDisplayDesktop(ACCOUNT_CONTENT))}>
                 <FontAwesomeIcon icon={faUserSecret} size="lg" style={display == ACCOUNT_CONTENT ? displayBtnCSS : notDisplayBtnCSS} />
             </div>

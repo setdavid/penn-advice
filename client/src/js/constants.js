@@ -6,7 +6,7 @@ export const TITLE_BAR_HEIGHT = 80;
 export const NAV_BAR_HEIGHT = 60;
 export const MOBILE_DISPLAY_TRANSITION_DURATION = 250;
 
-export const SIDE_BAR_WIDTH = 60;
+export const SIDE_BAR_WIDTH = 30;
 export const DESKTOP_DISPLAY_TRANSITION_DURATION = 250;
 
 export const LOAD_NEXT_BUFFER_ON_INDEX = 4;

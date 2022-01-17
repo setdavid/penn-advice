@@ -152,6 +152,8 @@ p {
 
 #side-bar {
     position: relative;
+    margin-left: -15px;
+    margin-right: -15px;
     background: linear-gradient(0deg, var(--theme-color-2), black, var(--theme-color-1), black, var(--theme-color-2));
     background-size: 200% 200%;
     overflow: hidden;

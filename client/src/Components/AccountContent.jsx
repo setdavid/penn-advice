@@ -75,7 +75,7 @@ function AccountContent(props) {
             <div className="row">
                 <div className="col-12 d-flex justify-content-center" style={{ marginTop: "10px" }}>
                     <h2>
-                        User #12345
+                        {userData.username}
                     </h2>
                 </div>
             </div>
