@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import Desktop from "./Desktop";
 import Mobile from "./Mobile";
 import SideBar from "./SideBar";
-import { NAV_BAR_HEIGHT, SIDE_BAR_WIDTH, TITLE_BAR_HEIGHT } from "../js/constants";
+import { SIDE_BAR_WIDTH } from "../js/constants";
 
 function MainContent() {
   let modeIsMobile = useSelector(state => state.mode.modeIsMobile);

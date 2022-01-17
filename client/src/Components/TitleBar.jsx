@@ -1,5 +1,4 @@
 import React from "react";
-import { TITLE_BAR_HEIGHT } from "../js/constants";
 import Logo from "./Logo";
 
 function TitleBar() {
@@ -8,7 +7,6 @@ function TitleBar() {
   // percentRight *= 100;
 
   let titleBarCSS = {
-    height: `${TITLE_BAR_HEIGHT}px`
   }
 
   return (

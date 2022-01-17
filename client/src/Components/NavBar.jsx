@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClone, faUserSecret, faPenSquare, faUndo } from "@fortawesome/free-solid-svg-icons"
 import { setDisplayMobile, SWIPE_CONTENT, PERSONAL_CONTENT, ACCOUNT_CONTENT } from "../redux/ducks/mobile";
-import { MOBILE_DISPLAY_TRANSITION_DURATION, NAV_BAR_HEIGHT } from "../js/constants";
+import { MOBILE_DISPLAY_TRANSITION_DURATION } from "../js/constants";
 import { DISPLAY_GHOST_CARD, setDisplayGhost } from "../redux/ducks/swipe";
 
 function NavBar() {
@@ -22,8 +22,7 @@ function NavBar() {
     };
 
     let navbarCSS = {
-        display: `${modeIsMobile ? "block" : "none"}`,
-        height: `${NAV_BAR_HEIGHT}px`
+        display: `${modeIsMobile ? "block" : "none"}`
     }
 
     return (

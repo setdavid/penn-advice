@@ -6,7 +6,6 @@ import { BUFFER_SIZE, LOAD_NEXT_BUFFER_ON_INDEX, TEST_ARR } from "../js/constant
 import { setBuffer, setNextBuffer } from "../redux/ducks/card-manager";
 import { setPrevCard, newSwipeCard, setExternalSwipe, setDisplayGhost, DISPLAY_GHOST_BAR, DISPLAY_GHOST_CARD, DISPLAY_GHOST_NONE } from "../redux/ducks/swipe";
 import SwipeCard from "./SwipeCard";
-import { TITLE_BAR_HEIGHT, NAV_BAR_HEIGHT } from "../js/constants";
 import { GHOST_MODE_BAR, GHOST_MODE_CARD, GHOST_MODE_NONE } from "../redux/ducks/mode";
 
 function SwipeContent() {
