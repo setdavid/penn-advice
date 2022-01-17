@@ -2,7 +2,7 @@ import store from "../redux/configureStore"
 import { setBuffer } from "../redux/ducks/card-manager";
 import { setMobile, setDesktop } from "../redux/ducks/mode";
 import { setUserCards } from "../redux/ducks/user";
-import { setMCHeight } from "../redux/ducks/window-config";
+import { setMCHeight, setWindowDims } from "../redux/ducks/window-config";
 import { NAV_BAR_HEIGHT, TEST_ARR, TITLE_BAR_HEIGHT } from "./constants";
 
 export let initialize = () => {
@@ -18,6 +18,8 @@ export let initialize = () => {
 export let updateConfigs = () => {
     let windowWidth = window.innerWidth;
     let windowHeight = window.innerHeight;
+
+    store.dispatch(setWindowDims({ width: windowWidth, height: windowHeight }));
 
     let modeIsMobile = !((windowWidth >= 992) && (windowWidth > windowHeight));
 

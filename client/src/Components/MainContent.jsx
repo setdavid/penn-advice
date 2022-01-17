@@ -7,10 +7,8 @@ import { SIDE_BAR_WIDTH } from "../js/constants";
 
 function MainContent() {
   let modeIsMobile = useSelector(state => state.mode.modeIsMobile);
-  let mcHeight = useSelector(state => state.windowConfig.mcHeight);
 
   let mainContentCSS = {
-    height: `${mcHeight}px`
   }
 
   let desktopCSS = {
