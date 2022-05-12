@@ -17,8 +17,8 @@ function App() {
   let appContentCSS = {
     gridTemplateRows: `${TITLE_BAR_HEIGHT}px 1fr ${modeIsMobile ? `${NAV_BAR_HEIGHT}px` : ""}`,
     height: `${windowDims.height}px`
-  }
-
+  }  
+   
   return (
     <div className="App full-height">
       <header className="App-header full-height">
